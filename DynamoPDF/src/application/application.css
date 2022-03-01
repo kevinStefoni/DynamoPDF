@@ -1,0 +1,103 @@
+#designButton{
+	
+	-fx-font-size: 37px;
+	-fx-font-family:"Impact";
+	-fx-text-background-color: #dddddd;
+	-fx-background-color: #140854;
+ 	-fx-border-color: #dddddd;
+	-fx-border-style: solid;
+ 	-fx-border-width: 2;
+}
+
+#exitButton{
+	
+	-fx-font-size: 37px;
+	-fx-font-family:"Impact";
+	-fx-text-background-color: #dddddd;
+	-fx-background-color: #140854;
+	-fx-border-color: #dddddd;
+	-fx-border-style: solid;
+ 	-fx-border-width: 2;
+	
+}
+
+#root{
+	
+	-fx-background-color: linear-gradient(to top, #140854, #777777, #dddddd);
+	
+}
+
+#optionsAnchorPane{
+	
+	-fx-background-color: #222222;	
+}
+
+#optionLabel{
+	
+	-fx-font-size: 37px;
+	-fx-font-family:"Impact";
+	-fx-text-background-color: #dddddd;
+	
+}
+
+#nameCheck{
+	
+	-fx-font-size: 18px;
+	-fx-font-family: "Arial";
+	-fx-text-background-color: #dddddd;
+	
+}
+
+#dateCheck{
+	
+	-fx-font-size: 18px;
+	-fx-font-family: "Arial";
+	-fx-text-background-color: #dddddd;
+	
+}
+
+#titleCheck{
+	
+	-fx-font-size: 18px;
+	-fx-font-family: "Arial";
+	-fx-text-background-color: #dddddd;
+	
+}
+
+#instructionsCheck{
+	
+	-fx-font-size: 18px;
+	-fx-font-family: "Arial";
+	-fx-text-background-color: #dddddd;
+	
+}
+
+#numberedQuestionsCheck{
+	
+	-fx-font-size: 18px;
+	-fx-font-family: "Arial";
+	-fx-text-background-color: #dddddd;
+	
+}
+
+#numberOfQuestions{
+	
+	-fx-font-size: 18px;
+	-fx-font-family: "Arial";
+	-fx-text-background-color: #dddddd;
+	
+}
+
+#numberOfChoices{
+	
+	-fx-font-size: 18px;
+	-fx-font-family: "Arial";
+	-fx-text-background-color: #dddddd;
+	
+}
+
+#bottomOptionAnchorPane{
+	
+	-fx-background-color: #140854;
+	
+}
