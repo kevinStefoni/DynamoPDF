@@ -50,8 +50,6 @@ public class MainMenuController {
     		window.setScene(scene);
     		window.show();
     		
-    		
-    	
     }
 
     @FXML

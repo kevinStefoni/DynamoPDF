@@ -6,25 +6,22 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="639.0" prefWidth="669.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.OptionsMenuController">
+
+<AnchorPane fx:id="optionsAnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" stylesheets="@../../bin/application/application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.OptionsMenuController">
    <children>
-      <AnchorPane fx:id="optionsAnchorPane" layoutY="-2.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../bin/application/application.css">
+      <Label fx:id="optionLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="246.0" layoutY="31.0" prefHeight="100.0" prefWidth="266.0" stylesheets="@../../bin/application/application.css" text="Options" textAlignment="CENTER" textFill="WHITE" />
+      <CheckBox fx:id="nameCheck" layoutX="74.0" layoutY="131.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="111.0" stylesheets="@../../bin/application/application.css" text="Name" />
+      <CheckBox fx:id="dateCheck" contentDisplay="CENTER" layoutX="74.0" layoutY="177.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="111.0" stylesheets="@../../bin/application/application.css" text="Date" textAlignment="CENTER" />
+      <CheckBox fx:id="titleCheck" contentDisplay="CENTER" layoutX="74.0" layoutY="223.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="111.0" stylesheets="@../../bin/application/application.css" text="Title" textAlignment="CENTER" />
+      <CheckBox fx:id="instructionsCheck" contentDisplay="CENTER" layoutX="74.0" layoutY="269.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="131.0" stylesheets="@../../bin/application/application.css" text="Instructions" textAlignment="CENTER" />
+      <CheckBox fx:id="numberedQuestionsCheck" contentDisplay="CENTER" layoutX="379.0" layoutY="131.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="222.0" stylesheets="@../../bin/application/application.css" text="Numbered Questions" textAlignment="CENTER" />
+      <Pane fx:id="bottomOptionAnchorPane" layoutY="399.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" stylesheets="@../../bin/application/application.css">
          <children>
-            <Label fx:id="optionLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="246.0" layoutY="31.0" prefHeight="100.0" prefWidth="266.0" stylesheets="@../../bin/application/application.css" text="Options" textAlignment="CENTER" textFill="WHITE" />
-            <CheckBox fx:id="nameCheck" layoutX="74.0" layoutY="131.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="111.0" stylesheets="@../../bin/application/application.css" text="Name" />
-            <CheckBox fx:id="dateCheck" contentDisplay="CENTER" layoutX="74.0" layoutY="177.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="111.0" stylesheets="@../../bin/application/application.css" text="Date" textAlignment="CENTER" />
-            <Pane fx:id="bottomOptionAnchorPane" layoutY="400.0" prefHeight="400.0" prefWidth="757.0" stylesheets="@../../bin/application/application.css">
-               <children>
-                  <Label fx:id="numberOfQuestions" layoutX="72.0" layoutY="56.0" prefHeight="46.0" prefWidth="182.0" stylesheets="@../../bin/application/application.css" text="Number of Questions:" />
-                  <TextField layoutX="254.0" layoutY="64.0" prefHeight="31.0" prefWidth="65.0" />
-                  <TextField layoutX="254.0" layoutY="110.0" prefHeight="31.0" prefWidth="65.0" />
-                  <Label fx:id="numberOfChoices" layoutX="72.0" layoutY="102.0" prefHeight="46.0" prefWidth="182.0" stylesheets="@../../bin/application/application.css" text="Number of Choices:" />
-               </children>
-            </Pane>
-            <CheckBox fx:id="titleCheck" contentDisplay="CENTER" layoutX="74.0" layoutY="223.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="111.0" stylesheets="@../../bin/application/application.css" text="Title" textAlignment="CENTER" />
-            <CheckBox fx:id="instructionsCheck" contentDisplay="CENTER" layoutX="74.0" layoutY="269.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="131.0" stylesheets="@../../bin/application/application.css" text="Instructions" textAlignment="CENTER" />
-            <CheckBox fx:id="numberedQuestionsCheck" contentDisplay="CENTER" layoutX="379.0" layoutY="131.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="222.0" stylesheets="@../../bin/application/application.css" text="Numbered Questions" textAlignment="CENTER" />
+            <Label fx:id="numberOfQuestions" layoutX="72.0" layoutY="56.0" prefHeight="46.0" prefWidth="182.0" stylesheets="@../../bin/application/application.css" text="Number of Questions:" />
+            <TextField layoutX="254.0" layoutY="64.0" prefHeight="31.0" prefWidth="65.0" />
+            <TextField layoutX="254.0" layoutY="110.0" prefHeight="31.0" prefWidth="65.0" />
+            <Label fx:id="numberOfChoices" layoutX="72.0" layoutY="102.0" prefHeight="46.0" prefWidth="182.0" stylesheets="@../../bin/application/application.css" text="Number of Choices:" />
          </children>
-      </AnchorPane>
+      </Pane>
    </children>
 </AnchorPane>
