@@ -6,10 +6,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="639.0" prefWidth="669.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="application.OptionsMenuController">
+<AnchorPane prefHeight="639.0" prefWidth="669.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.OptionsMenuController">
    <children>
-      <AnchorPane fx:id="optionsAnchorPane" layoutY="-2.0" prefHeight="800.0" prefWidth="757.0" stylesheets="@../../bin/application/application.css">
+      <AnchorPane fx:id="optionsAnchorPane" layoutY="-2.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../bin/application/application.css">
          <children>
             <Label fx:id="optionLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="246.0" layoutY="31.0" prefHeight="100.0" prefWidth="266.0" stylesheets="@../../bin/application/application.css" text="Options" textAlignment="CENTER" textFill="WHITE" />
             <CheckBox fx:id="nameCheck" layoutX="74.0" layoutY="131.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="111.0" stylesheets="@../../bin/application/application.css" text="Name" />
