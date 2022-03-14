@@ -8,13 +8,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="root" prefHeight="800.0" prefWidth="800.0" stylesheets="@../../bin/application/application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainMenuController">
+<AnchorPane fx:id="root" prefHeight="800.0" prefWidth="800.0" stylesheets="@../bin/application/application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.MainMenuController">
    <children>
       <BorderPane prefHeight="800.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" stylesheets="@../bin/application/application.css" BorderPane.alignment="CENTER">
                <children>
-                  <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" text="Dynamo PDF" textAlignment="CENTER" textFill="#140854">
+                  <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" stylesheets="@../bin/application/application.css" text="Dynamo PDF" textAlignment="CENTER" textFill="#140854">
                      <font>
                         <Font name="Impact" size="54.0" />
                      </font>
@@ -22,7 +22,7 @@
                         <Insets bottom="50.0" />
                      </padding>
                   </Label>
-                  <Button fx:id="designButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goToOptionsMenu" prefHeight="73.0" prefWidth="266.0" stylesheets="@application.css" text="DESIGN" textAlignment="CENTER" textFill="#dddddd">
+                  <Button fx:id="designButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goToOptionsMenu" prefHeight="73.0" prefWidth="266.0" stylesheets="@../bin/application/application.css" text="DESIGN" textAlignment="CENTER" textFill="#dddddd">
                      <font>
                         <Font name="Impact" size="37.0" />
                      </font>
@@ -30,7 +30,7 @@
                         <Insets bottom="20.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="exitButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goToExit" prefHeight="0.0" prefWidth="266.0" stylesheets="@application.css" text="EXIT" textAlignment="CENTER" textFill="#dddddd">
+                  <Button fx:id="exitButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goToExit" prefHeight="0.0" prefWidth="266.0" stylesheets="@../bin/application/application.css" text="EXIT" textAlignment="CENTER" textFill="#dddddd">
                      <font>
                         <Font name="Impact" size="37.0" />
                      </font>

@@ -1,5 +1,7 @@
 package application.controller;
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,11 +46,25 @@ public class MainMenuController {
      */
     void goToOptionsMenu(ActionEvent event) throws IOException{
 
-    		root = FXMLLoader.load(getClass().getResource("OptionsMenu.fxml"));
+
+    	try {
+    		
+    		URL url = new File("src/OptionsMenu.fxml").toURI().toURL();
+    		root = FXMLLoader.load(url);
     		Scene scene = new Scene(root);
     		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
     		window.setScene(scene);
     		window.show();
+    		
+    	}
+    	catch(IOException ioe)
+    	{
+    		
+    		ioe.printStackTrace();
+    		
+    	}
+    	
+    	
     		
     }
 
