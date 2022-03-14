@@ -6,15 +6,15 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="optionsAnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" stylesheets="@../../bin/application/application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.OptionsMenuController">
+<AnchorPane fx:id="optionsAnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" stylesheets="@../bin/application/application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.OptionsMenuController">
    <children>
-      <Label fx:id="optionLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="246.0" layoutY="31.0" prefHeight="100.0" prefWidth="266.0" stylesheets="@../../bin/application/application.css" text="Options" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="246.0" AnchorPane.rightAnchor="288.0" />
-      <Pane fx:id="bottomOptionAnchorPane" layoutY="399.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" stylesheets="@../../bin/application/application.css" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <Label fx:id="optionLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="246.0" layoutY="31.0" prefHeight="100.0" prefWidth="266.0" stylesheets="@../bin/application/application.css" text="Options" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="246.0" AnchorPane.rightAnchor="288.0" />
+      <Pane fx:id="bottomOptionAnchorPane" layoutY="399.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" stylesheets="@../bin/application/application.css" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <Label fx:id="numberOfQuestions" layoutX="72.0" layoutY="56.0" prefHeight="46.0" prefWidth="182.0" stylesheets="@../../bin/application/application.css" text="Number of Questions:" />
+            <Label fx:id="numberOfQuestions" layoutX="72.0" layoutY="56.0" prefHeight="46.0" prefWidth="182.0" stylesheets="@../bin/application/application.css" text="Number of Questions:" />
             <TextField layoutX="254.0" layoutY="64.0" prefHeight="31.0" prefWidth="65.0" />
             <TextField layoutX="254.0" layoutY="110.0" prefHeight="31.0" prefWidth="65.0" />
-            <Label fx:id="numberOfChoices" layoutX="72.0" layoutY="102.0" prefHeight="46.0" prefWidth="182.0" stylesheets="@../../bin/application/application.css" text="Number of Choices:" />
+            <Label fx:id="numberOfChoices" layoutX="72.0" layoutY="102.0" prefHeight="46.0" prefWidth="182.0" stylesheets="@../bin/application/application.css" text="Number of Choices:" />
          </children>
       </Pane>
       <GridPane alignment="CENTER" layoutX="39.0" layoutY="122.0" prefHeight="124.0" prefWidth="336.0" AnchorPane.bottomAnchor="554.0" AnchorPane.leftAnchor="39.0" AnchorPane.rightAnchor="425.0" AnchorPane.topAnchor="122.0">
@@ -28,11 +28,11 @@
           <RowConstraints maxHeight="188.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <CheckBox fx:id="nameCheck" mnemonicParsing="false" prefHeight="46.0" prefWidth="111.0" stylesheets="@../../bin/application/application.css" text="Name" />
-            <CheckBox fx:id="dateCheck" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="46.0" prefWidth="111.0" stylesheets="@../../bin/application/application.css" text="Date" textAlignment="CENTER" GridPane.rowIndex="1" />
-            <CheckBox fx:id="titleCheck" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="46.0" prefWidth="111.0" stylesheets="@../../bin/application/application.css" text="Title" textAlignment="CENTER" GridPane.rowIndex="2" />
-            <CheckBox fx:id="instructionsCheck" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="46.0" prefWidth="131.0" stylesheets="@../../bin/application/application.css" text="Instructions" textAlignment="CENTER" GridPane.columnIndex="1" />
-            <CheckBox fx:id="numberedQuestionsCheck" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="46.0" prefWidth="222.0" stylesheets="@../../bin/application/application.css" text="Numbered Questions" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <CheckBox fx:id="nameCheck" mnemonicParsing="false" prefHeight="46.0" prefWidth="111.0" stylesheets="@../bin/application/application.css" text="Name" />
+            <CheckBox fx:id="dateCheck" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="46.0" prefWidth="111.0" stylesheets="@../bin/application/application.css" text="Date" textAlignment="CENTER" GridPane.rowIndex="1" />
+            <CheckBox fx:id="titleCheck" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="46.0" prefWidth="111.0" stylesheets="@../bin/application/application.css" text="Title" textAlignment="CENTER" GridPane.rowIndex="2" />
+            <CheckBox fx:id="instructionsCheck" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="46.0" prefWidth="131.0" stylesheets="@../bin/application/application.css" text="Instructions" textAlignment="CENTER" GridPane.columnIndex="1" />
+            <CheckBox fx:id="numberedQuestionsCheck" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="46.0" prefWidth="222.0" stylesheets="@../bin/application/application.css" text="Numbered Questions" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </children>
