@@ -28,7 +28,7 @@
           <RowConstraints maxHeight="188.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <CheckBox fx:id="nameCheck" mnemonicParsing="false" prefHeight="46.0" prefWidth="111.0" stylesheets="@../bin/application/application.css" text="Name" />
+            <CheckBox fx:id="nameCheck" mnemonicParsing="false" onAction="#toggleName" prefHeight="46.0" prefWidth="111.0" stylesheets="@../bin/application/application.css" text="Name" />
             <CheckBox fx:id="dateCheck" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="46.0" prefWidth="111.0" stylesheets="@../bin/application/application.css" text="Date" textAlignment="CENTER" GridPane.rowIndex="1" />
             <CheckBox fx:id="titleCheck" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="46.0" prefWidth="111.0" stylesheets="@../bin/application/application.css" text="Title" textAlignment="CENTER" GridPane.rowIndex="2" />
             <CheckBox fx:id="instructionsCheck" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="46.0" prefWidth="131.0" stylesheets="@../bin/application/application.css" text="Instructions" textAlignment="CENTER" GridPane.columnIndex="1" />
