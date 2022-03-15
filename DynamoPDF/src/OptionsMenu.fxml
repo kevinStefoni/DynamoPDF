@@ -31,10 +31,10 @@
         </rowConstraints>
          <children>
             <CheckBox fx:id="nameCheck" mnemonicParsing="false" onAction="#toggleName" prefHeight="46.0" prefWidth="111.0" stylesheets="@../bin/application/application.css" text="Name" />
-            <CheckBox fx:id="dateCheck" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="46.0" prefWidth="111.0" stylesheets="@../bin/application/application.css" text="Date" textAlignment="CENTER" GridPane.rowIndex="1" />
-            <CheckBox fx:id="titleCheck" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="46.0" prefWidth="111.0" stylesheets="@../bin/application/application.css" text="Title" textAlignment="CENTER" GridPane.rowIndex="2" />
-            <CheckBox fx:id="instructionsCheck" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="46.0" prefWidth="131.0" stylesheets="@../bin/application/application.css" text="Instructions" textAlignment="CENTER" GridPane.columnIndex="1" />
-            <CheckBox fx:id="numberedQuestionsCheck" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="46.0" prefWidth="222.0" stylesheets="@../bin/application/application.css" text="Numbered Questions" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <CheckBox fx:id="dateCheck" contentDisplay="CENTER" mnemonicParsing="false" onAction="#toggleDate" prefHeight="46.0" prefWidth="111.0" stylesheets="@../bin/application/application.css" text="Date" textAlignment="CENTER" GridPane.rowIndex="1" />
+            <CheckBox fx:id="titleCheck" contentDisplay="CENTER" mnemonicParsing="false" onAction="#toggleTitle" prefHeight="46.0" prefWidth="111.0" stylesheets="@../bin/application/application.css" text="Title" textAlignment="CENTER" GridPane.rowIndex="2" />
+            <CheckBox fx:id="instructionsCheck" contentDisplay="CENTER" mnemonicParsing="false" onAction="#toggleInstructions" prefHeight="46.0" prefWidth="131.0" stylesheets="@../bin/application/application.css" text="Instructions" textAlignment="CENTER" GridPane.columnIndex="1" />
+            <CheckBox fx:id="numberedQuestionsCheck" contentDisplay="CENTER" mnemonicParsing="false" onAction="#toggleNumberedQuestions" prefHeight="46.0" prefWidth="222.0" stylesheets="@../bin/application/application.css" text="Numbered Questions" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </children>
