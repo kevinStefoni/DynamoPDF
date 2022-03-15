@@ -22,7 +22,7 @@ public class OptionsMenuController {
     private Label optionLabel;
 
     @FXML
-    private Pane bottomOptionAnchorPane;
+    private Pane bottomOptionPane;
 
     @FXML
     private CheckBox nameCheck;
