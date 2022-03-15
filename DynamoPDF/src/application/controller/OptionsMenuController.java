@@ -57,4 +57,64 @@ public class OptionsMenuController {
     	
     }
     
+    @FXML
+    /**
+     * 
+     * toggleDate
+     * 
+     * This is the controller class that invokes the model class method that toggles the check box within the model.
+     * 
+     * @param event
+     */
+    void toggleDate(ActionEvent event) {
+
+    	worksheet.toggleHasDate();
+    	
+    }
+
+    @FXML
+    /**
+     * 
+     * toggleTitle
+     * 
+     * This is the controller class that invokes the model class method that toggles the check box within the model.
+     * 
+     * @param event
+     */
+    void toggleTitle(ActionEvent event) {
+
+    	worksheet.toggleHasTitle();
+    	
+    }
+
+    @FXML
+    /**
+     * 
+     * toggleInstructions
+     * 
+     * This is the controller class that invokes the model class method that toggles the check box within the model.
+     * 
+     * @param event
+     */
+    void toggleInstructions(ActionEvent event) {
+
+    	worksheet.toggleHasInstructions();
+    	
+    }
+
+    @FXML
+    /**
+     * 
+     * toggleNumberedQuestions
+     * 
+     * This is the controller class that invokes the model class method that toggles the check box within the model.
+     * 
+     * @param event
+     */
+    void toggleNumberedQuestions(ActionEvent event) {
+
+    	worksheet.toggleHasNumberedQuestions();
+    	
+    }
+    
 }
