@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="1043.0" prefWidth="1187.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
+   <center>
+      <AnchorPane prefHeight="700.0" prefWidth="848.0" style="-fx-background-color: #777777;" BorderPane.alignment="CENTER">
+         <children>
+            <Button alignment="CENTER" contentDisplay="TOP" layoutX="291.0" layoutY="304.0" mnemonicParsing="false" prefHeight="68.0" prefWidth="205.0" style="-fx-background-color: #140854;" text="Generate PDF">
+               <font>
+                  <Font name="Impact" size="26.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="0.8523809523809524" startX="1.0" startY="1.0">
+                     <stops>
+                        <Stop color="WHITE" />
+                        <Stop color="WHITE" offset="0.17869415807560138" />
+                        <Stop color="WHITE" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+               <effect>
+                  <DropShadow height="62.52" radius="24.8275" spread="0.29" width="38.79" />
+               </effect>
+            </Button>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </AnchorPane>
+   </center>
+   <right>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #222222;" BorderPane.alignment="CENTER" />
+   </right>
+   <bottom>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #222222;" BorderPane.alignment="CENTER" />
+   </bottom>
+   <top>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #222222;" BorderPane.alignment="CENTER" />
+   </top>
+   <left>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #222222;" BorderPane.alignment="CENTER" />
+   </left>
+</BorderPane>
