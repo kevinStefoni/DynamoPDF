@@ -246,7 +246,7 @@ public class Worksheet {
 	 * toggleHasNumberedQuestions
 	 * 
 	 * This method will simulate whether the checkbox is clicked or not, given any kind of click on the CheckBox from the user.
-	 * This is for the Numbered Questions checkbox.
+	 * This is for the Numbered Questions checkbox. It will determine if the questions will be numbered.
 	 * 
 	 */
 	public void toggleHasNumberedQuestions()
