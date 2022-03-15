@@ -43,6 +43,14 @@ public class OptionsMenuController {
     private CheckBox numberedQuestionsCheck;
 
     @FXML
+    /**
+     * 
+     * toggleName
+     * 
+     * This is the controller class that invokes the model class method that toggles the check box within the model.
+     * 
+     * @param event
+     */
     void toggleName(ActionEvent event) {
 
     	worksheet.toggleHasName();
