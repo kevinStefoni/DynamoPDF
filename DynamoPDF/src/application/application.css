@@ -47,7 +47,9 @@
 	
 }
 
-#nameCheck{
+
+
+#checkBoxGridPane{
 	
 	-fx-font-size: 18px;
 	-fx-font-family: "Arial";
@@ -55,7 +57,7 @@
 	
 }
 
-#dateCheck{
+#textFieldGridPane{
 	
 	-fx-font-size: 18px;
 	-fx-font-family: "Arial";
@@ -63,42 +65,3 @@
 	
 }
 
-#titleCheck{
-	
-	-fx-font-size: 18px;
-	-fx-font-family: "Arial";
-	-fx-text-background-color: #dddddd;
-	
-}
-
-#instructionsCheck{
-	
-	-fx-font-size: 18px;
-	-fx-font-family: "Arial";
-	-fx-text-background-color: #dddddd;
-	
-}
-
-#numberedQuestionsCheck{
-	
-	-fx-font-size: 18px;
-	-fx-font-family: "Arial";
-	-fx-text-background-color: #dddddd;
-	
-}
-
-#numberOfQuestions{
-	
-	-fx-font-size: 18px;
-	-fx-font-family: "Arial";
-	-fx-text-background-color: #dddddd;
-	
-}
-
-#numberOfChoices{
-	
-	-fx-font-size: 18px;
-	-fx-font-family: "Arial";
-	-fx-text-background-color: #dddddd;
-	
-}

@@ -39,4 +39,36 @@ public class QuestionSet {
 		this.setOfQuestions.add(new MultipleChoiceQuestion());
 		
 	}
+	
+	/**
+	 * 
+	 * getNumQuestions
+	 * 
+	 * This is the getter method for numQuestions.
+	 * 
+	 * @return numQuestions the number of questions in the worksheet
+	 */
+	public int getNumQuestions()
+	{
+		
+		return this.numQuestions;
+		
+	}
+	
+	/**
+	 * 
+	 * setNumQuestions
+	 * 
+	 * This is the setter method for numQuestions.
+	 * 
+	 * @param numQuestions the new number of questions in the worksheet
+	 */
+	public void setNumQuestions(int numQuestions)
+	{
+		
+		this.numQuestions = numQuestions;
+		
+	}
+	
+
 }

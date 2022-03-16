@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -31,16 +32,16 @@ public class OptionsMenuController {
     private CheckBox instructionsCheck;
 
     @FXML
-    private Label numberOfChoices;
-
-    @FXML
-    private Label numberOfQuestions;
-
-    @FXML
     private CheckBox titleCheck;
 
     @FXML
     private CheckBox numberedQuestionsCheck;
+    
+    @FXML
+    private TextField numQuestionsTextField;
+    
+    @FXML
+    private TextField numChoicesTextField;
 
     @FXML
     /**
@@ -114,6 +115,20 @@ public class OptionsMenuController {
     void toggleNumberedQuestions(ActionEvent event) {
 
     	worksheet.toggleHasNumberedQuestions();
+    	
+    }
+    
+    @FXML
+    void setNumQuestions(ActionEvent event) {
+
+    	worksheet.getQuestionSet().setNumQuestions(Integer.parseInt(numQuestionsTextField.getText()));
+    	
+    }
+
+    @FXML
+    void setNumChoices(ActionEvent event) {
+
+    	//worksheet.getQuestionSet().setNumChoices(Integer.parseInt(numChoicesTextField.getText()));
     	
     }
     

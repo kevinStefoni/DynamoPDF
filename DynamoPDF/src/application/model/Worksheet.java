@@ -1,5 +1,7 @@
 package application.model;
 
+import java.util.ArrayList;
+
 public class Worksheet {
 
 	private boolean hasName;
@@ -8,6 +10,11 @@ public class Worksheet {
 	private boolean hasInstructions;
 	private boolean hasNumberedQuestions;
 	
+	private QuestionSet questionSet;
+	
+	private String title;
+	
+	private String fileName;
 	
 	/**
 	 * 
@@ -27,6 +34,8 @@ public class Worksheet {
 		this.hasTitle = false;
 		this.hasInstructions = false;
 		this.hasNumberedQuestions = false;
+		
+		this.questionSet = new QuestionSet();
 		
 	}
 	
@@ -180,6 +189,12 @@ public class Worksheet {
 		
 	}
 	
+	public QuestionSet getQuestionSet()
+	{
+		
+		return this.questionSet;
+		
+	}
 	
 	/**
 	 * 
