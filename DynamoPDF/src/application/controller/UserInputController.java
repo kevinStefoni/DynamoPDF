@@ -11,7 +11,7 @@ public class UserInputController extends OptionsMenuController{
 
 		
 		/*
-		 * To access a datamember from Options class from worksheet object, do something like this.
+		 * To access a data member from Options class from worksheet object, do something like this.
 		 * 		 * 
 		 * worksheet.getOptions().getHasDate()
 		 */
@@ -40,5 +40,13 @@ public class UserInputController extends OptionsMenuController{
 
     @FXML
     private Button questionInputNextButton;
+    
+    public void initialize()
+    {
+    	
+    	//System.out.println(worksheet.getQuestionSet().getNumQuestions() + " " + worksheet.getQuestionSet().getNumChoices());
+    	
+    }
+    
 	
 }

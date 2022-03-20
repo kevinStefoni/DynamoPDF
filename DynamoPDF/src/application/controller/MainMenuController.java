@@ -53,6 +53,7 @@ public class MainMenuController {
     		root = FXMLLoader.load(url);
     		Scene scene = new Scene(root);
     		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+    		window.setTitle("Options");
     		window.setScene(scene);
     		window.show();
     		
