@@ -11,11 +11,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<AnchorPane fx:id="generatePDFAnchorPane" prefHeight="800.0" prefWidth="800.0" stylesheets="@../bin/application/application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
+<AnchorPane fx:id="generatePDFAnchorPane" prefHeight="800.0" prefWidth="800.0" stylesheets="@../bin/application/application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.PDFController">
    <children>
-      <Pane fx:id="generatePDFPane" layoutX="150.0" layoutY="150.0" prefHeight="500.0" prefWidth="500.0" stylesheets="@../bin/application/application.css" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="150.0">
+      <VBox fx:id="generatePDFVBox" alignment="CENTER" layoutX="200.0" layoutY="200.0" prefHeight="400.0" prefWidth="400.0" stylesheets="@../bin/application/application.css" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="200.0">
          <children>
-            <Button alignment="CENTER" contentDisplay="TOP" layoutX="148.0" layoutY="216.0" mnemonicParsing="false" prefHeight="68.0" prefWidth="205.0" style="-fx-background-color: #140854;" text="Generate PDF">
+            <Button fx:id="generatePDFButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#generate" prefHeight="68.0" prefWidth="205.0" stylesheets="@../bin/application/application.css" text="Generate PDF">
                <font>
                   <Font name="Impact" size="26.0" />
                </font>
@@ -33,7 +33,7 @@
                </effect>
             </Button>
          </children>
-      </Pane>
+      </VBox>
    </children>
    <opaqueInsets>
       <Insets />

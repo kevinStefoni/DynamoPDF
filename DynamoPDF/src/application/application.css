@@ -62,6 +62,7 @@
 	-fx-font-size: 18px;
 	-fx-font-family: "Arial";
 	-fx-text-background-color: #dddddd;
+	-fx-background-color: #140854;
 	
 }
 
@@ -95,8 +96,17 @@
 	
 }
 
-#generatePDFPane{
+#generatePDFVBox{
 	
 	-fx-background-color: #777777;
+	
+}
+
+#generatePDFButton{
+	
+	-fx-background-color: #140854;
+	-fx-font-size: 26px;
+	-fx-font-family:"Impact";
+	-fx-text-background-color: #dddddd;
 	
 }
