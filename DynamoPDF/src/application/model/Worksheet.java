@@ -1,7 +1,5 @@
 package application.model;
 
-import java.util.ArrayList;
-
 public class Worksheet{
 
 	private Options options;
@@ -55,6 +53,96 @@ public class Worksheet{
 	{
 		
 		return this.options;
+		
+	}
+	
+	/**
+	 * 
+	 * getTitle
+	 * 
+	 * This is the getter method for title.
+	 * 
+	 * @return title the title that will appear at the top of the worksheet, not the pdf file name
+	 */
+	public String getTitle()
+	{
+		
+		return this.title;
+		
+	}
+	
+	/**
+	 * 
+	 * setTitle
+	 * 
+	 * The setter method for title.
+	 * 
+	 * @param title the title that will appear at the top of the worksheet, not the pdf file name
+	 */
+	public void setTitle(String title)
+	{
+		
+		this.title = title;
+		
+	}
+	
+	/**
+	 * 
+	 * getInstructions
+	 * 
+	 * This is the getter method for instructions.
+	 * 
+	 * @return instructions the instructions that will appear at the top of the worksheet
+	 */
+	public String getInstructions()
+	{
+		
+		return this.instructions;
+		
+	}
+	
+	/**
+	 * 
+	 * setInstructions
+	 * 
+	 * The setter method for instructions.
+	 * 
+	 * @param instructions the instructions that will appear at the top of the worksheet
+	 */
+	public void setInstructions(String instructions)
+	{
+		
+		this.instructions = instructions;
+		
+	}
+	
+	/**
+	 * 
+	 * getFileName
+	 * 
+	 * This is the getter method for fileName.
+	 * 
+	 * @return fileName the name of the pdf file
+	 */
+	public String getFileName()
+	{
+		
+		return this.fileName;
+		
+	}
+	
+	/**
+	 * 
+	 * setFileName
+	 * 
+	 * The setter method for fileName.
+	 * 
+	 * @param fileName the name of the pdf file
+	 */
+	public void setFileName(String fileName)
+	{
+		
+		this.fileName = fileName;
 		
 	}
 	
