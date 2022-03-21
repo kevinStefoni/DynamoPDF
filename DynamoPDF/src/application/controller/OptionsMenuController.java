@@ -198,6 +198,7 @@ public class OptionsMenuController {
     		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
     		window.setTitle(title);
     		window.setScene(scene);
+    		window.setFullScreen(true);
     		window.show();
     		
     	}
