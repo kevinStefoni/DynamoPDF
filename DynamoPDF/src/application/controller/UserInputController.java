@@ -69,6 +69,7 @@ public class UserInputController extends OptionsMenuController{
     		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
     		window.setTitle("Options");
     		window.setScene(scene);
+    		window.setFullScreen(true);
     		window.show();
     		
     	}
