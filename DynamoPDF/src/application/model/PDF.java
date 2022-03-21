@@ -8,16 +8,7 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDTrueTypeFont;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
-import org.apache.pdfbox.pdmodel.font.encoding.Type1Encoding;
 import org.apache.pdfbox.pdmodel.font.encoding.WinAnsiEncoding;
-
-import application.controller.UserInputController;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 
 public class PDF{
 
@@ -38,14 +29,23 @@ public class PDF{
 			contentStream.beginText();
 			contentStream.setFont(font, 12);
 			contentStream.newLineAtOffset(25, 725);
-			contentStream.showText("Name: ___________________");
+			
+			if(worksheet.getOptions().getHasName())
+				contentStream.showText("Name: _____________________________________                                                     ");
+			
+			if(worksheet.getOptions().getHasDate())
+				contentStream.showText("Date: __________");
+			
+			contentStream.newLine();
+			contentStream.showText("1. What is 2 + 2?");
+			
 			contentStream.endText();
+			contentStream.close();
 			// insert pdf stuff here
 			
 			pdf.save("test.pdf");
 			
 			//pdf.save(worksheet.getFileName());
-			contentStream.close();
 			pdf.close();
 			
 		}
