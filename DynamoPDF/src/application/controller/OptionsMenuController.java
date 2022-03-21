@@ -1,16 +1,26 @@
 package application.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+
 import application.model.Worksheet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class OptionsMenuController {
 
-	Worksheet worksheet = new Worksheet();
+	public static Worksheet worksheet = new Worksheet();
 	
     @FXML
     private AnchorPane optionsAnchorPane;
@@ -22,25 +32,25 @@ public class OptionsMenuController {
     private Label optionLabel;
 
     @FXML
-    private Pane bottomOptionPane;
-
-    @FXML
     private CheckBox nameCheck;
 
     @FXML
     private CheckBox instructionsCheck;
 
     @FXML
-    private Label numberOfChoices;
-
-    @FXML
-    private Label numberOfQuestions;
-
-    @FXML
     private CheckBox titleCheck;
 
     @FXML
     private CheckBox numberedQuestionsCheck;
+    
+    @FXML
+    private TextField numQuestionsTextField;
+    
+    @FXML
+    private TextField numChoicesTextField;
+    
+    @FXML
+    private Button optionsMenuNextButton;
 
     @FXML
     /**
@@ -49,7 +59,7 @@ public class OptionsMenuController {
      * 
      * This is the controller class that invokes the model class method that toggles the check box within the model.
      * 
-     * @param event
+     * @param event the name option was selected
      */
     void toggleName(ActionEvent event) {
 
@@ -64,7 +74,7 @@ public class OptionsMenuController {
      * 
      * This is the controller class that invokes the model class method that toggles the check box within the model.
      * 
-     * @param event
+     * @param event the date option was selected
      */
     void toggleDate(ActionEvent event) {
 
@@ -79,7 +89,7 @@ public class OptionsMenuController {
      * 
      * This is the controller class that invokes the model class method that toggles the check box within the model.
      * 
-     * @param event
+     * @param event the title option was selected
      */
     void toggleTitle(ActionEvent event) {
 
@@ -94,7 +104,7 @@ public class OptionsMenuController {
      * 
      * This is the controller class that invokes the model class method that toggles the check box within the model.
      * 
-     * @param event
+     * @param event the instructions option was selected
      */
     void toggleInstructions(ActionEvent event) {
 
@@ -109,12 +119,126 @@ public class OptionsMenuController {
      * 
      * This is the controller class that invokes the model class method that toggles the check box within the model.
      * 
-     * @param event
+     * @param event the numbered questions option was selected
      */
     void toggleNumberedQuestions(ActionEvent event) {
 
     	worksheet.toggleHasNumberedQuestions();
     	
     }
+    
+    @FXML
+    /**
+     * 
+     * setNumQuestions
+     * 
+     * This method will take the value in the numQuestions text field and store it within the worksheet's QuestionSet object.
+     * 
+     * @param event either enter is pressed with cursor in text field or "Next" button is pressed
+     */
+    void setNumQuestions(ActionEvent event) {
+
+    	if(!numQuestionsTextField.getText().equals(""))
+    		worksheet.getQuestionSet().setNumQuestions(Integer.parseInt(numQuestionsTextField.getText()));
+    	
+    }
+
+    @FXML
+    /**
+     * 
+     * setNumChoices
+     * 
+     * This method will take the value in the numChoices text field and store it within the worksheet's QuestionSet object.
+     * 
+     * @param event either enter is pressed with cursor in text field or "Next" button is pressed
+     */
+    void setNumChoices(ActionEvent event) {
+
+    	if(!numChoicesTextField.getText().equals(""))
+    		worksheet.getQuestionSet().setNumChoices(Integer.parseInt(numChoicesTextField.getText()));
+    	
+    }
+    
+    @FXML
+    /**
+     * 
+     * goToInputs
+     * 
+     * This method will go to whatever the next scene should be, based on what the user entered.
+     * This means it will either go to the title input, instructions input, or question input.
+     * It will also trigger other events that may not have triggered like text field events.
+     * 
+     * @param event the "Next" button is pressed
+     * @throws IOException
+     */
+    void goToInputs(ActionEvent event) throws IOException{
+
+    	// Need to ensure that text field data is stored, in case user didn't press enter to trigger event.
+    	setNumQuestions(event);
+    	setNumChoices(event);
+    	
+    	String fileName; // the name of the next fxml file
+    	
+    	// decide what the name of the next file is based on the options the user selected.
+    	if(worksheet.getOptions().getHasTitle() == true)
+    		fileName = "TitleInput";
+    	else if(worksheet.getOptions().getHasInstructions() == true)
+    		fileName = "InstructionsInput";
+    	else
+    		fileName = "QuestionInput";
+    	
+    	String title = separateCamelCase(fileName); // format the String to make a title for next window
+
+    	// open the file that was determined
+    	try {
+    		
+    		URL url = new File("src/" + fileName + ".fxml").toURI().toURL();
+    		optionsAnchorPane = FXMLLoader.load(url);
+    		Scene scene = new Scene(optionsAnchorPane);
+    		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+    		window.setTitle(title);
+    		window.setScene(scene);
+    		window.setFullScreen(true);
+    		window.show();
+    		
+    	}
+    	catch(IOException ioe)
+    	{
+    		
+    		ioe.printStackTrace();
+    		
+    	}
+    	
+    }
+
+    /**
+     * 
+     * separateCamelCase
+     * 
+     * This method will add a space between all words in a camelcase word. It will be used to get the titles
+     * for the UserInput windows.
+     * 
+     * @param word a camelcase word
+     * @return newWord a String with the camel-cased words separated by a space
+     */
+    public String separateCamelCase(String word)
+    {
+    	
+    	String newWord = ""; // the new word that will include the extra spaces
+    	for(int i = 0; i < word.length(); ++i)
+    	{
+    		
+    		// First letter doesn't need a space behind it, but all subsequent upper case letters need a space behind them
+    		if(i != 0 && Character.isUpperCase(word.charAt(i)))
+    			newWord += " ";
+    		
+    		newWord += String.valueOf(word.charAt(i)); // concatenate the letter
+    		
+    		
+    	}
+    	return newWord;
+    	
+    }
+    
     
 }

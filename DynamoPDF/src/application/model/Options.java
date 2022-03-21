@@ -1,0 +1,182 @@
+package application.model;
+
+public class Options {
+
+	private boolean hasName;
+	private boolean hasDate;
+	private boolean hasTitle;
+	private boolean hasInstructions;
+	private boolean hasNumberedQuestions;
+	
+	/**
+	 * 
+	 * Options
+	 * 
+	 * The default and primary constructor for the worksheet class. There won't be a constructor where parameters
+	 * are passed, because the parameters will all have default values and will be dynamically toggled or changed
+	 * by the user. 
+	 * 
+	 */
+	public Options()
+	{
+		this.hasName = false;
+		this.hasDate = false;
+		this.hasTitle = false;
+		this.hasInstructions = false;
+		this.hasNumberedQuestions = false;
+	}
+	
+	
+	/**
+	 * 
+	 * getHasName
+	 * 
+	 * The getter method for hasName.
+	 * 
+	 * @return whether the worksheet will have a line for user to enter their name
+	 */
+	public boolean getHasName()
+	{
+		
+		return this.hasName;
+		
+	}
+	
+	/**
+	 * 
+	 * setHasName
+	 * 
+	 * The setter method for hasName.
+	 * 
+	 * @param hasName whether the worksheet will have a line for user to enter their name
+	 */
+	public void setHasName(boolean hasName)
+	{
+		
+		this.hasName = hasName;
+		
+	}
+	
+	/**
+	 * 
+	 * getHasDate
+	 * 
+	 * The getter method for hasDate.
+	 * 
+	 * @return hasDate whether the worksheet will have a line for the date
+	 */
+	public boolean getHasDate()
+	{
+		
+		return this.hasDate;
+		
+	}
+	
+	/**
+	 * 
+	 * setHasDate
+	 * 
+	 * The setter method for hasDate.
+	 * 
+	 * @param hasDate whether the worksheet will have a line for the date
+	 */
+	public void setHasDate(boolean hasDate)
+	{
+		
+		this.hasDate = hasDate;
+		
+	}
+	
+	/**
+	 * 
+	 * getHasTitle
+	 * 
+	 * The getter method for hasTitle.
+	 * 
+	 * @return hasTitle whether the worksheet will have a title
+	 */
+	public boolean getHasTitle()
+	{
+		
+		return this.hasTitle;
+		
+	}
+	
+	/**
+	 * 
+	 * setHasTitle
+	 * 
+	 * The setter method for hasTitle.
+	 * 
+	 * @param hasTitle whether the worksheet will have a title
+	 */
+	public void setHasTitle(boolean hasTitle)
+	{
+		
+		this.hasTitle = hasTitle;
+		
+	}
+	
+	/**
+	 * 
+	 * getHasInstructions
+	 * 
+	 * The getter method for hasInstructions.
+	 * 
+	 * @return has whether the worksheet will have instructions at the top
+	 */
+	public boolean getHasInstructions()
+	{
+		
+		return this.hasInstructions;
+		
+	}
+	
+	/**
+	 * 
+	 * setHasInstructions
+	 * 
+	 * The setter method for hasInstructions.
+	 * 
+	 * @param has whether the worksheet will have instructions at the top
+	 */
+	public void setHasInstructions(boolean hasInstructions)
+	{
+		
+		this.hasInstructions = hasInstructions;
+		
+	}
+	
+	/**
+	 * 
+	 * getHasNumberedQuestions
+	 * 
+	 * The getter method for hasNumberedQuestions.
+	 * 
+	 * @return has whether the worksheet will have numbered questions
+	 */
+	public boolean getHasNumberedQuestions()
+	{
+		
+		return this.hasNumberedQuestions;
+		
+	}
+	
+	/**
+	 * 
+	 * setHasNumberedQuestions
+	 * 
+	 * The setter method for hasNumberedQuestions.
+	 * 
+	 * @param has whether the worksheet will have numbered questions
+	 */
+	public void setHasNumberedQuestions(boolean hasNumberedQuestions)
+	{
+		
+		this.hasNumberedQuestions = hasNumberedQuestions;
+		
+	}
+	
+	
+	
+}
