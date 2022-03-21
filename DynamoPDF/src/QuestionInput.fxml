@@ -13,7 +13,7 @@
       <TextField fx:id="question2a" layoutX="127.0" layoutY="350.0" prefHeight="38.0" prefWidth="518.0" stylesheets="@../bin/application/application.css" />
       <TextField fx:id="question3a" layoutX="127.0" layoutY="418.0" prefHeight="38.0" prefWidth="518.0" stylesheets="@../bin/application/application.css" />
       <TextField fx:id="question4a" layoutX="127.0" layoutY="487.0" prefHeight="38.0" prefWidth="518.0" stylesheets="@../bin/application/application.css" />
-      <Button fx:id="questionInputNextButton" layoutX="724.0" layoutY="748.0" mnemonicParsing="false" onAction="#goToPDFGenerate" prefHeight="4.0" prefWidth="62.0" stylesheets="@../bin/application/application.css" text="Next" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+      <Button fx:id="nextButton" layoutX="724.0" layoutY="748.0" mnemonicParsing="false" onAction="#goToPDFGenerate" prefHeight="4.0" prefWidth="62.0" stylesheets="@../bin/application/application.css" text="Next" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
          <font>
             <Font name="Impact" size="36.0" />
          </font>
