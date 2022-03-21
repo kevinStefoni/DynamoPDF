@@ -48,9 +48,6 @@ public class OptionsMenuController {
     
     @FXML
     private TextField numChoicesTextField;
-    
-    @FXML
-    private Button optionsMenuNextButton;
 
     @FXML
     /**

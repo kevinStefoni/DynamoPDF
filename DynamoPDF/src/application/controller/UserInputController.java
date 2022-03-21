@@ -16,14 +16,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class UserInputController extends OptionsMenuController{
-
-
-		
-		/*
-		 * To access a data member from Options class from worksheet object, do something like this.
-		 * 		 * 
-		 * worksheet.getOptions().getHasDate()
-		 */
 		
 
     @FXML
