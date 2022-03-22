@@ -24,6 +24,10 @@ public class Worksheet{
 		this.options = new Options();
 		this.questionSet = new QuestionSet();
 		
+		this.title = "Title";
+		this.instructions = "Here are the instructions.";
+		this.fileName = "file.pdf";
+		
 	}
 
 	/**
