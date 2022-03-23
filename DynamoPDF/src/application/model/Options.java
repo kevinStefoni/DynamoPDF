@@ -2,11 +2,22 @@ package application.model;
 
 public class Options {
 
+	private enum Fonts{
+		
+		TIMES_NEW_ROMAN,
+		HELVETICA,
+		COURIER
+		
+	};
+	
+	
 	private boolean hasName;
 	private boolean hasDate;
 	private boolean hasTitle;
 	private boolean hasInstructions;
 	private boolean hasNumberedQuestions;
+	
+	private Fonts font;
 	
 	/**
 	 * 
@@ -24,6 +35,7 @@ public class Options {
 		this.hasTitle = false;
 		this.hasInstructions = false;
 		this.hasNumberedQuestions = false;
+		this.font = Fonts.TIMES_NEW_ROMAN;
 	}
 	
 	
@@ -174,6 +186,36 @@ public class Options {
 	{
 		
 		this.hasNumberedQuestions = hasNumberedQuestions;
+		
+	}
+	
+	/**
+	 * 
+	 * getFont
+	 * 
+	 * The getter method for font.
+	 * 
+	 * @return font an enum value for the font that the document should have it
+	 */
+	public Fonts getFont()
+	{
+		
+		return this.font;
+		
+	}
+	
+	/**
+	 * 
+	 * setFont
+	 * 
+	 * The setter method for font.
+	 * 
+	 * @param font an enum value for the font that the document should have it
+	 */
+	public void setFont(Fonts font)
+	{
+		
+		this.font = font;
 		
 	}
 	
