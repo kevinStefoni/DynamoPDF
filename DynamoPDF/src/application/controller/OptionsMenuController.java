@@ -4,11 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
-import application.model.Worksheet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -16,9 +16,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class OptionsMenuController {
+public class OptionsMenuController extends MainMenuController{
 
-	public static Worksheet worksheet = new Worksheet();
 	
     @FXML
     private AnchorPane optionsAnchorPane;
@@ -188,12 +187,12 @@ public class OptionsMenuController {
     	try {
     		
     		URL url = new File("src/" + fileName + ".fxml").toURI().toURL();
-    		optionsAnchorPane = FXMLLoader.load(url);
-    		Scene scene = new Scene(optionsAnchorPane);
-    		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-    		window.setTitle(title);
-    		window.setScene(scene);
-    		window.show();
+    		Parent loadedFxml = FXMLLoader.load(url);
+    		Scene scene = ((Node) event.getSource()).getScene();
+    		scene.setRoot(loadedFxml);
+    		Stage stg = (Stage)scene.getWindow(); 
+    		stg.setTitle(title);
+    		stg.setMaximized(stg.isMaximized());
     		
     	}
     	catch(IOException ioe)

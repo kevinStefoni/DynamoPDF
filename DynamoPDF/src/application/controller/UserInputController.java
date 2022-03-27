@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -56,12 +57,12 @@ public class UserInputController extends OptionsMenuController{
     	try {
     		
     		URL url = new File("src/GeneratePDF.fxml").toURI().toURL();
-    		background = FXMLLoader.load(url);
-    		Scene scene = new Scene(background);
-    		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-    		window.setTitle("Options");
-    		window.setScene(scene);
-    		window.show();
+    		Parent loadedFxml = FXMLLoader.load(url);
+    		Scene scene = ((Node) event.getSource()).getScene();
+    		scene.setRoot(loadedFxml);
+    		Stage stg = (Stage)scene.getWindow(); 
+    		stg.setTitle("Generate PDF");
+    		stg.setMaximized(stg.isMaximized());
     		
     	}
     	catch(IOException ioe)

@@ -35,13 +35,12 @@ public class PDF{
 			float fontSize = 12;
 			
 			String text = "This is a test to see if I can really do a line that is very long. This is going to test if that is really going to be the case, but I am not sure. Is this all going to be on the correct lines? Or not? Perhaps. But maybe not.";
-			String text2 = "This is another very long string, to see if it is going to start and if writeStringToPDF will work with consecutive calls without doing contentStream.endText().";
+			String text2 = "This is another very long string, to see if it is going to start and if writeStringToPDF will work with consecutive calls without doing contentStream.endText(). aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 			
 			PDPageContentStream contentStream = new PDPageContentStream(pdf, pdf.getPage(0));
 			contentStream.beginText();
 			
-			writeStringToPDF(page, contentStream, font, fontSize, text);
-			writeStringToPDF(page, contentStream, font, fontSize, text2);
+			writeStringToPDF(pdf, page, contentStream, font, fontSize, text2);
 			
 			contentStream.endText();
 			contentStream.close();
@@ -68,11 +67,13 @@ public class PDF{
 		}
 	}
 	
-	public void writeStringToPDF(PDPage page,
+	public void writeStringToPDF(PDDocument pdf, 
+								  PDPage page,
 							      PDPageContentStream contentStream,
 								  PDFont font,
 								  float fontSize,
-								  String text)
+								  String text
+								  )
 	{
 		
 		try 
@@ -126,13 +127,27 @@ public class PDF{
 		
 			contentStream.setFont(font, fontSize);
 			contentStream.newLineAtOffset(startX, startY);
-			for(String line: lines)
-			{
-			
-				contentStream.showText(line);
-				contentStream.newLineAtOffset(0, -leading);
-			
-			}
+			float currentY=startY;
+	           for (String line: lines)
+	           {
+	               currentY -=leading;
+
+	               if(currentY<=margin)
+	               {
+
+	                   contentStream.endText(); 
+	                   contentStream.close();
+	                   PDPage new_Page = new PDPage();
+	                   pdf.addPage(new_Page);
+	                   contentStream = new PDPageContentStream(pdf, new_Page);
+	                   contentStream.beginText();
+	                   contentStream.setFont(font, fontSize);
+	                   contentStream.newLineAtOffset(startX, startY);
+	                   currentY=startY;
+	               }
+	               contentStream.showText(line);
+	               contentStream.newLineAtOffset(0, -leading);
+	           }
 		
 		
 		}

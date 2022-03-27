@@ -3,19 +3,24 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
+import application.model.Worksheet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 public class MainMenuController {
 
+	public static Worksheet worksheet = new Worksheet();
+	
     @FXML
     private AnchorPane root;
 
@@ -37,7 +42,7 @@ public class MainMenuController {
      * goToOptionsMenu
      * 
      * This method makes it so that if the user clicks on the DESIGN button in the main menu, then they
-     * will be taken to the options menu.
+     * will be taken to the options menu. It ensures that the maximization of the window is consistent.
      * 
      * @param event	       the ActionEvent that happens when DESIGN button is clicked
      * @throws IOException if an input or output exception occurs
@@ -46,26 +51,23 @@ public class MainMenuController {
      */
     void goToOptionsMenu(ActionEvent event) throws IOException{
 
-
     	try {
-    		
+    	
     		URL url = new File("src/OptionsMenu.fxml").toURI().toURL();
-    		root = FXMLLoader.load(url);
-    		Scene scene = new Scene(root);
-    		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-    		window.setTitle("Options");
-    		window.setScene(scene);
-    		window.show();
+    		Parent loadedFxml = FXMLLoader.load(url);
+    		Scene scene = ((Node) event.getSource()).getScene();
+    		scene.setRoot(loadedFxml);
+    		Stage stg = (Stage)scene.getWindow(); 
+    		stg.setTitle("Options");
+    		stg.setMaximized(stg.isMaximized());
     		
     	}
-    	catch(IOException ioe)
+    	catch(IOException e)
     	{
     		
-    		ioe.printStackTrace();
+    		e.printStackTrace();
     		
     	}
-    	
-    	
     		
     }
 

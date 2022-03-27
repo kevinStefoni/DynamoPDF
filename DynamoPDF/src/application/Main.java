@@ -14,6 +14,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			primaryStage.setMaximized(true);
 			URL url = new File("src/MainMenu.fxml").toURI().toURL();
 	    	AnchorPane root = FXMLLoader.load(url);
 			Scene scene = new Scene(root,800,800);
