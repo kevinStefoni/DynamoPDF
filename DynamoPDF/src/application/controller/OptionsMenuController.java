@@ -192,7 +192,12 @@ public class OptionsMenuController extends MainMenuController{
     		scene.setRoot(loadedFxml);
     		Stage stg = (Stage)scene.getWindow(); 
     		stg.setTitle(title);
+    		stg.setHeight(stg.getHeight());
+    		stg.setWidth(stg.getWidth());
+    		stg.setX(stg.getX());
+    		stg.setY(stg.getY());
     		stg.setMaximized(stg.isMaximized());
+    		stg.setFullScreen(stg.isFullScreen());
     		
     	}
     	catch(IOException ioe)

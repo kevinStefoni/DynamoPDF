@@ -62,7 +62,12 @@ public class UserInputController extends OptionsMenuController{
     		scene.setRoot(loadedFxml);
     		Stage stg = (Stage)scene.getWindow(); 
     		stg.setTitle("Generate PDF");
+    		stg.setHeight(stg.getHeight());
+    		stg.setWidth(stg.getWidth());
+    		stg.setX(stg.getX());
+    		stg.setY(stg.getY());
     		stg.setMaximized(stg.isMaximized());
+    		stg.setFullScreen(stg.isFullScreen());
     		
     	}
     	catch(IOException ioe)
