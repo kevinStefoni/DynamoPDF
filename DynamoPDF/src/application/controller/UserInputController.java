@@ -46,7 +46,6 @@ public class UserInputController extends OptionsMenuController{
     public void initialize()
     {
     	
-    	//System.out.println(worksheet.getQuestionSet().getNumQuestions() + " " + worksheet.getQuestionSet().getNumChoices());
     	
     }
     
@@ -68,6 +67,8 @@ public class UserInputController extends OptionsMenuController{
     		stg.setY(stg.getY());
     		stg.setMaximized(stg.isMaximized());
     		stg.setFullScreen(stg.isFullScreen());
+			stg.setMinHeight(800);
+			stg.setMinWidth(800);
     		
     	}
     	catch(IOException ioe)

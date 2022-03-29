@@ -42,7 +42,9 @@ public class MainMenuController {
      * goToOptionsMenu
      * 
      * This method makes it so that if the user clicks on the DESIGN button in the main menu, then they
-     * will be taken to the options menu. It ensures that the maximization of the window is consistent.
+     * will be taken to the options menu. This method ensures that the maximization, position, whether it is full screen,
+     * and size of the window will persist. It also ensures that the minimum height and width are both 800, to prevent user from
+     * shrinking window to such a small size that there are formatting issues visible.
      * 
      * @param event	       the ActionEvent that happens when DESIGN button is clicked
      * @throws IOException if an input or output exception occurs
@@ -65,6 +67,8 @@ public class MainMenuController {
     		stg.setY(stg.getY());
     		stg.setMaximized(stg.isMaximized());
     		stg.setFullScreen(stg.isFullScreen());
+			stg.setMinHeight(800);
+			stg.setMinWidth(800);
     		
     	}
     	catch(IOException e)

@@ -18,6 +18,7 @@ public class Options {
 	private boolean hasNumberedQuestions;
 	
 	private Fonts font;
+	private float fontSize;
 	
 	/**
 	 * 
@@ -30,12 +31,15 @@ public class Options {
 	 */
 	public Options()
 	{
+		
 		this.hasName = false;
 		this.hasDate = false;
 		this.hasTitle = false;
 		this.hasInstructions = false;
 		this.hasNumberedQuestions = false;
 		this.font = Fonts.TIMES_NEW_ROMAN;
+		this.fontSize = 12;
+		
 	}
 	
 	
@@ -216,6 +220,36 @@ public class Options {
 	{
 		
 		this.font = font;
+		
+	}
+	
+	/**
+	 * 
+	 * getFontSize
+	 * 
+	 * The getter method for fontSize.
+	 * 
+	 * @return fontSize the size of the font
+	 */
+	public float getFontSize()
+	{
+		
+		return this.fontSize;
+		
+	}
+	
+	/**
+	 * 
+	 * setFontSize
+	 * 
+	 * The setter method for fontSize.
+	 * 
+	 * @param fontSize the size of the font
+	 */
+	public void setFontSize(float fontSize)
+	{
+		
+		this.fontSize = fontSize;
 		
 	}
 	

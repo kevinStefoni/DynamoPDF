@@ -161,6 +161,10 @@ public class OptionsMenuController extends MainMenuController{
      * This method will go to whatever the next scene should be, based on what the user entered.
      * This means it will either go to the title input, instructions input, or question input.
      * It will also trigger other events that may not have triggered like text field events.
+     * This method ensures that the maximization, position, whether it is full screen,
+     * and size of the window will persist. It also ensures that the minimum height and 
+     * width are both 800, to prevent user from shrinking window to such a small size that 
+     * there are formatting issues visible.
      * 
      * @param event the "Next" button is pressed
      * @throws IOException
@@ -198,6 +202,8 @@ public class OptionsMenuController extends MainMenuController{
     		stg.setY(stg.getY());
     		stg.setMaximized(stg.isMaximized());
     		stg.setFullScreen(stg.isFullScreen());
+			stg.setMinHeight(800);
+			stg.setMinWidth(800);
     		
     	}
     	catch(IOException ioe)

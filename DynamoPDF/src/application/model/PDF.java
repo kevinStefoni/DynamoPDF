@@ -34,22 +34,26 @@ public class PDF{
 			PDFont font = PDType1Font.TIMES_ROMAN;
 			float fontSize = 12;
 			
-			String text = "This is a test to see if I can really do a line that is very long. This is going to test if that is really going to be the case, but I am not sure. Is this all going to be on the correct lines? Or not? Perhaps. But maybe not.";
-			String text2 = "This is another very long string, to see if it is going to start and if writeStringToPDF will work with consecutive calls without doing contentStream.endText(). aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+			String text = "This is another very long string, to see if it is";
+			String text2 = "going to start and if writeStringToPDF will work with.";
+					
 			
 			PDPageContentStream contentStream = new PDPageContentStream(pdf, pdf.getPage(0));
 			contentStream.beginText();
 			
-			writeStringToPDF(pdf, page, contentStream, font, fontSize, text2);
+			PDRectangle mediabox = page.getMediaBox();
+			float margin = 72;
+			float width = mediabox.getWidth() - 2 * margin;
+			float startX = mediabox.getLowerLeftX() + margin;
+			float startY = mediabox.getUpperRightY() - margin;
+			
+			writeStringToPDF(pdf, page, contentStream, font, fontSize, text, margin, width, startX, startY);
+			writeStringToPDF(pdf, page, contentStream, font, fontSize, text2, margin, width, 0, 15);
+			
+			//content offset method is relative, not absolute
 			
 			contentStream.endText();
 			contentStream.close();
-			
-			
-			
-			
-			
-			
 
 			// insert pdf stuff here
 			
@@ -72,83 +76,88 @@ public class PDF{
 							      PDPageContentStream contentStream,
 								  PDFont font,
 								  float fontSize,
-								  String text
+								  String text,
+								  float margin,
+								  float width,
+								  float startX,
+								  float startY
 								  )
 	{
 		
 		try 
 		{
 			float leading = 1.5f * fontSize;
-			PDRectangle mediabox = page.getMediaBox();
-			float margin = 72;
-			float width = mediabox.getWidth() - 2 * margin;
-			float startX = mediabox.getLowerLeftX() + margin;
-			float startY = mediabox.getUpperRightY() - margin;
 		
 			List<String> lines = new ArrayList<String>();
-			int lastSpace = -1;
-		
-			while(text.length() > 0)
-			{
 			
-				int spaceIndex = text.indexOf(' ', lastSpace + 1);
-				if(spaceIndex < 0)
-					spaceIndex = text.length();
-			
-				String sub = text.substring(0, spaceIndex);
-				float size = fontSize * font.getStringWidth(sub) / 1000;
-			
-				if(size > width)
-				{
+			for(String t: text.split("\n")) {
 				
-					if(lastSpace < 0)
+				int lastSpace = -1;
+				
+				while(text.length() > 0)
+				{
+			
+					int spaceIndex = text.indexOf(' ', lastSpace + 1);
+					if(spaceIndex < 0)
+						spaceIndex = text.length();
+			
+					String sub = text.substring(0, spaceIndex);
+					float size = fontSize * font.getStringWidth(sub) / 1000;
+			
+					if(size > width)
+					{
+				
+						if(lastSpace < 0)
+							lastSpace = spaceIndex;
+				
+						sub = text.substring(0, lastSpace);
+						lines.add(sub);
+						text = text.substring(lastSpace).trim();
+						lastSpace = -1;
+				
+					}
+					else if (spaceIndex == text.length())
+					{
+				
+						lines.add(text);
+						text = "";					
+					}
+					else
+					{
+				
 						lastSpace = spaceIndex;
 				
-					sub = text.substring(0, lastSpace);
-					lines.add(sub);
-					text = text.substring(lastSpace).trim();
-					lastSpace = -1;
-				
+					}				
 				}
-				else if (spaceIndex == text.length())
-				{
-				
-					lines.add(text);
-					text = "";					
-				}
-				else
-				{
-				
-					lastSpace = spaceIndex;
-				
-				}				
+		
 			}
 		
-		
-			contentStream.setFont(font, fontSize);
-			contentStream.newLineAtOffset(startX, startY);
-			float currentY=startY;
-	           for (String line: lines)
-	           {
-	               currentY -=leading;
+				contentStream.setFont(font, fontSize);
+				contentStream.newLineAtOffset(startX, startY);
+				float currentY=startY;
+	            for (String line: lines)
+	            {
+	            	currentY -=leading;
 
-	               if(currentY<=margin)
-	               {
+	                if(currentY<=margin)
+	                {
 
-	                   contentStream.endText(); 
-	                   contentStream.close();
-	                   PDPage new_Page = new PDPage();
-	                   pdf.addPage(new_Page);
-	                   contentStream = new PDPageContentStream(pdf, new_Page);
-	                   contentStream.beginText();
-	                   contentStream.setFont(font, fontSize);
-	                   contentStream.newLineAtOffset(startX, startY);
-	                   currentY=startY;
+	                	contentStream.endText(); 
+	                    contentStream.close();
+	                    PDPage new_Page = new PDPage();
+	                    pdf.addPage(new_Page);
+	                    contentStream = new PDPageContentStream(pdf, new_Page);
+	                    contentStream.beginText();
+	                    contentStream.setFont(font, fontSize);
+	                    contentStream.newLineAtOffset(startX, startY);
+	                    currentY=startY;
 	               }
+	                
 	               contentStream.showText(line);
 	               contentStream.newLineAtOffset(0, -leading);
 	           }
-		
+	          
+			
 		
 		}
 		catch (IOException ioe)
