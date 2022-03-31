@@ -34,6 +34,8 @@
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -43,6 +45,10 @@
          <children>
             <Label fx:id="numberOfQuestions" prefHeight="46.0" prefWidth="195.0" stylesheets="@../bin/application/application.css" text="  Number of Questions:" />
             <Label fx:id="numberOfChoices" prefHeight="46.0" prefWidth="182.0" stylesheets="@../bin/application/application.css" text="Number of Choices:" GridPane.columnIndex="1" />
+            <Label prefHeight="21.0" prefWidth="64.0" text="  Font:" GridPane.rowIndex="2" />
+            <Label prefHeight="21.0" prefWidth="145.0" text="  Font Size:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <ComboBox fx:id="fontChoices" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" /> 
+            <ComboBox fx:id="fontSizes" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
             <TextField fx:id="numQuestionsTextField" onAction="#setNumQuestions">
                <GridPane.margin>
                   <Insets left="200.0" right="20.0" />
