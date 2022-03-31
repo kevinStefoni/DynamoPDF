@@ -2,7 +2,7 @@ package application.model;
 
 public class Options {
 
-	private enum Fonts{
+	public enum Fonts{
 		
 		TIMES_NEW_ROMAN,
 		HELVETICA,
