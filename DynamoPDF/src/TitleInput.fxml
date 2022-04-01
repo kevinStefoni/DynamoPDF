@@ -6,14 +6,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="titleInputBackground" prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: #140854;" stylesheets="@../bin/application/application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.UserInputController">
+<AnchorPane fx:id="background" prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: #140854;" stylesheets="@../bin/application/application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.UserInputController">
    <children>
-      <Label alignment="CENTER" layoutX="251.0" layoutY="294.0" prefHeight="78.0" prefWidth="298.0" text="Title" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="titleLabel" alignment="CENTER" layoutX="251.0" layoutY="294.0" prefHeight="78.0" prefWidth="298.0" text="Title" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Impact" size="63.0" />
          </font>
       </Label>
-      <TextField layoutX="164.0" layoutY="388.0" prefHeight="38.0" prefWidth="474.0" />
+      <TextField fx:id="titleInput" layoutX="164.0" layoutY="388.0" prefHeight="38.0" prefWidth="474.0" />
       <Button fx:id="nextButton" layoutX="724.0" layoutY="748.0" mnemonicParsing="false" prefHeight="4.0" prefWidth="62.0" stylesheets="@../bin/application/application.css" text="Next" textFill="WHITE">
          <font>
             <Font name="Impact" size="36.0" />

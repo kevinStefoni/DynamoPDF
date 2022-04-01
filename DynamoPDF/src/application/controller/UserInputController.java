@@ -11,46 +11,72 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class UserInputController extends OptionsMenuController{
-		
-
-    @FXML
-    private TextField question1a;
-
-    @FXML
-    private TextField question2a;
-    
-    @FXML
-    private TextField question3a;
-    
-    @FXML
-    private TextField question4a;
-    
-    @FXML
-    private TextField question5a;
-
+public class UserInputController extends OptionsMenuController {
+	
+	/* elements shared for all documents */
+	
     @FXML
     private AnchorPane background;
-
+    
+    @FXML
+    private Button nextButton;
+	
+	/* titleInput.fxml */
+	
+	@FXML
+	private Label titleLabel;
+	
+	@FXML
+	private TextField titleInput;
+    
+	/* instructionsInput.fxml */
+	
+	@FXML
+	private Label instructionsLabel;
+	
+	@FXML
+	private TextArea instructionsInput;
+	
+    /* questionInput.fxml */
+    
     @FXML
     private TextArea questionBox;
+    
+    @FXML
+    private TextField questionA;
 
     @FXML
-    private Button questionInputNextButton;
+    private TextField questionB;
+    
+    @FXML
+    private TextField questionC;
+    
+    @FXML
+    private TextField questionD;
+    
+    @FXML
+    private TextField questionE;
+    
+    //end of FXML elements
     
     public void initialize()
     {
     	
-    	
     }
     
     @FXML
-    void goToPDFGenerate(ActionEvent event) {
+    public void saveTitle() {
+    	worksheet.setTitle(titleInput.getText());
+    }
+    
+    @FXML
+    public void goToPDFGenerate(ActionEvent event) {
 
 
     	try {
