@@ -24,23 +24,48 @@ public class PDF{
 		
 		try {
 			
+			// First, store the font type based on the worksheet object's selected options.
+			PDFont font = PDType1Font.TIMES_ROMAN;
+			
+			if(worksheet.getOptions().getFont() == Options.Fonts.TIMES_NEW_ROMAN)
+			{
+				
+				font = PDType1Font.TIMES_ROMAN;
+				
+			}
+			else if(worksheet.getOptions().getFont() == Options.Fonts.COURIER)
+			{
+				
+				font = PDType1Font.COURIER;
+				
+			}
+			else if(worksheet.getOptions().getFont() == Options.Fonts.HELVETICA)
+			{
+				
+				font = PDType1Font.HELVETICA;
+				
+			}
+			
+			// Store the font size in a variable. 
+			float fontSize = worksheet.getOptions().getFontSize();
+			
 			PDDocument pdf = new PDDocument();
 			PDPage page = new PDPage();
 			pdf.addPage(page);
+
+			
 			//PDFont font = PDTrueTypeFont.load(pdf, PDDocument.class.getResourceAsStream(
 			//	    "/org/apache/pdfbox/resources/ttf/LiberationSans-Regular.ttf"), WinAnsiEncoding.INSTANCE);
 			// PDFont font = PDType1Font.HELVETICA; now also works, because I installed PDFBox 2.0.X, instead of the alpha of 3.0.X.
 			
-			PDFont font = PDType1Font.TIMES_ROMAN;
-			float fontSize = 12;
-			
-			String text = "This is another very long string, to see if it is";
-			String text2 = "going to start and if writeStringToPDF will work with.";
+		
+			String text = "This is another very long string, to see if it is going to work with the words being longer than the actual line. So, Iammakingthisalongerword will keep making sentences to see if this works.";
+			String text2 = "This is the second string. Time to see if it is going to work.";
 					
 			
-			PDPageContentStream contentStream = new PDPageContentStream(pdf, pdf.getPage(0));
+			PDPageContentStream contentStream = new PDPageContentStream(pdf, pdf.getPage(0), PDPageContentStream.AppendMode.APPEND, true);
 			contentStream.beginText();
-			
+		
 			PDRectangle mediabox = page.getMediaBox();
 			float margin = 72;
 			float width = mediabox.getWidth() - 2 * margin;
@@ -48,12 +73,13 @@ public class PDF{
 			float startY = mediabox.getUpperRightY() - margin;
 			
 			writeStringToPDF(pdf, page, contentStream, font, fontSize, text, margin, width, startX, startY);
-			writeStringToPDF(pdf, page, contentStream, font, fontSize, text2, margin, width, 0, 15);
+			contentStream.beginText();
+			writeStringToPDF(pdf, page, contentStream, font, fontSize, text2, margin, width, 0, -15);
+			
+			
 			
 			//content offset method is relative, not absolute
-			
-			contentStream.endText();
-			contentStream.close();
+
 
 			// insert pdf stuff here
 			
@@ -76,7 +102,7 @@ public class PDF{
 							      PDPageContentStream contentStream,
 								  PDFont font,
 								  float fontSize,
-								  String text,
+								  String textTotal,
 								  float margin,
 								  float width,
 								  float startX,
@@ -90,7 +116,7 @@ public class PDF{
 		
 			List<String> lines = new ArrayList<String>();
 			
-			for(String t: text.split("\n")) {
+			for(String text: textTotal.split("\n")) {
 				
 				int lastSpace = -1;
 				
@@ -157,7 +183,8 @@ public class PDF{
 	               contentStream.newLineAtOffset(0, -leading);
 	           }
 	          
-			
+	           contentStream.endText();
+	           contentStream.close();
 		
 		}
 		catch (IOException ioe)
