@@ -185,7 +185,7 @@ public class OptionsMenuController extends MainMenuController implements Initial
     	setNumQuestions(event);
     	setNumChoices(event);
     	
-    	String fileName; // the name of the next fxml file
+    	String fileName = null; // the name of the next fxml file
     	
     	// decide what the name of the next file is based on the options the user selected.
     	if(worksheet.getOptions().getHasTitle() == true)

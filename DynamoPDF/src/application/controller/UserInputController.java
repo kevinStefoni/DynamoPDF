@@ -19,13 +19,14 @@ import javafx.stage.Stage;
 
 public class UserInputController extends OptionsMenuController {
 	
-	/* elements shared for all documents */
+	/* elements shared for all input fxml files */
 	
     @FXML
     private AnchorPane background;
     
     @FXML
     private Button nextButton;
+    
 	
 	/* titleInput.fxml */
 	
@@ -34,6 +35,7 @@ public class UserInputController extends OptionsMenuController {
 	
 	@FXML
 	private TextField titleInput;
+	
     
 	/* instructionsInput.fxml */
 	
@@ -42,6 +44,7 @@ public class UserInputController extends OptionsMenuController {
 	
 	@FXML
 	private TextArea instructionsInput;
+	
 	
     /* questionInput.fxml */
     
@@ -65,19 +68,21 @@ public class UserInputController extends OptionsMenuController {
     
     //end of FXML elements
     
-    public void initialize()
-    {
-    	
-    }
-    
     @FXML
     public void saveTitle() {
     	worksheet.setTitle(titleInput.getText());
     }
     
     @FXML
+    /**
+     * 
+     * goToPDFGenerate
+     * 
+     * This is the method that sends the user to GeneratePDF.fxml.
+     * 
+     * @param event the next button was clicked in QuestionInput.fxml
+     */
     public void goToPDFGenerate(ActionEvent event) {
-
 
     	try {
     		
@@ -103,6 +108,94 @@ public class UserInputController extends OptionsMenuController {
     		ioe.printStackTrace();
     		
     	}
+    	
+    }
+    
+    @FXML
+    /**
+     * 
+     * goToSecondInput
+     * 
+     * This is the method that will send the user to the scene after title. It will conditionally select whether to send the
+     * user to Instructions.fxml or QuestionInput.fxml, depending on which options the user selected.
+     * 
+     * @param event the next button was clicked in Title.fxml
+     */
+    void goToSecondInput(ActionEvent event) {
+
+    	String fileName = null; // the name of the next fxml file
+    	
+    	// decide what the name of the next file is based on the options the user selected
+    	if(worksheet.getOptions().getHasInstructions() == true)
+    		fileName = "InstructionsInput";
+    	else
+    		fileName = "QuestionInput";
+    	
+    	String title = separateCamelCase(fileName); // format the String to make a title for next window
+    	
+    	try {
+    		
+    		URL url = new File("src/" + fileName + ".fxml").toURI().toURL();
+    		Parent loadedFxml = FXMLLoader.load(url);
+    		Scene scene = ((Node) event.getSource()).getScene();
+    		scene.setRoot(loadedFxml);
+    		Stage stg = (Stage)scene.getWindow(); 
+    		stg.setTitle(title);
+    		stg.setHeight(stg.getHeight());
+    		stg.setWidth(stg.getWidth());
+    		stg.setX(stg.getX());
+    		stg.setY(stg.getY());
+    		stg.setMaximized(stg.isMaximized());
+    		stg.setFullScreen(stg.isFullScreen());
+			stg.setMinHeight(800);
+			stg.setMinWidth(800);
+    		
+    	}
+    	catch(IOException ioe)
+    	{
+    		
+    		ioe.printStackTrace();
+    		
+    	}
+    	
+    }
+    
+    @FXML
+    /**
+     * 
+     * goToQuestionInput
+     * 
+     * This is the method that will send the user to QuestionInput.fxml. It is an unconditional change.
+     * 
+     * @param event the next button was clicked in Instructions.fxml
+     */
+    void goToQuestionInput(ActionEvent event) {
+
+    	try {
+    		
+    		URL url = new File("src/QuestionInput.fxml").toURI().toURL();
+    		Parent loadedFxml = FXMLLoader.load(url);
+    		Scene scene = ((Node) event.getSource()).getScene();
+    		scene.setRoot(loadedFxml);
+    		Stage stg = (Stage)scene.getWindow(); 
+    		stg.setTitle("Question Input");
+    		stg.setHeight(stg.getHeight());
+    		stg.setWidth(stg.getWidth());
+    		stg.setX(stg.getX());
+    		stg.setY(stg.getY());
+    		stg.setMaximized(stg.isMaximized());
+    		stg.setFullScreen(stg.isFullScreen());
+			stg.setMinHeight(800);
+			stg.setMinWidth(800);
+    		
+    	}
+    	catch(IOException ioe)
+    	{
+    		
+    		ioe.printStackTrace();
+    		
+    	}
+    	
     	
     }
     
