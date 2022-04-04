@@ -68,6 +68,10 @@ public class UserInputController extends OptionsMenuController {
     @FXML
     private TextField questionE;
     
+    //warning message label
+    @FXML
+    private Label warningMessage;
+    
     //end of FXML elements
     
     @FXML
@@ -85,24 +89,35 @@ public class UserInputController extends OptionsMenuController {
      * 
      */
     public void saveQuestionInput() {
+    	boolean warning = false;
     	int count = 0; //counter to hold how many sub questions have been filled out
     	//ArrayList to hold temporary question inputs
     	ArrayList<String> tempInput = new ArrayList<String>();
     	/* add questionA-E to tempInput */
     	tempInput.add(questionBox.getText());
+    	MultipleChoiceQuestion mcq = new MultipleChoiceQuestion(tempInput.get(0), worksheet.getQuestionSet().getNumChoices());
     	tempInput.add(questionA.getText());
     	tempInput.add(questionB.getText());
     	tempInput.add(questionC.getText());
     	tempInput.add(questionD.getText());
     	tempInput.add(questionE.getText());
-    	/* check for empty question input and ignore those text fields */
-    	for(int i = 1; i < tempInput.size()-1; i++) {
-    		if(!tempInput.get(i).equals("")) { //check if text field is not empty
-    			count++; //increase the valid sub question counter
+    	/* add the questions to the set while checking for empty input (show error if empty input) */
+    	for(int i = 1; i < worksheet.getQuestionSet().getNumChoices(); i++) {
+    		if(tempInput.get(i).equals("")) { //text field is empty
+    			warning = true;
+    		}
+    		else {
+    			mcq.addChoice(tempInput.get(i));
     		}
     	}
-    	MultipleChoiceQuestion mcq = new MultipleChoiceQuestion(tempInput.get(0), count);
+    	
+    	if(warning == true) { //one of the question boxes is empty
+    		warningMessage.setText("ERROR: One or more question boxes are empty. Please fill in the boxes and try again.");
+    	}
+    	else {
     	worksheet.getQuestionSet().addQuestion((mcq));
+    	goToPDFGenerate();
+    	}
     	
     }
     
@@ -115,7 +130,7 @@ public class UserInputController extends OptionsMenuController {
      * 
      * @param event the next button was clicked in QuestionInput.fxml
      */
-    public void goToPDFGenerate(ActionEvent event) {
+    public void goToPDFGenerate() {
 
     	try {
     		
