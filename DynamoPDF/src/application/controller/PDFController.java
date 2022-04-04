@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+
 import application.model.PDF;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,44 +14,51 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class PDFController extends UserInputController{
-
-    @FXML
-    private BorderPane borderPane;
-
-    @FXML
-    private MenuBar menuBar;
-    
-    @FXML
-    private TextArea PDFNameTextArea;
-    
-    @FXML
-    private Menu editMenu;
-
-    @FXML
-    private Menu helpMenu;
-
-    @FXML
-    private Button saveButton;
-
-    @FXML
-    private Menu fileMenu;
 	
-    @FXML
-    private AnchorPane generatePDFAnchorPane;
+	 	@FXML
+	    private ScrollBar scrollBar;
 
-    @FXML
-    private Button generatePDFButton;
-    
-    private PDF pdf = new PDF();
+	    @FXML
+	    private MenuBar menuBar;
+
+	    @FXML
+	    private Menu editMenu;
+
+	    @FXML
+	    private TextArea tempTextArea;
+
+	    @FXML
+	    private BorderPane mainBorderPane;
+
+	    @FXML
+	    private AnchorPane anchorPane;
+
+	    @FXML
+	    private TextField saveTextField;
+
+	    @FXML
+	    private Menu helpMenu;
+
+	    @FXML
+	    private Button saveButton;
+
+	    @FXML
+	    private Label pdfNameLabel;
+
+	    @FXML
+	    private Menu fileMenu;
 
 	@FXML
 	/**
@@ -72,7 +81,13 @@ public class PDFController extends UserInputController{
     @FXML
     void handleSave(ActionEvent event) throws IOException {
     	
-    	String pdfName=PDFNameTextArea.getText().toString()+"\n";
+    	PDDocument document = new PDDocument();
+    	
+    	document.save("C:/Downloads/"+ saveTextField.getOnInputMethodTextChanged()+".pdf");
+    	document.close();
+    	
+    	
+    	
     	
     }
     
