@@ -3,7 +3,9 @@ package application.controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 
+import application.model.MultipleChoiceQuestion;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -71,6 +73,37 @@ public class UserInputController extends OptionsMenuController {
     @FXML
     public void saveTitle() {
     	worksheet.setTitle(titleInput.getText());
+    }
+    
+    @FXML
+    /**
+     * 
+     * saveQuestionInput
+     * 
+     * This is the method that saves the user question and sub questions (a through e)
+     * These inputs are then saved to a MultipleChoiceQuestion object
+     * 
+     */
+    public void saveQuestionInput() {
+    	int count = 0; //counter to hold how many sub questions have been filled out
+    	//ArrayList to hold temporary question inputs
+    	ArrayList<String> tempInput = new ArrayList<String>();
+    	/* add questionA-E to tempInput */
+    	tempInput.add(questionBox.getText());
+    	tempInput.add(questionA.getText());
+    	tempInput.add(questionB.getText());
+    	tempInput.add(questionC.getText());
+    	tempInput.add(questionD.getText());
+    	tempInput.add(questionE.getText());
+    	/* check for empty question input and ignore those text fields */
+    	for(int i = 1; i < tempInput.size()-1; i++) {
+    		if(!tempInput.get(i).equals("")) { //check if text field is not empty
+    			count++; //increase the valid sub question counter
+    		}
+    	}
+    	MultipleChoiceQuestion mcq = new MultipleChoiceQuestion(tempInput.get(0), count);
+    	worksheet.getQuestionSet().addQuestion((mcq));
+    	
     }
     
     @FXML
