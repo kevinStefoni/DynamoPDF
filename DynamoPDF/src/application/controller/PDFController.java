@@ -3,6 +3,7 @@ package application.controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 
@@ -20,6 +21,8 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
@@ -80,14 +83,30 @@ public class PDFController extends UserInputController{
 	
     @FXML
     void handleSave(ActionEvent event) throws IOException {
-    	
+    	FileChooser fc = new FileChooser();
+    	//Alert that tells user if PDF was created successfully or not.
+    	Alert a = new Alert(AlertType.NONE);
+    	//Creating PDF Document
     	PDDocument document = new PDDocument();
+    	//Using System.getProperty() to find the users home user file in the off change it's not the default C: drive
+    	String home = System.getProperty("user.home");
+    	//getting path and storing it user's Downloads folder
+    	File file = new File(home+"/Downloads/" + saveTextField.getText() + ".pdf");
     	
-    	document.save("C:/Downloads/"+ saveTextField.getOnInputMethodTextChanged()+".pdf");
+    	//Saving file
+    	document.save(file);
+    	
+    	if (file.isFile()) {
+    		a.setAlertType(AlertType.CONFIRMATION);
+    		a.setHeaderText("PDF Created!");
+    		a.show();
+    	}
+    	else{
+    		a.setAlertType(AlertType.ERROR);
+    		a.setHeaderText("Error: DynamoPDF was unable to create PDF");
+    		a.show();
+    	}
     	document.close();
-    	
-    	
-    	
     	
     }
     
