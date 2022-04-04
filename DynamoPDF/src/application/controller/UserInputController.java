@@ -88,7 +88,7 @@ public class UserInputController extends OptionsMenuController {
      * These inputs are then saved to a MultipleChoiceQuestion object
      * 
      */
-    public void saveQuestionInput() {
+    public void saveQuestionInput(ActionEvent event) {
     	boolean warning = false;
     	int count = 0; //counter to hold how many sub questions have been filled out
     	//ArrayList to hold temporary question inputs
@@ -116,12 +116,11 @@ public class UserInputController extends OptionsMenuController {
     	}
     	else {
     	worksheet.getQuestionSet().addQuestion((mcq));
-    	goToPDFGenerate();
+    	goToPDFGenerate(event);
     	}
     	
     }
     
-    @FXML
     /**
      * 
      * goToPDFGenerate
@@ -130,7 +129,7 @@ public class UserInputController extends OptionsMenuController {
      * 
      * @param event the next button was clicked in QuestionInput.fxml
      */
-    public void goToPDFGenerate() {
+    public void goToPDFGenerate(ActionEvent event) {
 
     	try {
     		
