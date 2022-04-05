@@ -151,46 +151,62 @@ public class PDF{
 	{
 		float leading = 1.5f * fontSize;
 		
-		List<String> lines = new ArrayList<String>();
-		int lastSpace = -1;
-		while (text.length() > 0)
-		{
-			int spaceIndex = text.indexOf(' ', lastSpace + 1);
-		    if (spaceIndex < 0)
-		        spaceIndex = text.length();
-		    String subString = text.substring(0, spaceIndex);
-		    float size = fontSize * pdfFont.getStringWidth(subString) / 1000;
-		    System.out.printf("'%s' - %f of %f\n", subString, size, width);
-		    if (size > width)
-		    {
-		        if (lastSpace < 0)
-		            lastSpace = spaceIndex;
-		        subString = text.substring(0, lastSpace);
-		        lines.add(subString);
-		        text = text.substring(lastSpace).trim();
-		        System.out.printf("'%s' is line\n", subString);
-		        lastSpace = -1;
-		    }
-		    else if (spaceIndex == text.length())
-		    {
-		        lines.add(text);
-		        System.out.printf("'%s' is line\n", text);
-		        text = "";
-		    }
-		    else
-		    {
-		        lastSpace = spaceIndex;
-		    }
-		}
+        List<String> lines = new ArrayList<String>();
+        int lastSpace = -1;
+        while (text.length() > 0)
+        {
+            int spaceIndex = text.indexOf(' ', lastSpace + 1);
+            if (spaceIndex < 0)
+                spaceIndex = text.length();
+            String subString = text.substring(0, spaceIndex);
+            float size = fontSize * pdfFont.getStringWidth(subString) / 1000;
+            System.out.printf("'%s' - %f of %f\n", subString, size, width);
+            if (size > width)
+            {
+                if (lastSpace < 0)
+                    lastSpace = spaceIndex;
+                subString = text.substring(0, lastSpace);
+                lines.add(subString);
+                text = text.substring(lastSpace).trim();
+                System.out.printf("'%s' is line\n", subString);
+                lastSpace = -1;
+            }
+            else if (spaceIndex == text.length())
+            {
+                lines.add(text);
+                System.out.printf("'%s' is line\n", text);
+                text = "";
+            }
+            else
+            {
+                lastSpace = spaceIndex;
+            }
+        }
 
-		contentStream.beginText();
-		contentStream.setFont(font, fontSize);
-		contentStream.newLineAtOffset(startX, startY);
-		for (String line: lines)
-		{
-			contentStream.showText(line);
-		    contentStream.newLineAtOffset(0, -leading);
-		}
+        contentStream.beginText();
+        contentStream.setFont(pdfFont, fontSize);
+        contentStream.newLineAtOffset(startX, startY);
+        float currentY=startY;
+        for (String line: lines)
+        {
+            currentY -=leading;
+
+            if(currentY<=margin)
+            {
+
+                contentStream.endText(); 
+                contentStream.close();
+                PDPage new_Page = new PDPage();
+                doc.addPage(new_Page);
+                contentStream = new PDPageContentStream(doc, new_Page);
+                contentStream.beginText();
+                contentStream.setFont(pdfFont, fontSize);
+                contentStream.newLineAtOffset(startX, startY);
+                currentY=startY;
+            }
+            contentStream.showText(line);
+            contentStream.newLineAtOffset(0, -leading);
+        }
 	
 	}
 }
