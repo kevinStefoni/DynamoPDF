@@ -20,7 +20,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class OptionsMenuController extends MainMenuController implements Initializable {
+
+public class OptionsMenuController extends MainMenuController implements Initializable{
 
 	
     @FXML
@@ -185,7 +186,7 @@ public class OptionsMenuController extends MainMenuController implements Initial
     	setNumQuestions(event);
     	setNumChoices(event);
     	
-    	String fileName; // the name of the next fxml file
+    	String fileName = null; // the name of the next fxml file
     	
     	// decide what the name of the next file is based on the options the user selected.
     	if(worksheet.getOptions().getHasTitle() == true)
@@ -253,6 +254,46 @@ public class OptionsMenuController extends MainMenuController implements Initial
     	return newWord;
     	
     }
+    
+    /**
+     * 
+     * creates a combobox to allow the user to choose the font
+     * choices are times new roman, helvetica, and courier
+     * creates a combobox to allow the user to select the font
+     * there are 4 different sizes to choose from, and the user can input their own size if necessary
+     * @param url
+     * @param rb
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+    	if (fontChoices != null) {
+    		for (Fonts font : Fonts.values()) {
+
+    			fontChoices.getItems().add(font.toString());
+    		}
+    	
+    		fontChoices.setOnAction((event) -> {
+    			String fontChoice = fontChoices.getValue();
+    			System.out.println(fontChoice);
+    			if(!fontChoice.equals(""))
+    				worksheet.getOptions().setFont(Fonts.valueOf(fontChoice));
+    		});
+    	}
+    	if (fontSizes != null) {
+    		fontSizes.getItems().add("10");
+    		fontSizes.getItems().add("12");
+    		fontSizes.getItems().add("14");
+    		fontSizes.getItems().add("16");
+    		fontSizes.setEditable(true);
+    		fontChoices.setOnAction((event) -> {
+    			String fontSize = fontSizes.getValue();
+    			System.out.println(fontSize);
+    			if(!fontSize.equals(""))
+    				worksheet.getOptions().setFontSize(Float.valueOf(fontSize));
+    		});
+    	}
+    }
+    
     
     /**
      * 

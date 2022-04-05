@@ -16,7 +16,37 @@ import org.apache.pdfbox.pdmodel.font.encoding.WinAnsiEncoding;
 
 public class PDF{
 
-
+	private int pageNumber = 0;
+	
+	/**
+	 * 
+	 * getPageNumber
+	 * 
+	 * This is the getter method for pageNumber.
+	 * 
+	 * @return pageNumber the current page that the PDF is on
+	 */
+	public int getPageNumber()
+	{
+		
+		return this.pageNumber;
+		
+	}
+	
+	/**
+	 * 
+	 * setPageNumber
+	 * 
+	 * This is the setter method for pageNumber.
+	 * 
+	 * @param pageNumber the current page that the PDF is on
+	 */
+	public void setPageNumber(int pageNumber)
+	{
+		
+		this.pageNumber = pageNumber;
+		
+	}
 	
 	public	void generatePDF(Worksheet worksheet)
 	{
@@ -24,21 +54,46 @@ public class PDF{
 		
 		try {
 			
+			// First, store the font type based on the worksheet object's selected options.
+			PDFont font = PDType1Font.TIMES_ROMAN;
+			
+			if(worksheet.getOptions().getFont() == Options.Fonts.TIMES_NEW_ROMAN)
+			{
+				
+				font = PDType1Font.TIMES_ROMAN;
+				
+			}
+			else if(worksheet.getOptions().getFont() == Options.Fonts.COURIER)
+			{
+				
+				font = PDType1Font.COURIER;
+				
+			}
+			else if(worksheet.getOptions().getFont() == Options.Fonts.HELVETICA)
+			{
+				
+				font = PDType1Font.HELVETICA;
+				
+			}
+			
+			// Store the font size in a variable. 
+			float fontSize = worksheet.getOptions().getFontSize();
+			
 			PDDocument pdf = new PDDocument();
 			PDPage page = new PDPage();
 			pdf.addPage(page);
+
+			
 			//PDFont font = PDTrueTypeFont.load(pdf, PDDocument.class.getResourceAsStream(
 			//	    "/org/apache/pdfbox/resources/ttf/LiberationSans-Regular.ttf"), WinAnsiEncoding.INSTANCE);
 			// PDFont font = PDType1Font.HELVETICA; now also works, because I installed PDFBox 2.0.X, instead of the alpha of 3.0.X.
 			
-			PDFont font = PDType1Font.TIMES_ROMAN;
-			float fontSize = 12;
-			
-			String text = "This is another very long string, to see if it is";
-			String text2 = "going to start and if writeStringToPDF will work with.";
+		
+			String text = "This is another very long string, to see if it is going to work with the words being longer than the actual line. So, Iammakingthisalongerword will keep making sentences to see if this works.";
+			String text2 = "This is the second string. Time to see if it is going to work.";
 					
 			
-			PDPageContentStream contentStream = new PDPageContentStream(pdf, pdf.getPage(0));
+			PDPageContentStream contentStream = new PDPageContentStream(pdf, pdf.getPage(pageNumber));
 			contentStream.beginText();
 			
 			PDRectangle mediabox = page.getMediaBox();
@@ -47,13 +102,26 @@ public class PDF{
 			float startX = mediabox.getLowerLeftX() + margin;
 			float startY = mediabox.getUpperRightY() - margin;
 			
-			writeStringToPDF(pdf, page, contentStream, font, fontSize, text, margin, width, startX, startY);
-			writeStringToPDF(pdf, page, contentStream, font, fontSize, text2, margin, width, 0, 15);
-			
-			//content offset method is relative, not absolute
-			
+			contentStream.setFont(font, fontSize);
+			contentStream.newLineAtOffset(startX, startY);
+			contentStream.showText(text);
+			contentStream.endText();
+			contentStream.setFont(font, fontSize);
+			contentStream.newLineAtOffset(0, -15);
+			contentStream.showText(text2);
 			contentStream.endText();
 			contentStream.close();
+			
+			
+//			writeStringToPDF(pdf, page, contentStream, font, fontSize, text, margin, width, startX, startY);
+//			writeStringToPDF(pdf, page, contentStream, font, fontSize, text2, margin, width, 0, -15);
+//			
+//	        contentStream.endText();
+//	        contentStream.close();
+			
+			
+			//content offset method is relative, not absolute
+
 
 			// insert pdf stuff here
 			
@@ -76,7 +144,7 @@ public class PDF{
 							      PDPageContentStream contentStream,
 								  PDFont font,
 								  float fontSize,
-								  String text,
+								  String textTotal,
 								  float margin,
 								  float width,
 								  float startX,
@@ -90,7 +158,7 @@ public class PDF{
 		
 			List<String> lines = new ArrayList<String>();
 			
-			for(String t: text.split("\n")) {
+			for(String text: textTotal.split("\n")) {
 				
 				int lastSpace = -1;
 				
@@ -145,8 +213,9 @@ public class PDF{
 	                	contentStream.endText(); 
 	                    contentStream.close();
 	                    PDPage new_Page = new PDPage();
+	                    pageNumber++;
 	                    pdf.addPage(new_Page);
-	                    contentStream = new PDPageContentStream(pdf, new_Page);
+	                    contentStream = new PDPageContentStream(pdf, pdf.getPage(pageNumber));
 	                    contentStream.beginText();
 	                    contentStream.setFont(font, fontSize);
 	                    contentStream.newLineAtOffset(startX, startY);
@@ -156,8 +225,6 @@ public class PDF{
 	               contentStream.showText(line);
 	               contentStream.newLineAtOffset(0, -leading);
 	           }
-	          
-			
 		
 		}
 		catch (IOException ioe)

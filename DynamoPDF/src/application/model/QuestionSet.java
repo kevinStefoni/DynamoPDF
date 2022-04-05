@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class QuestionSet {
 
-	int numQuestions;
-	int numChoices;
+	private int numQuestions;
+	private int numChoices;
 	private ArrayList<Question>setOfQuestions; 
 	
 	/**
@@ -103,5 +103,20 @@ public class QuestionSet {
 		
 	}
 	
+	/**
+	 * 
+	 * addQuestion
+	 * 
+	 * This is a method to add a question to the setOfQuestions.
+	 * 
+	 * @param question the question to be added to the setOfQuestions
+	 * 
+	 */
+	public void addQuestion(Question question)
+	{
+		
+		this.setOfQuestions.add(question);
+		
+	}
 
 }
