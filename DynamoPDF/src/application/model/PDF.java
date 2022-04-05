@@ -89,7 +89,7 @@ public class PDF{
 			// PDFont font = PDType1Font.HELVETICA; now also works, because I installed PDFBox 2.0.X, instead of the alpha of 3.0.X.
 			
 		
-			String text = "This is another very long string, to see if it is going to work with the words being longer than the actual line. So, Iammakingthisalongerword will keep making sentences to see if this works.";
+			String text = "This is another very long string, ";
 			String text2 = "This is the second string. Time to see if it is going to work.";
 					
 			
@@ -105,9 +105,7 @@ public class PDF{
 			contentStream.setFont(font, fontSize);
 			contentStream.newLineAtOffset(startX, startY);
 			contentStream.showText(text);
-			contentStream.endText();
-			contentStream.setFont(font, fontSize);
-			contentStream.newLineAtOffset(0, -15);
+			contentStream.newLineAtOffset(0, 15);
 			contentStream.showText(text2);
 			contentStream.endText();
 			contentStream.close();
@@ -144,96 +142,55 @@ public class PDF{
 							      PDPageContentStream contentStream,
 								  PDFont font,
 								  float fontSize,
-								  String textTotal,
+								  String text,
 								  float margin,
 								  float width,
 								  float startX,
 								  float startY
 								  )
 	{
+		float leading = 1.5f * fontSize;
 		
-		try 
+		List<String> lines = new ArrayList<String>();
+		int lastSpace = -1;
+		while (text.length() > 0)
 		{
-			float leading = 1.5f * fontSize;
-		
-			List<String> lines = new ArrayList<String>();
-			
-			for(String text: textTotal.split("\n")) {
-				
-				int lastSpace = -1;
-				
-				while(text.length() > 0)
-				{
-			
-					int spaceIndex = text.indexOf(' ', lastSpace + 1);
-					if(spaceIndex < 0)
-						spaceIndex = text.length();
-			
-					String sub = text.substring(0, spaceIndex);
-					float size = fontSize * font.getStringWidth(sub) / 1000;
-			
-					if(size > width)
-					{
-				
-						if(lastSpace < 0)
-							lastSpace = spaceIndex;
-				
-						sub = text.substring(0, lastSpace);
-						lines.add(sub);
-						text = text.substring(lastSpace).trim();
-						lastSpace = -1;
-				
-					}
-					else if (spaceIndex == text.length())
-					{
-				
-						lines.add(text);
-						text = "";					
-					}
-					else
-					{
-				
-						lastSpace = spaceIndex;
-				
-					}				
-				}
-		
-			}
-		
-				contentStream.setFont(font, fontSize);
-				contentStream.newLineAtOffset(startX, startY);
-				float currentY=startY;
-	            for (String line: lines)
-	            {
-	            	currentY -=leading;
-
-	                if(currentY<=margin)
-	                {
-
-	                	contentStream.endText(); 
-	                    contentStream.close();
-	                    PDPage new_Page = new PDPage();
-	                    pageNumber++;
-	                    pdf.addPage(new_Page);
-	                    contentStream = new PDPageContentStream(pdf, pdf.getPage(pageNumber));
-	                    contentStream.beginText();
-	                    contentStream.setFont(font, fontSize);
-	                    contentStream.newLineAtOffset(startX, startY);
-	                    currentY=startY;
-	               }
-	                
-	               contentStream.showText(line);
-	               contentStream.newLineAtOffset(0, -leading);
-	           }
-		
+			int spaceIndex = text.indexOf(' ', lastSpace + 1);
+		    if (spaceIndex < 0)
+		        spaceIndex = text.length();
+		    String subString = text.substring(0, spaceIndex);
+		    float size = fontSize * pdfFont.getStringWidth(subString) / 1000;
+		    System.out.printf("'%s' - %f of %f\n", subString, size, width);
+		    if (size > width)
+		    {
+		        if (lastSpace < 0)
+		            lastSpace = spaceIndex;
+		        subString = text.substring(0, lastSpace);
+		        lines.add(subString);
+		        text = text.substring(lastSpace).trim();
+		        System.out.printf("'%s' is line\n", subString);
+		        lastSpace = -1;
+		    }
+		    else if (spaceIndex == text.length())
+		    {
+		        lines.add(text);
+		        System.out.printf("'%s' is line\n", text);
+		        text = "";
+		    }
+		    else
+		    {
+		        lastSpace = spaceIndex;
+		    }
 		}
-		catch (IOException ioe)
+
+		contentStream.beginText();
+		contentStream.setFont(font, fontSize);
+		contentStream.newLineAtOffset(startX, startY);
+		for (String line: lines)
 		{
-		
-			ioe.printStackTrace();
-		
+			contentStream.showText(line);
+		    contentStream.newLineAtOffset(0, -leading);
 		}
-	
 	
 	}
 }

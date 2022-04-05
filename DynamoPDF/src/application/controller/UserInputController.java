@@ -75,8 +75,17 @@ public class UserInputController extends OptionsMenuController {
     //end of FXML elements
     
     @FXML
+    /**
+     * 
+     * saveTitle
+     * 
+     * This is the method that stores the title from the text field in the worksheet object.
+     * 
+     */
     public void saveTitle() {
+    	
     	worksheet.setTitle(titleInput.getText());
+   
     }
     
     @FXML
