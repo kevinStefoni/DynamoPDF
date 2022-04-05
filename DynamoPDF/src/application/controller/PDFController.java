@@ -27,7 +27,9 @@ import javafx.stage.Stage;
 
 public class PDFController extends UserInputController{
 	
-		private PDDocument pdf = new PDDocument();
+		private PDDocument document = new PDDocument();
+		
+		private PDF pdf = new PDF();
 	
 	 	@FXML
 	    private ScrollBar scrollBar;
@@ -84,8 +86,8 @@ public class PDFController extends UserInputController{
     void handleSave(ActionEvent event) throws IOException {
     	
     	
-    	pdf.save("C:/Downloads/"+ saveTextField.getOnInputMethodTextChanged()+".pdf");
-    	pdf.close();
+    	document.save("C:/Downloads/"+ saveTextField.getOnInputMethodTextChanged()+".pdf");
+    	document.close();
     	
     	
     	

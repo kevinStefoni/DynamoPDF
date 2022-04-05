@@ -16,7 +16,37 @@ import org.apache.pdfbox.pdmodel.font.encoding.WinAnsiEncoding;
 
 public class PDF{
 
-
+	private int pageNumber = 0;
+	
+	/**
+	 * 
+	 * getPageNumber
+	 * 
+	 * This is the getter method for pageNumber.
+	 * 
+	 * @return pageNumber the current page that the PDF is on
+	 */
+	public int getPageNumber()
+	{
+		
+		return this.pageNumber;
+		
+	}
+	
+	/**
+	 * 
+	 * setPageNumber
+	 * 
+	 * This is the setter method for pageNumber.
+	 * 
+	 * @param pageNumber the current page that the PDF is on
+	 */
+	public void setPageNumber(int pageNumber)
+	{
+		
+		this.pageNumber = pageNumber;
+		
+	}
 	
 	public	void generatePDF(Worksheet worksheet)
 	{
@@ -63,19 +93,31 @@ public class PDF{
 			String text2 = "This is the second string. Time to see if it is going to work.";
 					
 			
-			PDPageContentStream contentStream = new PDPageContentStream(pdf, pdf.getPage(0), PDPageContentStream.AppendMode.APPEND, true);
+			PDPageContentStream contentStream = new PDPageContentStream(pdf, pdf.getPage(pageNumber));
 			contentStream.beginText();
-		
+			
 			PDRectangle mediabox = page.getMediaBox();
 			float margin = 72;
 			float width = mediabox.getWidth() - 2 * margin;
 			float startX = mediabox.getLowerLeftX() + margin;
 			float startY = mediabox.getUpperRightY() - margin;
 			
-			writeStringToPDF(pdf, page, contentStream, font, fontSize, text, margin, width, startX, startY);
-			contentStream.beginText();
-			writeStringToPDF(pdf, page, contentStream, font, fontSize, text2, margin, width, 0, -15);
+			contentStream.setFont(font, fontSize);
+			contentStream.newLineAtOffset(startX, startY);
+			contentStream.showText(text);
+			contentStream.endText();
+			contentStream.setFont(font, fontSize);
+			contentStream.newLineAtOffset(0, -15);
+			contentStream.showText(text2);
+			contentStream.endText();
+			contentStream.close();
 			
+			
+//			writeStringToPDF(pdf, page, contentStream, font, fontSize, text, margin, width, startX, startY);
+//			writeStringToPDF(pdf, page, contentStream, font, fontSize, text2, margin, width, 0, -15);
+//			
+//	        contentStream.endText();
+//	        contentStream.close();
 			
 			
 			//content offset method is relative, not absolute
@@ -171,8 +213,9 @@ public class PDF{
 	                	contentStream.endText(); 
 	                    contentStream.close();
 	                    PDPage new_Page = new PDPage();
+	                    pageNumber++;
 	                    pdf.addPage(new_Page);
-	                    contentStream = new PDPageContentStream(pdf, new_Page);
+	                    contentStream = new PDPageContentStream(pdf, pdf.getPage(pageNumber));
 	                    contentStream.beginText();
 	                    contentStream.setFont(font, fontSize);
 	                    contentStream.newLineAtOffset(startX, startY);
@@ -182,9 +225,6 @@ public class PDF{
 	               contentStream.showText(line);
 	               contentStream.newLineAtOffset(0, -leading);
 	           }
-	          
-	           contentStream.endText();
-	           contentStream.close();
 		
 		}
 		catch (IOException ioe)

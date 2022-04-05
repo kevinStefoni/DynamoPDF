@@ -8,17 +8,17 @@
 
 <AnchorPane fx:id="background" prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: #140854;" stylesheets="@../bin/application/application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.UserInputController">
    <children>
-      <TextArea fx:id="questionBox" layoutX="127.0" layoutY="133.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="85.0" prefWidth="525.0" style="-fx-background-color: #dddddd;" stylesheets="@../bin/application/application.css" AnchorPane.bottomAnchor="582.0" AnchorPane.leftAnchor="127.0" AnchorPane.rightAnchor="148.0" AnchorPane.topAnchor="133.0" />
-      <TextField fx:id="questionA" layoutX="127.0" layoutY="282.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="38.0" prefWidth="518.0" stylesheets="@../bin/application/application.css" AnchorPane.bottomAnchor="480.0" AnchorPane.leftAnchor="127.0" AnchorPane.rightAnchor="155.0" AnchorPane.topAnchor="282.0" />
-      <TextField fx:id="questionA" layoutX="127.0" layoutY="350.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="38.0" prefWidth="518.0" stylesheets="@../bin/application/application.css" AnchorPane.bottomAnchor="412.0" AnchorPane.leftAnchor="127.0" AnchorPane.rightAnchor="155.0" AnchorPane.topAnchor="350.0" />
-      <TextField fx:id="questionA" layoutX="127.0" layoutY="418.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="38.0" prefWidth="518.0" stylesheets="@../bin/application/application.css" AnchorPane.bottomAnchor="344.0" AnchorPane.leftAnchor="127.0" AnchorPane.rightAnchor="155.0" AnchorPane.topAnchor="418.0" />
-      <TextField fx:id="questionA" layoutX="127.0" layoutY="487.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="38.0" prefWidth="518.0" stylesheets="@../bin/application/application.css" AnchorPane.bottomAnchor="275.0" AnchorPane.leftAnchor="127.0" AnchorPane.rightAnchor="155.0" AnchorPane.topAnchor="487.0" />
+      <TextArea fx:id="questionBox" layoutX="127.0" layoutY="133.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="85.0" prefWidth="525.0" style="-fx-background-color: #dddddd;" stylesheets="@../bin/application/application.css" />
+      <TextField fx:id="questionA" layoutX="127.0" layoutY="282.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="38.0" prefWidth="518.0" stylesheets="@../bin/application/application.css" />
+      <TextField fx:id="questionA" layoutX="127.0" layoutY="350.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="38.0" prefWidth="518.0" stylesheets="@../bin/application/application.css" />
+      <TextField fx:id="questionA" layoutX="127.0" layoutY="418.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="38.0" prefWidth="518.0" stylesheets="@../bin/application/application.css" />
+      <TextField fx:id="questionA" layoutX="127.0" layoutY="487.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="38.0" prefWidth="518.0" stylesheets="@../bin/application/application.css" />
       <Button fx:id="nextButton" layoutX="724.0" layoutY="748.0" mnemonicParsing="false" onAction="#saveQuestionInput" prefHeight="4.0" prefWidth="62.0" stylesheets="@../bin/application/application.css" text="Next" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
          <font>
             <Font name="Impact" size="36.0" />
          </font>
       </Button>
-      <TextField fx:id="questionA" layoutX="127.0" layoutY="552.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="38.0" prefWidth="518.0" stylesheets="@../bin/application/application.css" AnchorPane.bottomAnchor="210.0" AnchorPane.leftAnchor="127.0" AnchorPane.rightAnchor="155.0" AnchorPane.topAnchor="552.0" />
+      <TextField fx:id="questionA" layoutX="127.0" layoutY="552.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="38.0" prefWidth="518.0" stylesheets="@../bin/application/application.css" />
       <Label fx:id="qLabelMain" layoutX="45.0" layoutY="138.0" prefHeight="69.0" prefWidth="74.0" text="Q1" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Impact" size="63.0" />
