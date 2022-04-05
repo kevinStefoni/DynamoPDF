@@ -100,7 +100,6 @@ public class UserInputController extends OptionsMenuController {
     public void saveQuestionInput(ActionEvent event) {
     	
     	boolean warning = false;
-    	int count = 0; //counter to hold how many sub questions have been filled out
     	//ArrayList to hold temporary question inputs
     	ArrayList<String> tempInput = new ArrayList<String>();
     	/* add questionA-E to tempInput */
@@ -112,7 +111,7 @@ public class UserInputController extends OptionsMenuController {
     	tempInput.add(questionD.getText());
     	tempInput.add(questionE.getText());
     	/* add the questions to the set while checking for empty input (show error if empty input) */
-    	for(int i = 1; i < worksheet.getQuestionSet().getNumChoices(); i++) {
+    	for(int i = 1; i < worksheet.getQuestionSet().getNumChoices()+2; i++) {
     		if(tempInput.get(i).equals("")) { //text field is empty
     			warning = true;
     		}
