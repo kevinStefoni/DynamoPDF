@@ -121,7 +121,7 @@ public class UserInputController extends OptionsMenuController {
     	}
     	
     	if(warning == true) { //one of the question boxes is empty
-    		warningMessage.setText("ERROR: One or more question boxes are empty. Please fill in the boxes and try again.");
+    		warningMessage.setText("ERROR: Please fill in all the boxes.");
     	}
     	else {
     	worksheet.getQuestionSet().addQuestion((mcq));
