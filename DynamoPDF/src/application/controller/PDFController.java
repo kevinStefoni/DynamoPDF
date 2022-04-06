@@ -3,6 +3,7 @@ package application.controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ResourceBundle;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 
@@ -10,31 +11,30 @@ import application.model.PDF;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
-public class PDFController extends UserInputController{
+public class PDFController extends UserInputController implements Initializable{
 	
 		private PDDocument document = new PDDocument();
 		
 		private PDF pdf = new PDF();
 	
 	 	@FXML
-	    private ScrollBar scrollBar;
-
-	    @FXML
 	    private MenuBar menuBar;
 
 	    @FXML
@@ -50,7 +50,7 @@ public class PDFController extends UserInputController{
 	    private AnchorPane anchorPane;
 
 	    @FXML
-	    private TextField saveTextField;
+	    private ScrollBar pDFscrollBar;
 
 	    @FXML
 	    private Menu helpMenu;
@@ -59,11 +59,12 @@ public class PDFController extends UserInputController{
 	    private Button saveButton;
 
 	    @FXML
-	    private Label pdfNameLabel;
-
-	    @FXML
 	    private Menu fileMenu;
 
+	    @FXML
+	    private ScrollBar pageScrollBar;
+	    FileChooser fc= new FileChooser();
+	    
 	@FXML
 	/**
 	 * 
@@ -77,28 +78,41 @@ public class PDFController extends UserInputController{
 	void generate(ActionEvent event)
 	{
 		
-		pdf.generatePDF(worksheet);
+		//pdf.generatePDF(worksheet);
+
 		goToPDFScene(event);
 		
 	}
-	
-    @FXML
-    void handleSave(ActionEvent event) throws IOException {
-    	
-    	
-    	document.save("C:/Downloads/"+ saveTextField.getOnInputMethodTextChanged()+".pdf");
-    	document.close();
-    	
-    	
-    	
-    	
+
+	    	
+
+	public void intialize(URL location, ResourceBundle resources) {
+    	fc.setInitialDirectory(new File("downloads"));
+
     }
+    @FXML
+   public void handleSave(ActionEvent event) throws IOException {
+    	Window stage =saveButton.getScene().getWindow();
+    	fc.setTitle("Save Dialog");
+    	fc.setInitialFileName("My PDF");
+    	fc.getExtensionFilters().addAll(
+    			new ExtensionFilter ("PDF Files", "*.pdf"));
+    	
+    	try {
+    	File file=fc.showSaveDialog(stage);
+    	//save the chosen directory
+    	fc.setInitialDirectory(file.getParentFile());
+    	}catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    }
+    
+		   
     
     void goToPDFScene(ActionEvent event)
     {
 
-    	try {
-    		
+    	try {    		
     		URL url = new File("src/PDFScene.fxml").toURI().toURL();
     		Parent loadedFxml = FXMLLoader.load(url);
     		Scene scene = ((Node) event.getSource()).getScene();
@@ -123,5 +137,5 @@ public class PDFController extends UserInputController{
     	}
     	
     }
-	
+    
 }
