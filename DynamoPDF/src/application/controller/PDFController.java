@@ -4,13 +4,17 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
+import java.util.ResourceBundle;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 
 import application.model.PDF;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,22 +22,25 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
-public class PDFController extends UserInputController{
+public class PDFController extends UserInputController implements Initializable{
 	
 	 	@FXML
-	    private ScrollBar scrollBar;
-
-	    @FXML
 	    private MenuBar menuBar;
 
 	    @FXML
@@ -49,7 +56,7 @@ public class PDFController extends UserInputController{
 	    private AnchorPane anchorPane;
 
 	    @FXML
-	    private TextField saveTextField;
+	    private ScrollBar pDFscrollBar;
 
 	    @FXML
 	    private Menu helpMenu;
@@ -58,10 +65,16 @@ public class PDFController extends UserInputController{
 	    private Button saveButton;
 
 	    @FXML
-	    private Label pdfNameLabel;
+	    private Menu fileMenu;
 
 	    @FXML
-	    private Menu fileMenu;
+	    private ScrollBar pageScrollBar;
+	    FileChooser fc= new FileChooser();
+	    
+    
+   
+    
+
 
 	@FXML
 	/**
@@ -76,39 +89,30 @@ public class PDFController extends UserInputController{
 	void generate(ActionEvent event)
 	{
 		
-		//pdf.generatePDF(worksheet);
 		goToPDFScene(event);
 		
 	}
-	
-    @FXML
-    void handleSave(ActionEvent event) throws IOException {
-    	FileChooser fc = new FileChooser();
-    	//Alert that tells user if PDF was created successfully or not.
-    	Alert a = new Alert(AlertType.NONE);
-    	//Creating PDF Document
-    	PDDocument document = new PDDocument();
-    	//Using System.getProperty() to find the users home user file in the off change it's not the default C: drive
-    	String home = System.getProperty("user.home");
-    	//getting path and storing it user's Downloads folder
-    	File file = new File(home+"/Downloads/" + saveTextField.getText() + ".pdf");
-    	
-    	//Saving file
-    	document.save(file);
-    	
-    	if (file.isFile()) {
-    		a.setAlertType(AlertType.CONFIRMATION);
-    		a.setHeaderText("PDF Created!");
-    		a.show();
-    	}
-    	else{
-    		a.setAlertType(AlertType.ERROR);
-    		a.setHeaderText("Error: DynamoPDF was unable to create PDF");
-    		a.show();
-    	}
-    	document.close();
-    	
+	public void intialize(URL location, ResourceBundle resources) {
+    	fc.setInitialDirectory(new File("downloads"));
     }
+    @FXML
+   public void handleSave(ActionEvent event) throws IOException {
+    	Window stage =saveButton.getScene().getWindow();
+    	fc.setTitle("Save Dialog");
+    	fc.setInitialFileName("My PDF");
+    	fc.getExtensionFilters().addAll(
+    			new ExtensionFilter ("PDF Files", "*.pdf"));
+    	
+    	try {
+    	File file=fc.showSaveDialog(stage);
+    	//save the chosen directory
+    	fc.setInitialDirectory(file.getParentFile());
+    	}catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    }
+    
+		   
     
     void goToPDFScene(ActionEvent event)
     {
@@ -139,5 +143,5 @@ public class PDFController extends UserInputController{
     	}
     	
     }
-	
+    
 }
