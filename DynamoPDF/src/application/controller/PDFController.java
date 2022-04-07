@@ -31,8 +31,6 @@ import javafx.stage.Window;
 
 public class PDFController extends UserInputController implements Initializable{
 	
-		private PDDocument document = new PDDocument();
-		
 		private PDF pdf = new PDF();
 	
 		@FXML
@@ -83,7 +81,9 @@ public class PDFController extends UserInputController implements Initializable{
 	 */
 	void generate(ActionEvent event)
 	{
+
 		//pdf.generatePDF(worksheet);
+
 		goToPDFScene(event);
 	}
 
