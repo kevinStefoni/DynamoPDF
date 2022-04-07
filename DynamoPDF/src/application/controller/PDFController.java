@@ -70,10 +70,6 @@ public class PDFController extends UserInputController implements Initializable{
 	    @FXML
 	    private ScrollBar pageScrollBar;
 	    FileChooser fc= new FileChooser();
-	    
-    
-   
-    
 
 
 	@FXML
@@ -93,16 +89,16 @@ public class PDFController extends UserInputController implements Initializable{
 		
 	}
 	public void intialize(URL location, ResourceBundle resources) {
-    	fc.setInitialDirectory(new File("downloads"));
+    	fc.setInitialDirectory(new File("C://Downloads/"));
     }
+	
     @FXML
    public void handleSave(ActionEvent event) throws IOException {
     	Window stage =saveButton.getScene().getWindow();
-    	fc.setTitle("Save Dialog");
-    	fc.setInitialFileName("My PDF");
+    	fc.setTitle("Save PDF File");
+    	fc.setInitialFileName("MyPDF");
     	fc.getExtensionFilters().addAll(
-    			new ExtensionFilter ("PDF Files", "*.pdf"));
-    	
+    			new ExtensionFilter ("PDF Files", "*.pdf"));    	
     	try {
     	File file=fc.showSaveDialog(stage);
     	//save the chosen directory
@@ -119,7 +115,6 @@ public class PDFController extends UserInputController implements Initializable{
 
     	try {
     		//testing commit
-    		
     		URL url = new File("src/PDFScene.fxml").toURI().toURL();
     		Parent loadedFxml = FXMLLoader.load(url);
     		Scene scene = ((Node) event.getSource()).getScene();
