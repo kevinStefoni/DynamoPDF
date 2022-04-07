@@ -17,6 +17,7 @@ import org.apache.pdfbox.pdmodel.font.encoding.WinAnsiEncoding;
 public class PDF{
 
 	private int pageNumber = 0;
+	private static float currentY;
 	
 	/**
 	 * 
@@ -89,7 +90,7 @@ public class PDF{
 			// PDFont font = PDType1Font.HELVETICA; now also works, because I installed PDFBox 2.0.X, instead of the alpha of 3.0.X.
 			
 		
-			String text = "This is another very long string, This is the second string. Time to see if it is going to work.This is the second string. Time to see if it is going to work.This is the second string. Time to see if it is going to work.This is the second string. Time to see if it is going to work.This is the second string. Time to see if it is going to work.";
+			String text = "This is another very long string, here are a bunch of random words and now at this end too red blue carpet cytokinesis this is here to be a very long line that extends over multiple lines.";
 			String text2 = "This is the second string. Time to see if it is going to work.";
 					
 			
@@ -100,10 +101,23 @@ public class PDF{
 			float width = mediabox.getWidth() - 2 * margin;
 			float startX = mediabox.getLowerLeftX() + margin;
 			float startY = mediabox.getUpperRightY() - margin;
+			currentY = startY;
 			
-			contentStream = writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, text, margin, width, startX, startY);
-     		contentStream = writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, text2, margin, width, 0, -15);
-     		
+			// add the name line if needed
+			if(worksheet.getOptions().getHasName())
+				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, "Name: ____________________", margin, width, startX, startY);
+			
+			// add the date line if needed
+			if(worksheet.getOptions().getHasDate() && worksheet.getOptions().getHasName())
+				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, "Date: __________", margin, width, width * 0.75f, startY);
+			else if(worksheet.getOptions().getHasDate() && !worksheet.getOptions().getHasName())
+				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, "Date: __________", margin, width, startX, startY);
+				
+			
+			writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, text, margin, width, startX, currentY);
+     		writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, text2, margin, width, startX, currentY);
+     		writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, "last line", margin, width, startX, currentY);
+            
 			
 	        contentStream.close();
 			
@@ -119,7 +133,7 @@ public class PDF{
 		}
 	}
 	
-	public PDPageContentStream writeStringToPDF(PDDocument pdf, 
+	public void writeStringToPDF(PDDocument pdf, 
 								  PDPage page,
 							      PDPageContentStream contentStream,
 								  PDFont font,
@@ -179,34 +193,18 @@ public class PDF{
 	            
 	        }
 	
-	        contentStream.beginText();
-	        contentStream.setFont(font, fontSize);
-	        contentStream.newLineAtOffset(startX, startY);
-	        float currentY=startY;
+
+	       
 	        for (String line: lines)
 	        {
-	            currentY -=leading;
-	
-	            if(currentY<=margin)
-	            {
-	
-	            	System.out.println("Does it go into this code block?");
-	            	
-	                contentStream.endText(); 
-	                PDPage new_Page = new PDPage();
-	                pdf.addPage(new_Page);
-	                pageNumber++;
-	                contentStream.close();
-	                contentStream = new PDPageContentStream(pdf, new_Page);
-	                contentStream.beginText();
-	                contentStream.setFont(font, fontSize);
-	                contentStream.newLineAtOffset(startX, startY);
-	                currentY=startY;
-	                
-	            }
+	            
+		        contentStream.beginText();
+		        contentStream.setFont(font, fontSize);
+		        contentStream.newLineAtOffset(startX, currentY);
 	            
 	            contentStream.showText(line);
 	            contentStream.endText();
+	            currentY -=15;
 	            
 	        }
 		}catch(IOException e)
@@ -215,11 +213,6 @@ public class PDF{
 			e.printStackTrace();
 			
 		}
-		finally
-		{
-			
-			return contentStream;
-			
-		}
+
 	}
 }

@@ -48,9 +48,6 @@ public class OptionsMenuController extends MainMenuController implements Initial
     @FXML
     private TextField numQuestionsTextField;
     
-    //@FXML
-    private TextField numChoicesTextField;
-    
     @FXML
     private ComboBox<String> fontChoices;
     
