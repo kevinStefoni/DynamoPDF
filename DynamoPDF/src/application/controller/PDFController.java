@@ -76,17 +76,11 @@ public class PDFController extends UserInputController implements Initializable{
 	 */
 	void generate(ActionEvent event)
 	{
-		
 		//pdf.generatePDF(worksheet);
-
 		goToPDFScene(event);
-		
 	}
 
-	    	
-
 	public void intialize(URL location, ResourceBundle resources) {
-    
     	fc.setInitialDirectory(new File("downloads"));
     }
 	
@@ -128,11 +122,9 @@ public class PDFController extends UserInputController implements Initializable{
     		stg.setFullScreen(stg.isFullScreen());
 			stg.setMinHeight(800);
 			stg.setMinWidth(800);
-    		
     	}
     	catch(IOException ioe)
     	{
-    		
     		ioe.printStackTrace();
     		
     	}
