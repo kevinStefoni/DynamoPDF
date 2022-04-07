@@ -23,7 +23,9 @@ public class Main extends Application {
 	 * 
 	 */
 	public void start(Stage primaryStage) {
+		
 		try {
+			
 			primaryStage.setMaximized(true);
 			primaryStage.setMinHeight(800);
 			primaryStage.setMinWidth(800);
@@ -34,9 +36,13 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Dynamo PDF");
 			primaryStage.show();
+			
 		} catch(Exception e) {
+			
 			e.printStackTrace();
+			
 		}
+		
 	}
 	
 	public static void main(String[] args) {

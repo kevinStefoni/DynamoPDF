@@ -89,12 +89,11 @@ public class PDF{
 			// PDFont font = PDType1Font.HELVETICA; now also works, because I installed PDFBox 2.0.X, instead of the alpha of 3.0.X.
 			
 		
-			String text = "This is another very long string, ";
+			String text = "This is another very long string, This is the second string. Time to see if it is going to work.This is the second string. Time to see if it is going to work.This is the second string. Time to see if it is going to work.This is the second string. Time to see if it is going to work.This is the second string. Time to see if it is going to work.";
 			String text2 = "This is the second string. Time to see if it is going to work.";
 					
 			
 			PDPageContentStream contentStream = new PDPageContentStream(pdf, pdf.getPage(pageNumber));
-			contentStream.beginText();
 			
 			PDRectangle mediabox = page.getMediaBox();
 			float margin = 72;
@@ -102,23 +101,13 @@ public class PDF{
 			float startX = mediabox.getLowerLeftX() + margin;
 			float startY = mediabox.getUpperRightY() - margin;
 			
-			contentStream.beginText();
+			contentStream = writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, text, margin, width, startX, startY);
+     		contentStream = writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, text2, margin, width, 0, -15);
+     		
 			
-			writeStringToPDF(pdf, page, contentStream, font, fontSize, text, margin, width, startX, startY);
-     		writeStringToPDF(pdf, page, contentStream, font, fontSize, text2, margin, width, 0, -15);
-			
-	        contentStream.endText();
 	        contentStream.close();
 			
-			
-			//content offset method is relative, not absolute
-
-
-			// insert pdf stuff here
-			
-			pdf.save("test.pdf");
-			//pdf.save(worksheet.getFileName());
-			
+			pdf.save(new File("test.pdf"));
 			pdf.close();
 			
 		}
@@ -130,7 +119,7 @@ public class PDF{
 		}
 	}
 	
-	public void writeStringToPDF(PDDocument pdf, 
+	public PDPageContentStream writeStringToPDF(PDDocument pdf, 
 								  PDPage page,
 							      PDPageContentStream contentStream,
 								  PDFont font,
@@ -149,36 +138,48 @@ public class PDF{
 			
 	        List<String> lines = new ArrayList<String>();
 	        int lastSpace = -1;
+	        
 	        while (text.length() > 0)
 	        {
 	            int spaceIndex = text.indexOf(' ', lastSpace + 1);
+	            
 	            if (spaceIndex < 0)
 	                spaceIndex = text.length();
+	            
 	            String subString = text.substring(0, spaceIndex);
 	            float size = fontSize * font.getStringWidth(subString) / 1000;
 	            System.out.printf("'%s' - %f of %f\n", subString, size, width);
+	            
 	            if (size > width)
 	            {
 	                if (lastSpace < 0)
 	                    lastSpace = spaceIndex;
+	                
 	                subString = text.substring(0, lastSpace);
 	                lines.add(subString);
 	                text = text.substring(lastSpace).trim();
 	                System.out.printf("'%s' is line\n", subString);
 	                lastSpace = -1;
+	                
 	            }
 	            else if (spaceIndex == text.length())
 	            {
+	            	
 	                lines.add(text);
 	                System.out.printf("'%s' is line\n", text);
 	                text = "";
+	                
 	            }
 	            else
 	            {
+	            	
 	                lastSpace = spaceIndex;
+	                
 	            }
+	            
 	        }
 	
+	        contentStream.beginText();
 	        contentStream.setFont(font, fontSize);
 	        contentStream.newLineAtOffset(startX, startY);
 	        float currentY=startY;
@@ -189,23 +190,35 @@ public class PDF{
 	            if(currentY<=margin)
 	            {
 	
+	            	System.out.println("Does it go into this code block?");
+	            	
 	                contentStream.endText(); 
-	                contentStream.close();
 	                PDPage new_Page = new PDPage();
 	                pdf.addPage(new_Page);
+	                pageNumber++;
+	                contentStream.close();
 	                contentStream = new PDPageContentStream(pdf, new_Page);
 	                contentStream.beginText();
 	                contentStream.setFont(font, fontSize);
 	                contentStream.newLineAtOffset(startX, startY);
 	                currentY=startY;
+	                
 	            }
+	            
 	            contentStream.showText(line);
-	            contentStream.newLineAtOffset(0, -leading);
+	            contentStream.endText();
+	            
 	        }
 		}catch(IOException e)
 		{
 			
 			e.printStackTrace();
+			
+		}
+		finally
+		{
+			
+			return contentStream;
 			
 		}
 	}

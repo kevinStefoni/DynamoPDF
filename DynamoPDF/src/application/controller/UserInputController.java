@@ -72,6 +72,10 @@ public class UserInputController extends OptionsMenuController {
     @FXML
     private Label warningMessage;
     
+    //question number label
+    @FXML
+    private Label qLabelMain;
+    
     //end of FXML elements
     
     @FXML
@@ -91,6 +95,36 @@ public class UserInputController extends OptionsMenuController {
     @FXML
     /**
      * 
+     * nextQuestion
+     * 
+     * This is the method that will check to see if there is a next question to input
+     * If there is, it will clear the current question input and increase the question label counter
+     * 
+     * 
+     */
+    public void nextQuestion(ActionEvent event) {
+    	int questionCount = worksheet.getQuestionSet().getNumQuestions();
+    	int curQuestion = Integer.parseInt(qLabelMain.getText().substring(1, 2));
+    	if(curQuestion < questionCount) {
+    		/* reset the question label */
+    		qLabelMain.setText("Q" + (curQuestion + 1));
+    		/* clear all inputs */
+    		questionBox.setText("");
+    		questionA.setText("");
+    		questionB.setText("");
+    		questionC.setText("");
+    		questionD.setText("");
+    		questionE.setText("");
+    	}
+    	else {
+    		goToPDFGenerate(event);
+    	}
+    }
+    
+    
+    @FXML
+    /**
+     * 
      * saveQuestionInput
      * 
      * This is the method that saves the user question and sub questions (a through e)
@@ -98,7 +132,6 @@ public class UserInputController extends OptionsMenuController {
      * 
      */
     public void saveQuestionInput(ActionEvent event) {
-    	
     	boolean warning = false;
     	//ArrayList to hold temporary question inputs
     	ArrayList<String> tempInput = new ArrayList<String>();
@@ -119,15 +152,14 @@ public class UserInputController extends OptionsMenuController {
     			mcq.addChoice(tempInput.get(i));
     		}
     	}
-    	
+        
     	if(warning == true) { //one of the question boxes is empty
     		warningMessage.setText("ERROR: Please fill in all the boxes.");
     	}
     	else {
-    	worksheet.getQuestionSet().addQuestion((mcq));
-    	goToPDFGenerate(event);
+    		worksheet.getQuestionSet().addQuestion((mcq));
+    		nextQuestion(event);
     	}
-    	
     }
     
     /**

@@ -49,7 +49,7 @@ public class OptionsMenuController extends MainMenuController implements Initial
     private TextField numQuestionsTextField;
     
     //@FXML
-    //private TextField numChoicesTextField;
+    private TextField numChoicesTextField;
     
     @FXML
     private ComboBox<String> fontChoices;
@@ -150,24 +150,6 @@ public class OptionsMenuController extends MainMenuController implements Initial
     		worksheet.getQuestionSet().setNumQuestions(Integer.parseInt(numQuestionsTextField.getText()));
     	
     }
-
-   /**
-    @FXML
-    
-     * 
-     * setNumChoices
-     * 
-     * This method will take the value in the numChoices text field and store it within the worksheet's QuestionSet object.
-     * 
-     * @param event either enter is pressed with cursor in text field or "Next" button is pressed
-     
-    void setNumChoices(ActionEvent event) {
-
-    	if(!numChoicesTextField.getText().equals(""))
-    		worksheet.getQuestionSet().setNumChoices(Integer.parseInt(numChoicesTextField.getText()));
-    	
-    }
-    */
     
     @FXML
     /**
