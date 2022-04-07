@@ -3,7 +3,9 @@ package application.controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 
+import application.model.MultipleChoiceQuestion;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -66,14 +68,100 @@ public class UserInputController extends OptionsMenuController {
     @FXML
     private TextField questionE;
     
+    //warning message label
+    @FXML
+    private Label warningMessage;
+    
+    //question number label
+    @FXML
+    private Label qLabelMain;
+    
     //end of FXML elements
     
     @FXML
+    /**
+     * 
+     * saveTitle
+     * 
+     * This is the method that stores the title from the text field in the worksheet object.
+     * 
+     */
     public void saveTitle() {
+    	
     	worksheet.setTitle(titleInput.getText());
+   
     }
     
     @FXML
+    /**
+     * 
+     * nextQuestion
+     * 
+     * This is the method that will check to see if there is a next question to input
+     * If there is, it will clear the current question input and increase the question label counter
+     * 
+     * 
+     */
+    public void nextQuestion(ActionEvent event) {
+    	int questionCount = worksheet.getQuestionSet().getNumQuestions();
+    	int curQuestion = Integer.parseInt(qLabelMain.getText().substring(1, 2));
+    	if(curQuestion < questionCount) {
+    		/* reset the question label */
+    		qLabelMain.setText("Q" + (curQuestion + 1));
+    		/* clear all inputs */
+    		questionBox.setText("");
+    		questionA.setText("");
+    		questionB.setText("");
+    		questionC.setText("");
+    		questionD.setText("");
+    		questionE.setText("");
+    	}
+    	else {
+    		goToPDFGenerate(event);
+    	}
+    }
+    
+    
+    @FXML
+    /**
+     * 
+     * saveQuestionInput
+     * 
+     * This is the method that saves the user question and sub questions (a through e)
+     * These inputs are then saved to a MultipleChoiceQuestion object
+     * 
+     */
+    public void saveQuestionInput(ActionEvent event) {
+    	boolean warning = false;
+    	//ArrayList to hold temporary question inputs
+    	ArrayList<String> tempInput = new ArrayList<String>();
+    	/* add questionA-E to tempInput */
+    	tempInput.add(questionBox.getText());
+    	MultipleChoiceQuestion mcq = new MultipleChoiceQuestion(tempInput.get(0), worksheet.getQuestionSet().getNumChoices());
+    	tempInput.add(questionA.getText());
+    	tempInput.add(questionB.getText());
+    	tempInput.add(questionC.getText());
+    	tempInput.add(questionD.getText());
+    	tempInput.add(questionE.getText());
+    	/* add the questions to the set while checking for empty input (show error if empty input) */
+    	for(int i = 1; i < worksheet.getQuestionSet().getNumChoices()+2; i++) {
+    		if(tempInput.get(i).equals("")) { //text field is empty
+    			warning = true;
+    		}
+    		else {
+    			mcq.addChoice(tempInput.get(i));
+    		}
+    	}
+        
+    	if(warning == true) { //one of the question boxes is empty
+    		warningMessage.setText("ERROR: Please fill in all the boxes.");
+    	}
+    	else {
+    		worksheet.getQuestionSet().addQuestion((mcq));
+    		nextQuestion(event);
+    	}
+    }
+    
     /**
      * 
      * goToPDFGenerate

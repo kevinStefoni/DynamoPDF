@@ -3,42 +3,36 @@ package application.controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
 import java.util.ResourceBundle;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 
 import application.model.PDF;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
 public class PDFController extends UserInputController implements Initializable{
+	
+		private PDDocument document = new PDDocument();
+		
+		private PDF pdf = new PDF();
 	
 	 	@FXML
 	    private MenuBar menuBar;
@@ -70,8 +64,6 @@ public class PDFController extends UserInputController implements Initializable{
 	    @FXML
 	    private ScrollBar pageScrollBar;
 	    FileChooser fc= new FileChooser();
-
-
 	@FXML
 	/**
 	 * 
@@ -85,11 +77,17 @@ public class PDFController extends UserInputController implements Initializable{
 	void generate(ActionEvent event)
 	{
 		
+		//pdf.generatePDF(worksheet);
+
 		goToPDFScene(event);
 		
 	}
+
+	    	
+
 	public void intialize(URL location, ResourceBundle resources) {
-    	fc.setInitialDirectory(new File("C://Downloads/"));
+    
+    	fc.setInitialDirectory(new File("downloads"));
     }
 	
     @FXML
@@ -115,8 +113,7 @@ public class PDFController extends UserInputController implements Initializable{
     void goToPDFScene(ActionEvent event)
     {
 
-    	try {
-    		//testing commit
+    	try {   
     		URL url = new File("src/PDFScene.fxml").toURI().toURL();
     		Parent loadedFxml = FXMLLoader.load(url);
     		Scene scene = ((Node) event.getSource()).getScene();

@@ -20,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+
 public class OptionsMenuController extends MainMenuController implements Initializable{
 
 	
@@ -47,14 +48,17 @@ public class OptionsMenuController extends MainMenuController implements Initial
     @FXML
     private TextField numQuestionsTextField;
     
-    @FXML
-    private TextField numChoicesTextField;
+    //@FXML
+    //private TextField numChoicesTextField;
     
     @FXML
     private ComboBox<String> fontChoices;
     
     @FXML
     private ComboBox<String> fontSizes;
+    
+    @FXML
+    private ComboBox<String> numChoices;
 
     @FXML
     /**
@@ -147,21 +151,23 @@ public class OptionsMenuController extends MainMenuController implements Initial
     	
     }
 
+   /**
     @FXML
-    /**
+    
      * 
      * setNumChoices
      * 
      * This method will take the value in the numChoices text field and store it within the worksheet's QuestionSet object.
      * 
      * @param event either enter is pressed with cursor in text field or "Next" button is pressed
-     */
+     
     void setNumChoices(ActionEvent event) {
 
     	if(!numChoicesTextField.getText().equals(""))
     		worksheet.getQuestionSet().setNumChoices(Integer.parseInt(numChoicesTextField.getText()));
     	
     }
+    */
     
     @FXML
     /**
@@ -183,7 +189,7 @@ public class OptionsMenuController extends MainMenuController implements Initial
 
     	// Need to ensure that text field data is stored, in case user didn't press enter to trigger event.
     	setNumQuestions(event);
-    	setNumChoices(event);
+    	//setNumChoices(event);
     	
     	String fileName = null; // the name of the next fxml file
     	
@@ -252,8 +258,7 @@ public class OptionsMenuController extends MainMenuController implements Initial
     	}
     	return newWord;
     	
-    }
-    
+    }    
     
     /**
      * 
@@ -270,6 +275,7 @@ public class OptionsMenuController extends MainMenuController implements Initial
     		for (Fonts font : Fonts.values()) {
 
     			fontChoices.getItems().add(font.toString());
+    			fontChoices.getSelectionModel().select("TIMES_NEW_ROMAN");
     		}
     	
     		fontChoices.setOnAction((event) -> {
@@ -285,11 +291,23 @@ public class OptionsMenuController extends MainMenuController implements Initial
     		fontSizes.getItems().add("14");
     		fontSizes.getItems().add("16");
     		fontSizes.setEditable(true);
+    		fontSizes.getSelectionModel().select("12");
     		fontChoices.setOnAction((event) -> {
     			String fontSize = fontSizes.getValue();
-    			System.out.println(fontSize);
     			if(!fontSize.equals(""))
     				worksheet.getOptions().setFontSize(Float.valueOf(fontSize));
+    		});
+    	}
+    	if (numChoices != null) {
+    		numChoices.getItems().add("1");
+    		numChoices.getItems().add("2");
+    		numChoices.getItems().add("3");
+    		numChoices.getItems().add("4");
+    		numChoices.getSelectionModel().select("4");
+    		numChoices.setOnAction((event) -> {
+    			String numChoice = numChoices.getValue();
+    			if(!numChoice.equals(""))
+    				worksheet.getQuestionSet().setNumChoices(Integer.parseInt(numChoice));
     		});
     	}
     }

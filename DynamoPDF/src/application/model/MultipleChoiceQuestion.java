@@ -58,4 +58,36 @@ public class MultipleChoiceQuestion extends Question{
 		this.multipleChoices.add(newAnswerChoice);
 		
 	}
+	
+	/**
+	 * 
+	 * getQuestion
+	 * 
+	 * This is the getter method for question.
+	 * 
+	 * @return question the text for the question
+	 * 
+	 */
+	public String getQuestion()
+	{
+		
+		return this.question;
+		
+	}
+	
+	/**
+	 * 
+	 * setQuestion
+	 * 
+	 * This is the setter method for question.
+	 * 
+	 * @param question the text for the question
+	 * 
+	 */
+	public void setQuestion(String question)
+	{
+		
+		this.question = question;
+		
+	}
 }
