@@ -94,7 +94,7 @@ public class PDFController extends UserInputController implements Initializable{
 	
     @FXML
    public void handleSave(ActionEvent event) throws IOException {
-    	Window stage =saveButton.getScene().getWindow();
+    	Window stage = saveButton.getScene().getWindow();
     	fc.setTitle("Save PDF File");
     	fc.setInitialFileName("MyPDF");
     	fc.getExtensionFilters().addAll(
@@ -103,6 +103,8 @@ public class PDFController extends UserInputController implements Initializable{
     	File file=fc.showSaveDialog(stage);
     	//save the chosen directory
     	fc.setInitialDirectory(file.getParentFile());
+    	String absolute = file.getAbsolutePath();
+    	System.out.println(absolute);
     	}catch(Exception e) {
     		e.printStackTrace();
     	}
