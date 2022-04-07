@@ -10,34 +10,33 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="mainBorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.PDFController">
+<BorderPane fx:id="mainBorderPane" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.PDFController">
 
    <center>
       <AnchorPane fx:id="anchorPane" prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: #222222;" BorderPane.alignment="CENTER">
          <children>
             <ScrollBar fx:id="pDFscrollBar" layoutX="621.0" layoutY="92.0" orientation="VERTICAL" prefHeight="562.0" prefWidth="24.0" />
-            <MenuBar fx:id="menuBar" prefHeight="25.0" prefWidth="791.0" style="-fx-background-color: #140854;">
+            <MenuBar fx:id="menuBar" prefHeight="28.0" prefWidth="800.0" style="-fx-background-color: #140854;">
               <menus>
                 <Menu fx:id="fileMenu" mnemonicParsing="false" text="File">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Close" />
+                    <MenuItem fx:id="saveMenuItem" mnemonicParsing="false" onAction="#saveMenuItem" text="Save" />
+                        <MenuItem fx:id="menuClose" mnemonicParsing="false" text="Exit" />
                   </items>
                 </Menu>
                 <Menu fx:id="editMenu" mnemonicParsing="false" text="Edit">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
+                    <MenuItem fx:id="menuItemEdit" mnemonicParsing="false" text="Delete" />
                   </items>
                 </Menu>
                 <Menu fx:id="helpMenu" mnemonicParsing="false" text="Help">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
+                    <MenuItem fx:id="menuItemAbout" mnemonicParsing="false" text="About" />
                   </items>
                 </Menu>
               </menus>
             </MenuBar>
-            <ScrollBar fx:id="pageScrollBar" layoutX="787.0" orientation="VERTICAL" prefHeight="814.0" prefWidth="19.0" style="-fx-background-color: #dddddd;" />
             <TextArea fx:id="tempTextArea" layoutX="209.0" layoutY="91.0" prefHeight="563.0" prefWidth="412.0" text="Worksheet preview goes here..." />
-            <Button fx:id="saveButton" layoutX="209.0" layoutY="672.0" mnemonicParsing="false" onAction="#handleSave" prefHeight="17.0" prefWidth="85.0" text="Save PDF" />
          </children>
       </AnchorPane>
    </center>

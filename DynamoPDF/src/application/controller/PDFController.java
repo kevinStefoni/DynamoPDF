@@ -18,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextArea;
 
@@ -34,7 +35,7 @@ public class PDFController extends UserInputController implements Initializable{
 		
 		private PDF pdf = new PDF();
 	
-	 	@FXML
+		@FXML
 	    private MenuBar menuBar;
 
 	    @FXML
@@ -47,22 +48,29 @@ public class PDFController extends UserInputController implements Initializable{
 	    private BorderPane mainBorderPane;
 
 	    @FXML
+	    private MenuItem menuItemAbout;
+
+	    @FXML
 	    private AnchorPane anchorPane;
 
 	    @FXML
 	    private ScrollBar pDFscrollBar;
 
 	    @FXML
+	    private MenuItem saveMenuItem;
+
+	    @FXML
+	    private MenuItem menuClose;
+
+	    @FXML
 	    private Menu helpMenu;
 
 	    @FXML
-	    private Button saveButton;
+	    private MenuItem menuItemEdit;
 
 	    @FXML
 	    private Menu fileMenu;
 
-	    @FXML
-	    private ScrollBar pageScrollBar;
 	    FileChooser fc= new FileChooser();
 	@FXML
 	/**
@@ -71,7 +79,6 @@ public class PDFController extends UserInputController implements Initializable{
 	 * 
 	 * This is the method that finally takes the completed static worksheet object, with all of the worksheet's information,
 	 * and passes it into a class that will ultimately create the pdf using the Apache PDF Box API. 
-	 * 
 	 * @param event the Generate PDF button was pressed
 	 */
 	void generate(ActionEvent event)
@@ -84,9 +91,27 @@ public class PDFController extends UserInputController implements Initializable{
     	fc.setInitialDirectory(new File("downloads"));
     }
 	
+//    @FXML
+//   public void handleSave(ActionEvent event) throws IOException {
+//    	Window stage = saveButton.getScene().getWindow();
+//    	fc.setTitle("Save PDF File");
+//    	fc.setInitialFileName("MyPDF");
+//    	fc.getExtensionFilters().addAll(
+//    			new ExtensionFilter ("PDF Files", "*.pdf"));    	
+//    	try {
+//    	File file=fc.showSaveDialog(stage);
+//    	//save the chosen directory
+//    	fc.setInitialDirectory(file.getParentFile());
+//    	String absolute = file.getAbsolutePath();
+//    	System.out.println(absolute);
+//    	}catch(Exception e) {
+//    		e.printStackTrace();
+//    	}
+//    }
+    
     @FXML
-   public void handleSave(ActionEvent event) throws IOException {
-    	Window stage = saveButton.getScene().getWindow();
+    void saveMenuItem(ActionEvent event) throws IOException {
+    	Window stage = saveMenuItem.getParentPopup().getOwnerWindow();
     	fc.setTitle("Save PDF File");
     	fc.setInitialFileName("MyPDF");
     	fc.getExtensionFilters().addAll(
@@ -96,13 +121,12 @@ public class PDFController extends UserInputController implements Initializable{
     	//save the chosen directory
     	fc.setInitialDirectory(file.getParentFile());
     	String absolute = file.getAbsolutePath();
+    	//document.save(file.getAbsoluteFile());
     	System.out.println(absolute);
     	}catch(Exception e) {
     		e.printStackTrace();
     	}
     }
-    
-		   
     
     void goToPDFScene(ActionEvent event)
     {
@@ -129,6 +153,5 @@ public class PDFController extends UserInputController implements Initializable{
     		
     	}
     	
-    }
-    
+    }    
 }
