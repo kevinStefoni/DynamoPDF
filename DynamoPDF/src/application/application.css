@@ -92,3 +92,18 @@
 	-fx-text-background-color: #dddddd;
 	
 }
+
+#fontChoices {
+	
+	-fx-text-background-color: #000000;
+}
+
+#fontSizes {
+	
+	-fx-text-background-color: #000000;
+}
+
+#numChoices {
+
+	-fx-text-background-color: #000000;
+}
