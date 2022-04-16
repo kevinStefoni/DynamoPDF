@@ -78,13 +78,15 @@
 	
 }
 
-#generatePDFVBox{
+#generatePDFVBox
+{
 	
 	-fx-background-color: #777777;
 	
 }
 
-#generatePDFButton{
+#generatePDFButton
+{
 	
 	-fx-background-color: #140854;
 	-fx-font-size: 26px;
@@ -93,17 +95,27 @@
 	
 }
 
-#fontChoices {
+#fontChoices
+{
 	
 	-fx-text-background-color: #000000;
 }
 
-#fontSizes {
+#fontSizes
+{
 	
 	-fx-text-background-color: #000000;
 }
 
-#numChoices {
+#numChoices
+{
 
 	-fx-text-background-color: #000000;
+}
+
+#menuBar
+{
+	
+	-fx-text-background-color: #FFFFFF;
+	
 }

@@ -15,9 +15,7 @@
    <center>
       <AnchorPane fx:id="anchorPane" prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: #222222;" BorderPane.alignment="CENTER">
          <children>
-         <Button fx:id="generatePDFButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#generate" prefHeight="68.0" prefWidth="205.0" stylesheets="@../bin/application/application.css" text="Generate PDF">
-            <ScrollBar fx:id="pDFscrollBar" layoutX="621.0" layoutY="92.0" orientation="VERTICAL" prefHeight="562.0" prefWidth="24.0" />
-            <MenuBar fx:id="menuBar" prefHeight="28.0" prefWidth="800.0" style="-fx-background-color: #140854;">
+            <MenuBar fx:id="menuBar" prefHeight="28.0" prefWidth="800.0" style="-fx-background-color: #140854;" stylesheets="@../bin/application/application.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <menus>
                 <Menu fx:id="fileMenu" mnemonicParsing="false" text="File">
                   <items>
@@ -37,7 +35,7 @@
                 </Menu>
               </menus>
             </MenuBar>
-            <TextArea fx:id="tempTextArea" layoutX="209.0" layoutY="91.0" prefHeight="563.0" prefWidth="412.0" text="Worksheet preview goes here..." />
+            <Button fx:id="generatePDFButton" alignment="CENTER" contentDisplay="CENTER" layoutX="279.0" layoutY="338.0" mnemonicParsing="false" prefHeight="124.0" prefWidth="243.0" stylesheets="@../bin/application/application.css" text="Generate PDF" textFill="WHITE" />
          </children>
       </AnchorPane>
    </center>

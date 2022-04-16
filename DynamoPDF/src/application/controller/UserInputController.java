@@ -112,14 +112,14 @@ public class UserInputController extends OptionsMenuController {
     	MultipleChoiceQuestion mcq = new MultipleChoiceQuestion(tempInput.get(0), worksheet.getQuestionSet().getNumChoices());
     	
     	// retrieve all the answer choices to store in temporary ArrayList
-    	tempInput.add("a. " + questionA.getText());
-    	tempInput.add("b. " + questionB.getText());
-    	tempInput.add("c. " + questionC.getText());
-    	tempInput.add("d. " + questionD.getText());
-    	tempInput.add("e. " + questionE.getText());
+    	tempInput.add(questionA.getText());
+    	tempInput.add(questionB.getText());
+    	tempInput.add(questionC.getText());
+    	tempInput.add(questionD.getText());
+    	tempInput.add(questionE.getText());
     	
     	// Code motion optimization
-    	int loopBound = worksheet.getQuestionSet().getNumChoices() + 2;
+    	int loopBound = worksheet.getQuestionSet().getNumChoices() + 1;
     	
     	// add the questions to the set while checking for empty input (show error if empty input)
     	for(int i = 1; i < loopBound; i++)

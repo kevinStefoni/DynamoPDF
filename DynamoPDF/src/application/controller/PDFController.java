@@ -40,9 +40,6 @@ public class PDFController extends UserInputController implements Initializable{
     private Menu editMenu;
 
     @FXML
-    private TextArea tempTextArea;
-
-    @FXML
     private BorderPane mainBorderPane;
 
     @FXML
@@ -50,9 +47,6 @@ public class PDFController extends UserInputController implements Initializable{
 
     @FXML
     private AnchorPane anchorPane;
-
-    @FXML
-    private ScrollBar pDFscrollBar;
 
 	@FXML
 	private MenuItem saveMenuItem;
@@ -78,6 +72,7 @@ public class PDFController extends UserInputController implements Initializable{
 	 * 
 	 * This is the method that finally takes the completed static worksheet object, with all of the worksheet's information,
 	 * and passes it into a class that will ultimately create the pdf using the Apache PDF Box API. 
+	 * 
 	 * @param event the Generate PDF button was pressed
 	 */
 	void generate(ActionEvent event)
@@ -87,22 +82,6 @@ public class PDFController extends UserInputController implements Initializable{
 		
 	}
 
-	/**
-	 * 
-	 * initialize
-	 * 
-	 * This method simply sets the initial directory to downloads.
-	 * 
-	 * @param location
-	 * @param resources
-	 */
-	public void intialize(URL location, ResourceBundle resources)
-	{
-		
-    	fc.setInitialDirectory(new File("downloads"));
-    	
-    }
-	
 //    @FXML
 //   public void handleSave(ActionEvent event) throws IOException {
 //    	Window stage = saveButton.getScene().getWindow();
