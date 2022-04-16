@@ -119,4 +119,10 @@ public class PDFController extends UserInputController implements Initializable{
     	}
     }
     
+    @FXML
+    void previewPDF(ActionEvent event) {
+    	// TODO Open test.pdf so user can see what it will look like
+    }
+
+    
 }

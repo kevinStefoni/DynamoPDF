@@ -134,13 +134,21 @@ public class PDF{
 			for(MultipleChoiceQuestion mcq: worksheet.getQuestionSet().getSetOfQuestions())
 			{
 			
+				//FIXME
+				System.out.printf("> %s%n", mcq.getQuestion());
+				
 				// print the actual question
 				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, mcq.getQuestion(), margin, width, startX, currentY);
 				
 				// print each answer choice
 				for(String choice: mcq.getMultipleChoices())
+				{
+				
+					//FIXME
+					System.out.printf("> %s%n", choice);
 					writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, choice, margin, width, startX, currentY);
 				
+				}
 			}
             
 			// close the content stream

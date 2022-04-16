@@ -20,6 +20,7 @@
                 <Menu fx:id="fileMenu" mnemonicParsing="false" text="File">
                   <items>
                     <MenuItem fx:id="saveMenuItem" mnemonicParsing="false" onAction="#saveMenuItem" text="Save" />
+                        <MenuItem fx:id="previewMenuItem" mnemonicParsing="false" onAction="#previewPDF" text="Preview" />
                         <MenuItem fx:id="menuClose" mnemonicParsing="false" text="Exit" />
                   </items>
                 </Menu>
@@ -35,7 +36,11 @@
                 </Menu>
               </menus>
             </MenuBar>
-            <Button fx:id="generatePDFButton" alignment="CENTER" contentDisplay="CENTER" layoutX="279.0" layoutY="338.0" mnemonicParsing="false" prefHeight="124.0" prefWidth="243.0" stylesheets="@../bin/application/application.css" text="Generate PDF" textFill="WHITE" />
+            <VBox alignment="CENTER" layoutX="294.0" layoutY="313.0" prefHeight="174.0" prefWidth="213.0" AnchorPane.bottomAnchor="313.0" AnchorPane.leftAnchor="294.0" AnchorPane.rightAnchor="293.0" AnchorPane.topAnchor="313.0">
+               <children>
+                  <Button fx:id="generatePDFButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#generate" prefHeight="141.0" prefWidth="189.0" stylesheets="@../bin/application/application.css" text="Generate PDF" textFill="WHITE" />
+               </children>
+            </VBox>
          </children>
       </AnchorPane>
    </center>
