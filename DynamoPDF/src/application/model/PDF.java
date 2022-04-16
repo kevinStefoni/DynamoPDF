@@ -80,6 +80,7 @@ public class PDF{
 			// Store the font size in a variable. 
 			float fontSize = worksheet.getOptions().getFontSize();
 			
+			// Create the pdf document and add a new page to it
 			PDDocument pdf = new PDDocument();
 			PDPage page = new PDPage();
 			pdf.addPage(page);
@@ -87,15 +88,11 @@ public class PDF{
 			
 			//PDFont font = PDTrueTypeFont.load(pdf, PDDocument.class.getResourceAsStream(
 			//	    "/org/apache/pdfbox/resources/ttf/LiberationSans-Regular.ttf"), WinAnsiEncoding.INSTANCE);
-			// PDFont font = PDType1Font.HELVETICA; now also works, because I installed PDFBox 2.0.X, instead of the alpha of 3.0.X.
-			
 		
-			String text = "This is another very long string, here are a bunch of random words and now at this end too red blue carpet cytokinesis this is here to be a very long line that extends over multiple lines.";
-			String text2 = "This is the second string. Time to see if it is going to work.";
-					
-			
+			// create the content stream
 			PDPageContentStream contentStream = new PDPageContentStream(pdf, pdf.getPage(pageNumber));
 			
+			// establish margin, width, and initial positions using PDRectangle
 			PDRectangle mediabox = page.getMediaBox();
 			float margin = 72;
 			float width = mediabox.getWidth() - 2 * margin;
@@ -103,33 +100,56 @@ public class PDF{
 			float startY = mediabox.getUpperRightY() - margin;
 			currentY = startY;
 			
-			// name, name and date, or just date
+			// display name, name and date, or just date
 			if(worksheet.getOptions().getHasName() && !worksheet.getOptions().getHasDate())
 				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, "Name: ____________________", margin, width, startX, currentY);
 			if(worksheet.getOptions().getHasDate() && worksheet.getOptions().getHasName())
 				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, "Name: ____________________                                                                   Date: __________", margin, width, startX, currentY );
 			else if(worksheet.getOptions().getHasDate() && !worksheet.getOptions().getHasName())
 				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, "Date: __________", margin, width, startX, currentY);
-				
+			
+			// skip a line
 			currentY -=15;
 			
+			// display the title (left-aligned for simplicity)
 			if(worksheet.getOptions().getHasTitle())
-				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, worksheet.getTitle(), margin, width, width * 0.6f, currentY);
+			{
 			
+				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, worksheet.getTitle(), margin, width, startX, currentY);
+				currentY -= 15; // skip another line only if title displayed
+				
+			}
+			
+			
+			// display the instructions
+			if(worksheet.getOptions().getHasInstructions())
+			{
+				
+				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, worksheet.getInstructions(), margin, width, startX, currentY);
+				currentY -= 15; // skip another line only if instructions displayed
+				
+			}
+			
+			// loop through each multiple choice question
 			for(MultipleChoiceQuestion mcq: worksheet.getQuestionSet().getSetOfQuestions())
 			{
 			
+				// print the actual question
 				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, mcq.getQuestion(), margin, width, startX, currentY);
 				
+				// print each answer choice
 				for(String choice: mcq.getMultipleChoices())
 					writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, choice, margin, width, startX, currentY);
 				
 			}
             
-			
+			// close the content stream
 	        contentStream.close();
 			
+	        // save the pdf in a temporary location within project folder
 			pdf.save(new File("test.pdf"));
+			
+			// close the pdf
 			pdf.close();
 			
 		}

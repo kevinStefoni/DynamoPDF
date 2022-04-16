@@ -21,8 +21,7 @@ import javafx.stage.Stage;
 
 public class UserInputController extends OptionsMenuController {
 	
-	/* elements shared for all input fxml files */
-	
+	// elements shared for all input fxml files
     @FXML
     private AnchorPane background;
     
@@ -30,8 +29,7 @@ public class UserInputController extends OptionsMenuController {
     private Button nextButton;
     
 	
-	/* titleInput.fxml */
-	
+	// titleInput.fxml
 	@FXML
 	private Label titleLabel;
 	
@@ -39,8 +37,7 @@ public class UserInputController extends OptionsMenuController {
 	private TextField titleInput;
 	
     
-	/* instructionsInput.fxml */
-	
+	// instructionsInput.fxml
 	@FXML
 	private Label instructionsLabel;
 	
@@ -48,8 +45,7 @@ public class UserInputController extends OptionsMenuController {
 	private TextArea instructionsInput;
 	
 	
-    /* questionInput.fxml */
-    
+    // questionInput.fxml
     @FXML
     private TextArea questionBox;
     
@@ -76,8 +72,6 @@ public class UserInputController extends OptionsMenuController {
     @FXML
     private Label qLabelMain;
     
-    //end of FXML elements
-    
     @FXML
     /**
      * 
@@ -95,108 +89,114 @@ public class UserInputController extends OptionsMenuController {
     @FXML
     /**
      * 
-     * nextQuestion
+     * saveQuestionInput
      * 
-     * This is the method that will check to see if there is a next question to input
-     * If there is, it will clear the current question input and increase the question label counter
+     * This method saves the user question and sub questions (a through e).
+     * These inputs are then saved to a MultipleChoiceQuestion object.
      * 
+     * @param event the Next button was clicked
      * 
      */
-    public void nextQuestion(ActionEvent event) {
-    	int questionCount = worksheet.getQuestionSet().getNumQuestions();
-    	int curQuestion = Integer.parseInt(qLabelMain.getText().substring(1, 2));
-    	if(curQuestion < questionCount) {
-    		/* reset the question label */
-    		qLabelMain.setText("Q" + (curQuestion + 1));
-    		/* clear all inputs */
-    		questionBox.setText("");
-    		questionA.setText("");
-    		questionB.setText("");
-    		questionC.setText("");
-    		questionD.setText("");
-    		questionE.setText("");
+    public void saveQuestionInput(ActionEvent event) {
+    	
+    	// By default, assume no issues with empty text fields
+    	boolean isEmpty = false;
+    	
+    	//ArrayList to hold temporary question inputs
+    	ArrayList<String> tempInput = new ArrayList<String>();
+    	
+    	// add question A-E to tempInput
+    	tempInput.add(questionBox.getText());
+    	
+    	// instantiate a new MultipleChoiceQuestion object
+    	MultipleChoiceQuestion mcq = new MultipleChoiceQuestion(tempInput.get(0), worksheet.getQuestionSet().getNumChoices());
+    	
+    	// retrieve all the answer choices to store in temporary ArrayList
+    	tempInput.add("a. " + questionA.getText());
+    	tempInput.add("b. " + questionB.getText());
+    	tempInput.add("c. " + questionC.getText());
+    	tempInput.add("d. " + questionD.getText());
+    	tempInput.add("e. " + questionE.getText());
+    	
+    	// Code motion optimization
+    	int loopBound = worksheet.getQuestionSet().getNumChoices() + 2;
+    	
+    	// add the questions to the set while checking for empty input (show error if empty input)
+    	for(int i = 1; i < loopBound; i++)
+    	{
+    	
+    		// text field is empty
+    		if(tempInput.get(i).equals(""))
+    		{ 
+    		
+    			isEmpty = true; // a text field was empty
+    			break; // exit the for loop--questions are only added if there are the proper number of questions
+    		
+    		}
+    		else
+    		{
+    			
+    			// add the choice to the MultipleChoiceQuestion
+    			mcq.addChoice(tempInput.get(i));
+    			
+    		}
     	}
-    	else {
-    		goToPDFGenerate(event);
+        
+    	// go back and check if any text box was empty
+    	if(isEmpty == true)
+    	{ 
+    		
+    		warningMessage.setText("ERROR: Please fill in all the boxes.");
+    	
+    	}
+    	else
+    	{
+    		
+    		// add the entire question
+    		worksheet.getQuestionSet().addQuestion((mcq));
+    		
+    		// go to the next question
+    		nextQuestion(event);
+    		
     	}
     }
-    
     
     @FXML
     /**
      * 
-     * saveQuestionInput
+     * nextQuestion
      * 
-     * This is the method that saves the user question and sub questions (a through e)
-     * These inputs are then saved to a MultipleChoiceQuestion object
+     * This method checks to see if there are any questions left.
+     * If there are, it will clear the current question input and increase the question label counter.
      * 
+     * @param event the Next button was clicked, saveQuestionInput fired, saveQuestionInput called nextQuestion
      */
-    public void saveQuestionInput(ActionEvent event) {
-    	boolean warning = false;
-    	//ArrayList to hold temporary question inputs
-    	ArrayList<String> tempInput = new ArrayList<String>();
-    	/* add questionA-E to tempInput */
-    	tempInput.add(questionBox.getText());
-    	MultipleChoiceQuestion mcq = new MultipleChoiceQuestion(tempInput.get(0), worksheet.getQuestionSet().getNumChoices());
-    	tempInput.add(questionA.getText());
-    	tempInput.add(questionB.getText());
-    	tempInput.add(questionC.getText());
-    	tempInput.add(questionD.getText());
-    	tempInput.add(questionE.getText());
-    	/* add the questions to the set while checking for empty input (show error if empty input) */
-    	for(int i = 1; i < worksheet.getQuestionSet().getNumChoices()+2; i++) {
-    		if(tempInput.get(i).equals("")) { //text field is empty
-    			warning = true;
-    		}
-    		else {
-    			mcq.addChoice(tempInput.get(i));
-    		}
-    	}
-        
-    	if(warning == true) { //one of the question boxes is empty
-    		warningMessage.setText("ERROR: Please fill in all the boxes.");
+    public void nextQuestion(ActionEvent event) {
+    
+    	// find which question user is on
+    	int curQuestion = Integer.parseInt(qLabelMain.getText().substring(1, 2));
+    		
+    	// if the question user is on  fits within the number of questions they specified, then go for another question
+    	if(curQuestion < worksheet.getQuestionSet().getNumQuestions()) {
+
+    		// update question label
+    		qLabelMain.setText("Q" + (curQuestion + 1));
+
+    		// clear every text box
+    		questionBox.clear();
+    		questionA.clear();
+    		questionB.clear();
+    		questionC.clear();
+    		questionD.clear();
+    		questionE.clear();
+    		
     	}
     	else {
-    		worksheet.getQuestionSet().addQuestion((mcq));
-    		nextQuestion(event);
-    	}
-    }
-    
-    /**
-     * 
-     * goToPDFGenerate
-     * 
-     * This is the method that sends the user to GeneratePDF.fxml.
-     * 
-     * @param event the next button was clicked in QuestionInput.fxml
-     */
-    public void goToPDFGenerate(ActionEvent event) {
-
-    	try {
-    		
-    		URL url = new File("src/GeneratePDF.fxml").toURI().toURL();
-    		Parent loadedFxml = FXMLLoader.load(url);
-    		Scene scene = ((Node) event.getSource()).getScene();
-    		scene.setRoot(loadedFxml);
-    		Stage stg = (Stage)scene.getWindow(); 
-    		stg.setTitle("Generate PDF");
-    		stg.setHeight(stg.getHeight());
-    		stg.setWidth(stg.getWidth());
-    		stg.setX(stg.getX());
-    		stg.setY(stg.getY());
-    		stg.setMaximized(stg.isMaximized());
-    		stg.setFullScreen(stg.isFullScreen());
-			stg.setMinHeight(800);
-			stg.setMinWidth(800);
-    		
-    	}
-    	catch(IOException ioe)
-    	{
-    		
-    		ioe.printStackTrace();
-    		
-    	}
     	
+    		// if there are no questions left, go to the next scene
+    		goToPDFScene(event);
+    	
+    	}
     }
     
     @FXML
@@ -284,6 +284,43 @@ public class UserInputController extends OptionsMenuController {
     		
     	}
     	
+    	
+    }
+    
+    /**
+     * 
+     * goToPDFScene
+     * 
+     * This is the method that sends the user to PDFScene.fxml.
+     * 
+     * @param event the next button was clicked in QuestionInput.fxml
+     */
+    public void goToPDFScene(ActionEvent event) {
+
+    	try {
+    		
+    		URL url = new File("src/PDFScene.fxml").toURI().toURL();
+    		Parent loadedFxml = FXMLLoader.load(url);
+    		Scene scene = ((Node) event.getSource()).getScene();
+    		scene.setRoot(loadedFxml);
+    		Stage stg = (Stage)scene.getWindow(); 
+    		stg.setTitle("Generate PDF");
+    		stg.setHeight(stg.getHeight());
+    		stg.setWidth(stg.getWidth());
+    		stg.setX(stg.getX());
+    		stg.setY(stg.getY());
+    		stg.setMaximized(stg.isMaximized());
+    		stg.setFullScreen(stg.isFullScreen());
+			stg.setMinHeight(800);
+			stg.setMinWidth(800);
+    		
+    	}
+    	catch(IOException ioe)
+    	{
+    		
+    		ioe.printStackTrace();
+    		
+    	}
     	
     }
     

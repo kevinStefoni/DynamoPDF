@@ -31,45 +31,46 @@ import javafx.stage.Window;
 
 public class PDFController extends UserInputController implements Initializable{
 	
-		private PDF pdf = new PDF();
+	private PDF pdf = new PDF();
 	
-		@FXML
-	    private MenuBar menuBar;
+	@FXML
+	private MenuBar menuBar;
 
-	    @FXML
-	    private Menu editMenu;
+	@FXML
+    private Menu editMenu;
 
-	    @FXML
-	    private TextArea tempTextArea;
+    @FXML
+    private TextArea tempTextArea;
 
-	    @FXML
-	    private BorderPane mainBorderPane;
+    @FXML
+    private BorderPane mainBorderPane;
 
-	    @FXML
-	    private MenuItem menuItemAbout;
+    @FXML
+    private MenuItem menuItemAbout;
 
-	    @FXML
-	    private AnchorPane anchorPane;
+    @FXML
+    private AnchorPane anchorPane;
 
-	    @FXML
-	    private ScrollBar pDFscrollBar;
+    @FXML
+    private ScrollBar pDFscrollBar;
 
-	    @FXML
-	    private MenuItem saveMenuItem;
+	@FXML
+	private MenuItem saveMenuItem;
 
-	    @FXML
-	    private MenuItem menuClose;
+	@FXML
+	private MenuItem menuClose;
 
-	    @FXML
-	    private Menu helpMenu;
+    @FXML
+    private Menu helpMenu;
 
-	    @FXML
-	    private MenuItem menuItemEdit;
+	@FXML
+	private MenuItem menuItemEdit;
 
-	    @FXML
-	    private Menu fileMenu;
+	@FXML
+	private Menu fileMenu;
 
-	    FileChooser fc= new FileChooser();
+	FileChooser fc= new FileChooser();
+	    
 	@FXML
 	/**
 	 * 
@@ -83,11 +84,23 @@ public class PDFController extends UserInputController implements Initializable{
 	{
 
 		pdf.generatePDF(worksheet);
-		goToPDFScene(event);
+		
 	}
 
-	public void intialize(URL location, ResourceBundle resources) {
+	/**
+	 * 
+	 * initialize
+	 * 
+	 * This method simply sets the initial directory to downloads.
+	 * 
+	 * @param location
+	 * @param resources
+	 */
+	public void intialize(URL location, ResourceBundle resources)
+	{
+		
     	fc.setInitialDirectory(new File("downloads"));
+    	
     }
 	
 //    @FXML
@@ -127,30 +140,4 @@ public class PDFController extends UserInputController implements Initializable{
     	}
     }
     
-    void goToPDFScene(ActionEvent event)
-    {
-
-    	try {   
-    		URL url = new File("src/PDFScene.fxml").toURI().toURL();
-    		Parent loadedFxml = FXMLLoader.load(url);
-    		Scene scene = ((Node) event.getSource()).getScene();
-    		scene.setRoot(loadedFxml);
-    		Stage stg = (Stage)scene.getWindow(); 
-    		stg.setTitle("Preview");
-    		stg.setHeight(stg.getHeight());
-    		stg.setWidth(stg.getWidth());
-    		stg.setX(stg.getX());
-    		stg.setY(stg.getY());
-    		stg.setMaximized(stg.isMaximized());
-    		stg.setFullScreen(stg.isFullScreen());
-			stg.setMinHeight(800);
-			stg.setMinWidth(800);
-    	}
-    	catch(IOException ioe)
-    	{
-    		ioe.printStackTrace();
-    		
-    	}
-    	
-    }    
 }
