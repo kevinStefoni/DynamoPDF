@@ -103,20 +103,28 @@ public class PDF{
 			float startY = mediabox.getUpperRightY() - margin;
 			currentY = startY;
 			
-			// add the name line if needed
-			if(worksheet.getOptions().getHasName())
-				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, "Name: ____________________", margin, width, startX, startY);
-			
-			// add the date line if needed
+			// name, name and date, or just date
+			if(worksheet.getOptions().getHasName() && !worksheet.getOptions().getHasDate())
+				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, "Name: ____________________", margin, width, startX, currentY);
 			if(worksheet.getOptions().getHasDate() && worksheet.getOptions().getHasName())
-				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, "Date: __________", margin, width, width * 0.75f, startY);
+				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, "Name: ____________________                                                                   Date: __________", margin, width, startX, currentY );
 			else if(worksheet.getOptions().getHasDate() && !worksheet.getOptions().getHasName())
-				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, "Date: __________", margin, width, startX, startY);
+				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, "Date: __________", margin, width, startX, currentY);
 				
+			currentY -=15;
 			
-			writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, text, margin, width, startX, currentY);
-     		writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, text2, margin, width, startX, currentY);
-     		writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, "last line", margin, width, startX, currentY);
+			if(worksheet.getOptions().getHasTitle())
+				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, worksheet.getTitle(), margin, width, width * 0.6f, currentY);
+			
+			for(MultipleChoiceQuestion mcq: worksheet.getQuestionSet().getSetOfQuestions())
+			{
+			
+				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, mcq.getQuestion(), margin, width, startX, currentY);
+				
+				for(String choice: mcq.getMultipleChoices())
+					writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, choice, margin, width, startX, currentY);
+				
+			}
             
 			
 	        contentStream.close();
@@ -162,7 +170,6 @@ public class PDF{
 	            
 	            String subString = text.substring(0, spaceIndex);
 	            float size = fontSize * font.getStringWidth(subString) / 1000;
-	            System.out.printf("'%s' - %f of %f\n", subString, size, width);
 	            
 	            if (size > width)
 	            {
@@ -172,7 +179,6 @@ public class PDF{
 	                subString = text.substring(0, lastSpace);
 	                lines.add(subString);
 	                text = text.substring(lastSpace).trim();
-	                System.out.printf("'%s' is line\n", subString);
 	                lastSpace = -1;
 	                
 	            }
@@ -180,7 +186,6 @@ public class PDF{
 	            {
 	            	
 	                lines.add(text);
-	                System.out.printf("'%s' is line\n", text);
 	                text = "";
 	                
 	            }

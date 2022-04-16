@@ -90,4 +90,20 @@ public class MultipleChoiceQuestion extends Question{
 		this.question = question;
 		
 	}
+	
+	/**
+	 * 
+	 * getMultipleChoices
+	 * 
+	 * This is the getter method for multipleChoices.
+	 * 
+	 * @return multipleChoices all the answer choices for a question
+	 * 
+	 */
+	public ArrayList<String> getMultipleChoices()
+	{
+		
+		return this.multipleChoices;
+		
+	}
 }

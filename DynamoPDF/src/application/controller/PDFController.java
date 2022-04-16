@@ -82,8 +82,7 @@ public class PDFController extends UserInputController implements Initializable{
 	void generate(ActionEvent event)
 	{
 
-		//pdf.generatePDF(worksheet);
-
+		pdf.generatePDF(worksheet);
 		goToPDFScene(event);
 	}
 

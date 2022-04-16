@@ -6,7 +6,7 @@ public class QuestionSet {
 
 	private int numQuestions;
 	private int numChoices;
-	private ArrayList<Question>setOfQuestions; 
+	private ArrayList<MultipleChoiceQuestion>setOfQuestions; 
 	
 	/**
 	 * 
@@ -20,7 +20,7 @@ public class QuestionSet {
 		
 		this.numQuestions = 1;
 		this.numChoices = 4;
-		this.setOfQuestions = new ArrayList<Question>();
+		this.setOfQuestions = new ArrayList<MultipleChoiceQuestion>();
 		
 	}
 	
@@ -38,7 +38,7 @@ public class QuestionSet {
 		
 		this.numQuestions = numQuestions;
 		this.numChoices = numChoices;
-		this.setOfQuestions = new ArrayList<Question>();
+		this.setOfQuestions = new ArrayList<MultipleChoiceQuestion>();
 		
 		
 	}
@@ -105,17 +105,33 @@ public class QuestionSet {
 	
 	/**
 	 * 
+	 * getSetOfQuestions
+	 * 
+	 * This is the getter method for setOfQuestions.
+	 * 
+	 * @return setOfQuestions an ArrayList with all the questions in it
+	 * 
+	 */
+	public ArrayList<MultipleChoiceQuestion> getSetOfQuestions()
+	{
+		
+		return this.setOfQuestions;
+		
+	}
+	
+	/**
+	 * 
 	 * addQuestion
 	 * 
 	 * This is a method to add a question to the setOfQuestions.
 	 * 
-	 * @param question the question to be added to the setOfQuestions
+	 * @param mcquestion the question to be added to the setOfQuestions
 	 * 
 	 */
-	public void addQuestion(Question question)
+	public void addQuestion(MultipleChoiceQuestion mcquestion)
 	{
 		
-		this.setOfQuestions.add(question);
+		this.setOfQuestions.add(mcquestion);
 		
 	}
 
