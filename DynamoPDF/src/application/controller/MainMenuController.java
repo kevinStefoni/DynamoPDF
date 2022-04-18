@@ -10,31 +10,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 public class MainMenuController {
 
 	public static Worksheet worksheet = new Worksheet();
-	
-    @FXML
-    private AnchorPane root;
-
-    @FXML
-    private Label label;
-
-    @FXML
-    private Button designButton;
-    
-    @FXML
-    private Button exitButton;
-    
-    @FXML
-    private VBox mainMenuVBox;
     
     @FXML
     /**

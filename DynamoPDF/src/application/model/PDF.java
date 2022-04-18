@@ -10,9 +10,7 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDFont;
-import org.apache.pdfbox.pdmodel.font.PDTrueTypeFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
-import org.apache.pdfbox.pdmodel.font.encoding.WinAnsiEncoding;
 
 public class PDF{
 
@@ -102,11 +100,14 @@ public class PDF{
 			
 			// display name, name and date, or just date
 			if(worksheet.getOptions().getHasName() && !worksheet.getOptions().getHasDate())
-				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, "Name: ____________________", margin, width, startX, currentY);
+				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, margin, width, startX, currentY, 
+						"Name: ____________________");
 			if(worksheet.getOptions().getHasDate() && worksheet.getOptions().getHasName())
-				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, "Name: ____________________                                                                   Date: __________", margin, width, startX, currentY );
+				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, margin, width, startX, currentY, 
+						"Name: ____________________                                                                             Date: __________");
 			else if(worksheet.getOptions().getHasDate() && !worksheet.getOptions().getHasName())
-				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, "Date: __________", margin, width, startX, currentY);
+				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, margin, width, startX, currentY,
+						"Date: __________");
 			
 			// skip a line
 			currentY -=15;
@@ -115,7 +116,8 @@ public class PDF{
 			if(worksheet.getOptions().getHasTitle())
 			{
 			
-				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, worksheet.getTitle(), margin, width, startX, currentY);
+				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, margin, width, startX, currentY,
+						worksheet.getTitle());
 				currentY -= 15; // skip another line only if title displayed
 				
 			}
@@ -125,30 +127,39 @@ public class PDF{
 			if(worksheet.getOptions().getHasInstructions())
 			{
 				
-				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, worksheet.getInstructions(), margin, width, startX, currentY);
+				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, margin, width, startX, currentY, 
+						worksheet.getInstructions());
 				currentY -= 15; // skip another line only if instructions displayed
 				
 			}
+			
+			int questionTracker = 1; // keep track of which question it is for the sake of numbering the questions
 			
 			// loop through each multiple choice question
 			for(MultipleChoiceQuestion mcq: worksheet.getQuestionSet().getSetOfQuestions())
 			{
 			
-				//FIXME
-				System.out.printf("> %s%n", mcq.getQuestion());
+				currentY -=15; // skip another line
 				
-				// print the actual question
-				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, mcq.getQuestion(), margin, width, startX, currentY);
+				// print the actual question--if numbered questions, then print it with a number; otherwise, just the question
+				if(worksheet.getOptions().getHasNumberedQuestions())
+					writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, margin, width, startX, currentY,
+							String.valueOf(questionTracker) + ". " + mcq.getQuestion());
+				else
+					writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, margin, width, startX, currentY,
+							mcq.getQuestion());
 				
 				// print each answer choice
 				for(String choice: mcq.getMultipleChoices())
 				{
-				
-					//FIXME
-					System.out.printf("> %s%n", choice);
-					writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, choice, margin, width, startX, currentY);
+
+					writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, margin, width, startX, currentY,
+							choice);
 				
 				}
+				
+				currentY -= 15; // skip another line
+				
 			}
             
 			// close the content stream
@@ -174,78 +185,102 @@ public class PDF{
 							      PDPageContentStream contentStream,
 								  PDFont font,
 								  float fontSize,
-								  String text,
 								  float margin,
 								  float width,
 								  float startX,
-								  float startY
+								  float startY,
+								  String text
 								  )
 	{
 		
 		try {
 		
-			float leading = 1.5f * fontSize;
-			
-	        List<String> lines = new ArrayList<String>();
-	        int lastSpace = -1;
+	        List<String> lines = new ArrayList<String>(); // this will store all of the actual lines that are to be printed
+	        int lastSpace = -1; // the last space in the line
 	        
-	        while (text.length() > 0)
+	        // Work around newline characters, because they aren't included in the character encoding being used
+	        String[] artificialLines = text.split("[\n]");
+	        
+	        // Loop through all of the tokens derived from splitting the text string along the newline delimiter
+	        for(int k = 0; k < artificialLines.length; k++)
 	        {
-	            int spaceIndex = text.indexOf(' ', lastSpace + 1);
-	            
-	            if (spaceIndex < 0)
-	                spaceIndex = text.length();
-	            
-	            String subString = text.substring(0, spaceIndex);
-	            float size = fontSize * font.getStringWidth(subString) / 1000;
-	            
-	            if (size > width)
-	            {
-	                if (lastSpace < 0)
-	                    lastSpace = spaceIndex;
-	                
-	                subString = text.substring(0, lastSpace);
-	                lines.add(subString);
-	                text = text.substring(lastSpace).trim();
-	                lastSpace = -1;
-	                
-	            }
-	            else if (spaceIndex == text.length())
-	            {
-	            	
-	                lines.add(text);
-	                text = "";
-	                
-	            }
-	            else
-	            {
-	            	
-	                lastSpace = spaceIndex;
-	                
-	            }
-	            
-	        }
+		        
+	        	//FIXME IL
+	        	// Go as long as there is still something left in the line
+		        while(artificialLines[k].length() > 0)
+		        {
+		        	
+		        	// find the index of the space that will terminate the substring, starting at the previous space
+		            int spaceIndex = artificialLines[k].indexOf(' ', lastSpace + 1);
+		            
+		            // if there isn't a space available, then cut the String off at the end of the String
+		            if(spaceIndex < 0)
+		                spaceIndex = artificialLines[k].length();
+		            
+		            // create the substring, going from the start of the String to the index of the last space before the natural line break
+		            String subString = artificialLines[k].substring(0, spaceIndex);
+		            
+		            // calculate the size of the line
+		            float size = fontSize * font.getStringWidth(subString) / 1000;
+		            
+		            // if the size of the line is greater than the maximum width of a line, then need to introduce a natural line break
+		            if(size > width)
+		            {
+		            	
+		                if(lastSpace < 0)
+		                    lastSpace = spaceIndex;
+		                
+		                // update the substring
+		                subString = artificialLines[k].substring(0, lastSpace);
+		                
+		                // add the substring to the ArrayList of lines
+		                lines.add(subString);
+		                
+		                // update the entire string that is to be added and trim it
+		                artificialLines[k] = artificialLines[k].substring(lastSpace).trim();
+		                
+		                // reset lastSpace
+		                lastSpace = -1;
+		                
+		            }
+		            else if(spaceIndex == artificialLines[k].length())
+		            {
+		            	
+		            	// if it doesn't have to overflow into another line, but is equal to the line, then just add it as a line.
+		                lines.add(artificialLines[k]);
+		                
+		                // reset the String
+		                artificialLines[k] = "";
+		                
+		            }
+		            else
+		            {
+		            	
+		                lastSpace = spaceIndex;
+		                
+		            }
+		            
+		        }
 	
-
+	        }
 	       
-	        for (String line: lines)
+	        // looping through every line that is to be in the pdf
+	        for(String line: lines)
 	        {
 	            
+	        	// begin the text, set the font, set the position
 		        contentStream.beginText();
 		        contentStream.setFont(font, fontSize);
 		        contentStream.newLineAtOffset(startX, currentY);
 	            
+		        // display the text and then end the text
 	            contentStream.showText(line);
 	            contentStream.endText();
-	            currentY -=15;
+	            
+	            currentY -=15; // skip another line
 	            
 	        }
-		}catch(IOException e)
-		{
-			
-			e.printStackTrace();
-			
-		}
+		}catch(IOException e){ e.printStackTrace(); }
 
 	}
 }

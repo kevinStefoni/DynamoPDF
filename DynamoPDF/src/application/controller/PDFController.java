@@ -2,68 +2,24 @@ package application.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import org.apache.pdfbox.pdmodel.PDDocument;
 
 import application.model.PDF;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.ScrollBar;
-import javafx.scene.control.TextArea;
 
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
-import javafx.stage.Stage;
 import javafx.stage.Window;
 
 public class PDFController extends UserInputController implements Initializable{
 	
-	private PDF pdf = new PDF();
-	
-	@FXML
-	private MenuBar menuBar;
-
-	@FXML
-    private Menu editMenu;
-
-    @FXML
-    private BorderPane mainBorderPane;
-
-    @FXML
-    private MenuItem menuItemAbout;
-
-    @FXML
-    private AnchorPane anchorPane;
-
 	@FXML
 	private MenuItem saveMenuItem;
 
-	@FXML
-	private MenuItem menuClose;
-
-    @FXML
-    private Menu helpMenu;
-
-	@FXML
-	private MenuItem menuItemEdit;
-
-	@FXML
-	private Menu fileMenu;
-
-	FileChooser fc= new FileChooser();
+	private FileChooser fc= new FileChooser();
+	private PDF pdf = new PDF();
 	    
 	@FXML
 	/**
@@ -101,22 +57,25 @@ public class PDFController extends UserInputController implements Initializable{
 //    }
     
     @FXML
-    void saveMenuItem(ActionEvent event) throws IOException {
+    void saveAs(ActionEvent event) throws IOException {
+    	
     	Window stage = saveMenuItem.getParentPopup().getOwnerWindow();
     	fc.setTitle("Save PDF File");
     	fc.setInitialFileName("MyPDF");
     	fc.getExtensionFilters().addAll(
-    			new ExtensionFilter ("PDF Files", "*.pdf"));    	
+    			new ExtensionFilter ("PDF Files", "*.pdf"));    
+    	
     	try {
-    	File file=fc.showSaveDialog(stage);
-    	//save the chosen directory
-    	fc.setInitialDirectory(file.getParentFile());
-    	String absolute = file.getAbsolutePath();
-    	//document.save(file.getAbsoluteFile());
-    	System.out.println(absolute);
-    	}catch(Exception e) {
-    		e.printStackTrace();
-    	}
+    		
+	    	File file=fc.showSaveDialog(stage);
+	    	//save the chosen directory
+	    	fc.setInitialDirectory(file.getParentFile());
+	    	String absolute = file.getAbsolutePath();
+	    	//document.save(file.getAbsoluteFile());
+	    	System.out.println(absolute);
+	    	
+    	}catch(Exception e){ e.printStackTrace();}
+    	
     }
     
     @FXML

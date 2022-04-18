@@ -13,37 +13,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
 public class OptionsMenuController extends MainMenuController implements Initializable{
-
-	
-    @FXML
-    private AnchorPane optionsAnchorPane;
-
-    @FXML
-    private CheckBox dateCheck;
-
-    @FXML
-    private Label optionLabel;
-
-    @FXML
-    private CheckBox nameCheck;
-
-    @FXML
-    private CheckBox instructionsCheck;
-
-    @FXML
-    private CheckBox titleCheck;
-
-    @FXML
-    private CheckBox numberedQuestionsCheck;
     
     @FXML
     private TextField numQuestionsTextField;

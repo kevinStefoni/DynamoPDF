@@ -2,7 +2,7 @@ package application.model;
 
 import java.util.ArrayList;
 
-public class MultipleChoiceQuestion extends Question{
+public class MultipleChoiceQuestion{
 
 	private String question; // the actual question
 	private int numChoices; // the number of answer choices there are
@@ -18,7 +18,7 @@ public class MultipleChoiceQuestion extends Question{
 	public MultipleChoiceQuestion()
 	{
 		
-		super();
+		this.question = "This is a question.";
 		this.numChoices = 4;		
 		this.multipleChoices = new ArrayList<String>();
 		
@@ -37,7 +37,7 @@ public class MultipleChoiceQuestion extends Question{
 	public MultipleChoiceQuestion(String question, int numChoices)
 	{
 		
-		super(question);
+		this.question = question;
 		this.numChoices = numChoices;
 		this.multipleChoices = new ArrayList<String>();
 		

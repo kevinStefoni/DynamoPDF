@@ -12,35 +12,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class UserInputController extends OptionsMenuController {
-	
-	// elements shared for all input fxml files
-    @FXML
-    private AnchorPane background;
-    
-    @FXML
-    private Button nextButton;
-    
-	
+
 	// titleInput.fxml
-	@FXML
-	private Label titleLabel;
-	
 	@FXML
 	private TextField titleInput;
 	
     
-	// instructionsInput.fxml
-	@FXML
-	private Label instructionsLabel;
-	
+	// instructionsInput.fxml	
 	@FXML
 	private TextArea instructionsInput;
 	
@@ -63,26 +47,36 @@ public class UserInputController extends OptionsMenuController {
     
     @FXML
     private TextField questionE;
-    
-    //warning message label
+
     @FXML
     private Label warningMessage;
-    
-    //question number label
+
     @FXML
     private Label qLabelMain;
     
-    @FXML
     /**
      * 
      * saveTitle
      * 
-     * This is the method that stores the title from the text field in the worksheet object.
+     * This is the method that stores the title from the text field into the worksheet object.
      * 
      */
     public void saveTitle() {
     	
     	worksheet.setTitle(titleInput.getText());
+   
+    }
+    
+    /**
+     * 
+     * saveTitle
+     * 
+     * This is the method that stores the instructions from the text area into the worksheet object.
+     * 
+     */
+    public void saveInstructions() {
+    	
+    	worksheet.setInstructions(instructionsInput.getText());
    
     }
     
@@ -107,7 +101,7 @@ public class UserInputController extends OptionsMenuController {
     	
     	// add question A-E to tempInput
     	tempInput.add(questionBox.getText());
-    	
+
     	// instantiate a new MultipleChoiceQuestion object
     	MultipleChoiceQuestion mcq = new MultipleChoiceQuestion(tempInput.get(0), worksheet.getQuestionSet().getNumChoices());
     	
@@ -211,6 +205,8 @@ public class UserInputController extends OptionsMenuController {
      */
     void goToSecondInput(ActionEvent event) {
 
+    	saveTitle();
+    	
     	String fileName = null; // the name of the next fxml file
     	
     	// decide what the name of the next file is based on the options the user selected
@@ -259,6 +255,8 @@ public class UserInputController extends OptionsMenuController {
      */
     void goToQuestionInput(ActionEvent event) {
 
+    	saveInstructions();
+    	
     	try {
     		
     		URL url = new File("src/QuestionInput.fxml").toURI().toURL();
