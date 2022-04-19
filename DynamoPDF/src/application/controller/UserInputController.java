@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import application.model.MultipleChoiceQuestion;
 import javafx.event.ActionEvent;
@@ -18,6 +19,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class UserInputController extends OptionsMenuController {
+	
+	public static boolean hasInitialized = false;
 
 	// titleInput.fxml
 	@FXML
@@ -53,6 +56,63 @@ public class UserInputController extends OptionsMenuController {
 
     @FXML
     private Label qLabelMain;
+    
+    /* sub question labels */
+    
+    @FXML
+    private Label qLabelA;
+    
+    @FXML
+    private Label qLabelB;
+    
+    @FXML
+    private Label qLabelC;
+    
+    @FXML
+    private Label qLabelD;
+    
+    @FXML
+    private Label qLabelE;
+    
+    //end of FXML elements
+    
+    /**
+     * 
+     * initialize the scene
+     * 
+     * 
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+    	if(hasInitialized == false) { //UserInputController's first launch
+    	/* disable the boxes depending on the num choices (max 5) */
+    	int numChoices = worksheet.getQuestionSet().getNumChoices();
+    	System.out.println(numChoices);
+    	switch(numChoices) {
+    	case 1:
+    	case 2:
+    		questionC.setVisible(false);
+    		qLabelC.setVisible(false);
+    		questionD.setVisible(false);
+    		qLabelD.setVisible(false);
+    		questionE.setVisible(false);
+    		qLabelE.setVisible(false);
+    		break;
+    	case 3:
+    		questionD.setVisible(false);
+    		qLabelD.setVisible(false);
+    		questionE.setVisible(false);
+    		qLabelE.setVisible(false);
+    		break;
+    	case 4:
+    		questionE.setVisible(false);
+    		qLabelE.setVisible(false);
+		default: break; //do nothing
+    	}
+    	hasInitialized = true;
+    	}
+
+    }
     
     /**
      * 
@@ -92,6 +152,9 @@ public class UserInputController extends OptionsMenuController {
      * 
      */
     public void saveQuestionInput(ActionEvent event) {
+    	
+    	//clear any warning messages from previous checks
+    	warningMessage.setText("");
     	
     	// By default, assume no issues with empty text fields
     	boolean isEmpty = false;
@@ -145,7 +208,6 @@ public class UserInputController extends OptionsMenuController {
     	}
     	else
     	{
-    		
     		// add the letter plus dot
     		int letter = (int)'a';
     		for(int j = 0; j < mcq.getMultipleChoices().size(); j++)
@@ -179,7 +241,7 @@ public class UserInputController extends OptionsMenuController {
     	// find which question user is on
     	int curQuestion = Integer.parseInt(qLabelMain.getText().substring(1, 2));
     		
-    	// if the question user is on  fits within the number of questions they specified, then go for another question
+    	// if the question user is on fits within the number of questions they specified, then go for another question
     	if(curQuestion < worksheet.getQuestionSet().getNumQuestions()) {
 
     		// update question label
