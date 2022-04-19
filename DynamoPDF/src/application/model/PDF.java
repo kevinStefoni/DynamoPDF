@@ -47,10 +47,18 @@ public class PDF{
 		
 	}
 	
+	/**
+	 * 
+	 * generatePDF
+	 * 
+	 * This is the most important method of the application that finally uses writeStringToPDF to write the PDF.
+	 * It formats everything and prints everything from the static worksheet object that was passed along through all
+	 * the controller classes using Apache PDF box API.
+	 * 
+	 * @param worksheet the static worksheet object whose information is to be used to generate a pdf of the worksheet
+	 */
 	public	void generatePDF(Worksheet worksheet)
 	{
-		
-		
 		try {
 			
 			// First, store the font type based on the worksheet object's selected options.
@@ -104,7 +112,7 @@ public class PDF{
 						"Name: ____________________");
 			if(worksheet.getOptions().getHasDate() && worksheet.getOptions().getHasName())
 				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, margin, width, startX, currentY, 
-						"Name: ____________________                                                                             Date: __________");
+						"Name: ____________________                                                                   Date: __________");
 			else if(worksheet.getOptions().getHasDate() && !worksheet.getOptions().getHasName())
 				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, margin, width, startX, currentY,
 						"Date: __________");
@@ -118,7 +126,7 @@ public class PDF{
 			
 				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, margin, width, startX, currentY,
 						worksheet.getTitle());
-				currentY -= 15; // skip another line only if title displayed
+				currentY -= 5; // skip another line only if title displayed
 				
 			}
 			
@@ -129,7 +137,7 @@ public class PDF{
 				
 				writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, margin, width, startX, currentY, 
 						worksheet.getInstructions());
-				currentY -= 15; // skip another line only if instructions displayed
+				currentY -= 10; // skip another line only if instructions displayed
 				
 			}
 			
@@ -139,8 +147,6 @@ public class PDF{
 			for(MultipleChoiceQuestion mcq: worksheet.getQuestionSet().getSetOfQuestions())
 			{
 			
-				currentY -=15; // skip another line
-				
 				// print the actual question--if numbered questions, then print it with a number; otherwise, just the question
 				if(worksheet.getOptions().getHasNumberedQuestions())
 					writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, margin, width, startX, currentY,
@@ -180,6 +186,24 @@ public class PDF{
 		}
 	}
 	
+	/**
+	 * 
+	 * writeStringToPDF
+	 * 
+	 * This method takes a String and prints it to the PDF given the parameters. It removes tabs and deals with newline characters.
+	 * It also cuts a String off if it would go over the line and starts a new line. 
+	 * 
+	 * @param pdf 			  the PDF object
+	 * @param page 			  the current page
+	 * @param contentStream  the content stream
+	 * @param font           the font type
+	 * @param fontSize 		  the size of the font
+	 * @param margin  		  the page margins
+	 * @param width    	 	  the width of the page
+	 * @param startX         the starting horizontal position relative offset
+	 * @param startY         the starting vertical position relative offset
+	 * @param text           the String that is to be printed
+	 */
 	public void writeStringToPDF(PDDocument pdf, 
 								  PDPage page,
 							      PDPageContentStream contentStream,
@@ -198,6 +222,8 @@ public class PDF{
 	        List<String> lines = new ArrayList<String>(); // this will store all of the actual lines that are to be printed
 	        int lastSpace = -1; // the last space in the line
 	        
+	        text = text.replace("\t", ""); // remove tabs
+	        
 	        // Work around newline characters, because they aren't included in the character encoding being used
 	        String[] artificialLines = text.split("[\n]");
 	        
@@ -205,7 +231,6 @@ public class PDF{
 	        for(int k = 0; k < artificialLines.length; k++)
 	        {
 		        
-	        	//FIXME IL
 	        	// Go as long as there is still something left in the line
 		        while(artificialLines[k].length() > 0)
 		        {
@@ -283,4 +308,5 @@ public class PDF{
 		}catch(IOException e){ e.printStackTrace(); }
 
 	}
+	
 }

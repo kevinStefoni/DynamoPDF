@@ -146,6 +146,15 @@ public class UserInputController extends OptionsMenuController {
     	else
     	{
     		
+    		// add the letter plus dot
+    		int letter = (int)'a';
+    		for(int j = 0; j < mcq.getMultipleChoices().size(); j++)
+    		{
+    			
+    			mcq.getMultipleChoices().set(j, (char)(letter + j) + ". " + mcq.getMultipleChoices().get(j));
+    			
+    		}
+    		
     		// add the entire question
     		worksheet.getQuestionSet().addQuestion((mcq));
     		

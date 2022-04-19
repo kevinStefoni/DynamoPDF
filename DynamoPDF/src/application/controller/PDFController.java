@@ -1,6 +1,7 @@
 package application.controller;
 
 import java.io.File;
+import java.nio.file.Files;
 import java.io.IOException;
 
 import application.model.PDF;
@@ -72,7 +73,12 @@ public class PDFController extends UserInputController implements Initializable{
 	    	fc.setInitialDirectory(file.getParentFile());
 	    	String absolute = file.getAbsolutePath();
 	    	//document.save(file.getAbsoluteFile());
-	    	System.out.println(absolute);
+	    	//System.out.println(absolute);
+	    	
+	    	File src = new File("test.pdf");
+	    	File dest = new File(absolute);
+	    	
+	    	Files.copy(src.toPath(), dest.toPath());
 	    	
     	}catch(Exception e){ e.printStackTrace();}
     	
