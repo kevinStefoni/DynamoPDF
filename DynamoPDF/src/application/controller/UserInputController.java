@@ -74,42 +74,47 @@ public class UserInputController extends OptionsMenuController {
     @FXML
     private Label qLabelE;
     
-    //end of FXML elements
-    
+    @Override
     /**
      * 
-     * initialize the scene
+     * initialize
      * 
+     * This method removes all the text boxes and labels that are not in use, given the number of choices.
+     * 
+     * @param url
+     * @param rb
      * 
      */
-    @Override
     public void initialize(URL url, ResourceBundle rb) {
     	if(hasInitialized == false) { //UserInputController's first launch
     	/* disable the boxes depending on the num choices (max 5) */
     	int numChoices = worksheet.getQuestionSet().getNumChoices();
-    	System.out.println(numChoices);
     	switch(numChoices) {
-    	case 1:
-    	case 2:
-    		questionC.setVisible(false);
-    		qLabelC.setVisible(false);
-    		questionD.setVisible(false);
-    		qLabelD.setVisible(false);
-    		questionE.setVisible(false);
-    		qLabelE.setVisible(false);
-    		break;
-    	case 3:
-    		questionD.setVisible(false);
-    		qLabelD.setVisible(false);
-    		questionE.setVisible(false);
-    		qLabelE.setVisible(false);
-    		break;
-    	case 4:
-    		questionE.setVisible(false);
-    		qLabelE.setVisible(false);
-		default: break; //do nothing
+	    	case 1:
+	    	case 2:
+	    		questionC.setVisible(false);
+	    		qLabelC.setVisible(false);
+	    		questionD.setVisible(false);
+	    		qLabelD.setVisible(false);
+	    		questionE.setVisible(false);
+	    		qLabelE.setVisible(false);
+	    		break;
+	    		
+	    	case 3:
+	    		questionD.setVisible(false);
+	    		qLabelD.setVisible(false);
+	    		questionE.setVisible(false);
+	    		qLabelE.setVisible(false);
+	    		break;
+	    		
+	    	case 4:
+	    		questionE.setVisible(false);
+	    		qLabelE.setVisible(false);
+	    		break;
+			default: break; //do nothing
+		
     	}
-    	hasInitialized = true;
+    		hasInitialized = true;
     	}
 
     }

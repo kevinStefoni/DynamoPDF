@@ -59,6 +59,7 @@ public class PDF{
 	 */
 	public	void generatePDF(Worksheet worksheet)
 	{
+
 		try {
 			
 			// First, store the font type based on the worksheet object's selected options.
