@@ -151,7 +151,7 @@ public class PDF{
 				// print the actual question--if numbered questions, then print it with a number; otherwise, just the question
 				if(worksheet.getOptions().getHasNumberedQuestions())
 					writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, margin, width, startX, currentY,
-							String.valueOf(questionTracker) + ". " + mcq.getQuestion());
+							String.valueOf(questionTracker++) + ". " + mcq.getQuestion());
 				else
 					writeStringToPDF(pdf, pdf.getPage(pageNumber), contentStream, font, fontSize, margin, width, startX, currentY,
 							mcq.getQuestion());

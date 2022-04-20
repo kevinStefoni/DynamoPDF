@@ -143,7 +143,6 @@ public class OptionsMenuController extends MainMenuController implements Initial
 
     	// Need to ensure that text field data is stored, in case user didn't press enter to trigger event.
     	setNumQuestions(event);
-    	//setNumChoices(event);
     	
     	String fileName = null; // the name of the next fxml file
     	
@@ -189,10 +188,10 @@ public class OptionsMenuController extends MainMenuController implements Initial
      * 
      * separateCamelCase
      * 
-     * This method will add a space between all words in a camelcase word. It will be used to get the titles
+     * This method will add a space between all words in a camel case word. It will be used to get the titles
      * for the UserInput windows.
      * 
-     * @param word a camelcase word
+     * @param word a camel case word
      * @return newWord a String with the camel-cased words separated by a space
      */
     public String separateCamelCase(String word)
@@ -214,56 +213,90 @@ public class OptionsMenuController extends MainMenuController implements Initial
     	
     }    
     
+    @Override
     /**
      * 
-     * creates a combobox to allow the user to choose the font
-     * choices are times new roman, helvetica, and courier
-     * creates a combobox to allow the user to select the font
-     * there are 4 different sizes to choose from, and the user can input their own size if necessary
+     * initialize
+     * 
+     * This method manages all of the drop down menus for font, font size, and
+     * number of choices. Font size is the only attribute where the user can
+     * enter in their own number. 
+     * 
      * @param url
      * @param rb
      */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-    	if (fontChoices != null) {
-    		for (Fonts font : Fonts.values()) {
+    public void initialize(URL url, ResourceBundle rb)
+    {
+    	
+    	// Manage font style
+    	if (fontChoices != null)
+    	{
+    		
+    		// Add all of the fonts that are available
+    		for (Fonts font : Fonts.values())
+    		{
 
     			fontChoices.getItems().add(font.toString());
-    			fontChoices.getSelectionModel().select("TIMES_NEW_ROMAN");
+    		
     		}
     	
+    		// Make Times New Roman the default font
+    		fontChoices.getSelectionModel().select("TIMES_NEW_ROMAN");
+    		
+    		// If font is not empty, then change it.
     		fontChoices.setOnAction((event) -> {
     			String fontChoice = fontChoices.getValue();
-    			System.out.println(fontChoice);
     			if(!fontChoice.equals(""))
     				worksheet.getOptions().setFont(Fonts.valueOf(fontChoice));
     		});
     	}
-    	if (fontSizes != null) {
+    	
+    	// Manage font size
+    	if (fontSizes != null)
+    	{
+    		
+    		// Add four sample font sizes
+    		fontSizes.getItems().add("8");
     		fontSizes.getItems().add("10");
     		fontSizes.getItems().add("12");
     		fontSizes.getItems().add("14");
     		fontSizes.getItems().add("16");
+    		
+    		// Allow user to enter a custom font size
     		fontSizes.setEditable(true);
+    		
+    		// Make 12 default font size
     		fontSizes.getSelectionModel().select("12");
-    		fontChoices.setOnAction((event) -> {
+    		
+    		// if font size is not empty, then change it
+    		fontSizes.setOnAction((event) -> {
     			String fontSize = fontSizes.getValue();
     			if(!fontSize.equals(""))
     				worksheet.getOptions().setFontSize(Float.valueOf(fontSize));
     		});
     	}
-    	if (numChoices != null) {
-    		numChoices.getItems().add("1");
+    	
+    	// Manage the number of choices
+    	if (numChoices != null)
+    	{
+    		
+    		// Add available number of choices 
     		numChoices.getItems().add("2");
     		numChoices.getItems().add("3");
     		numChoices.getItems().add("4");
+    		numChoices.getItems().add("5");
+    		
+    		// Make 4 default number of choices
     		numChoices.getSelectionModel().select("4");
+    		
+    		// if number of choices is not empty, then change it
     		numChoices.setOnAction((event) -> {
     			String numChoice = numChoices.getValue();
     			if(!numChoice.equals(""))
     				worksheet.getQuestionSet().setNumChoices(Integer.parseInt(numChoice));
     		});
     	}
+    	
     }
     
     

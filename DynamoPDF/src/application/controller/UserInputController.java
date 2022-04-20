@@ -2,6 +2,7 @@ package application.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -85,37 +86,49 @@ public class UserInputController extends OptionsMenuController {
      * @param rb
      * 
      */
-    public void initialize(URL url, ResourceBundle rb) {
-    	if(hasInitialized == false) { //UserInputController's first launch
-    	/* disable the boxes depending on the num choices (max 5) */
-    	int numChoices = worksheet.getQuestionSet().getNumChoices();
-    	switch(numChoices) {
-	    	case 1:
-	    	case 2:
-	    		questionC.setVisible(false);
-	    		qLabelC.setVisible(false);
-	    		questionD.setVisible(false);
-	    		qLabelD.setVisible(false);
-	    		questionE.setVisible(false);
-	    		qLabelE.setVisible(false);
-	    		break;
+    public void initialize(URL url, ResourceBundle rb)
+    {
+    	
+    	try
+    	{
+    		
+    		// make sure this initialize method only fires for QuestionInput.fxml. Otherwise, Null Pointer Exception
+	    	if(url == new File("src/QuestionInput.fxml").toURI().toURL())
+	    	{ 
+		    		
+		    	// disable the boxes depending on the num choices (max 5)
+		    	int numChoices = worksheet.getQuestionSet().getNumChoices();
+		    	
+		    	switch(numChoices) {
+			    	
+		    		case 1:
+		    		case 2:
+			    		questionC.setVisible(false);
+			    		qLabelC.setVisible(false);
+			    		questionD.setVisible(false);
+			    		qLabelD.setVisible(false);
+			    		questionE.setVisible(false);
+			    		qLabelE.setVisible(false);
+			    		break;
+			    		
+			    	case 3:
+			    		questionD.setVisible(false);
+			    		qLabelD.setVisible(false);
+			    		questionE.setVisible(false);
+			    		qLabelE.setVisible(false);
+			    		break;
+			    		
+			    	case 4:
+			    		questionE.setVisible(false);
+			    		qLabelE.setVisible(false);
+			    		break;
+			    		
+					default: break; //do nothing
+				
+		    	}
 	    		
-	    	case 3:
-	    		questionD.setVisible(false);
-	    		qLabelD.setVisible(false);
-	    		questionE.setVisible(false);
-	    		qLabelE.setVisible(false);
-	    		break;
-	    		
-	    	case 4:
-	    		questionE.setVisible(false);
-	    		qLabelE.setVisible(false);
-	    		break;
-			default: break; //do nothing
-		
-    	}
-    		hasInitialized = true;
-    	}
+	    	}
+    	}catch(MalformedURLException mue) {mue.printStackTrace();}
 
     }
     
@@ -218,7 +231,7 @@ public class UserInputController extends OptionsMenuController {
     		for(int j = 0; j < mcq.getMultipleChoices().size(); j++)
     		{
     			
-    			mcq.getMultipleChoices().set(j, (char)(letter + j) + ". " + mcq.getMultipleChoices().get(j));
+    			mcq.getMultipleChoices().set(j, "  " + (char)(letter + j) + ". " + mcq.getMultipleChoices().get(j));
     			
     		}
     		
