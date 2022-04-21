@@ -14,10 +14,10 @@ Login info: N/A.
 How to clone repository:
 
 	To clone repository on Eclipse:  
-		1.) Have JavaFX, EGit, and SceneBuilder installed and configured for Eclipse IDE and go to the Git 		Repository Tab.
-		2.) Click on "Clone Git Repository" and insert 								https://github.com/kevinStefoni/DynamoPDF into the URI field and fill out necessary
+		1.) Have JavaFX, EGit, and SceneBuilder installed and configured for Eclipse IDE and go to the Git Repository Tab.
+		2.) Click on "Clone Git Repository" and insert https://github.com/kevinStefoni/DynamoPDF into the URI field and fill out necessary
 		fields.
-		3.) Click on run configuration in the toolbar and fill out application with needed 					material and the file will be saved to computer.
+		3.) Click on run configuration in the toolbar and fill out application with needed material and the file will be saved to computer.
 
 Versions or other requirements: Internet access, Eclipse IDE, EGit, JavaFX SceneBuilder 2.0, JavaFX, Java jre 1.8.0_251, pdfbox-app-2.0.25.jar, Java 8, GitHub
 
