@@ -20,7 +20,7 @@
                   <Font name="Impact" size="63.0" />
                </font>
             </Label>
-            <TextField fx:id="titleInput" prefHeight="38.0" prefWidth="474.0" />
+            <TextField fx:id="titleInput" alignment="CENTER" prefHeight="38.0" prefWidth="474.0" style="-fx-font-size: 16;" />
          </children>
       </VBox>
    </children>
