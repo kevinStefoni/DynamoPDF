@@ -93,9 +93,9 @@ public class UserInputController extends OptionsMenuController {
     	{
     		
     		// make sure this initialize method only fires for QuestionInput.fxml. Otherwise, Null Pointer Exception
-	    	if(url == new File("src/QuestionInput.fxml").toURI().toURL())
+	    	if(url.sameFile(new File("src/QuestionInput.fxml").toURI().toURL()))
 	    	{ 
-		    		
+	    		
 		    	// disable the boxes depending on the num choices (max 5)
 		    	int numChoices = worksheet.getQuestionSet().getNumChoices();
 		    	
