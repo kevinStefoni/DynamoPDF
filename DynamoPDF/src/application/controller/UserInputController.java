@@ -21,8 +21,6 @@ import javafx.stage.Stage;
 
 public class UserInputController extends OptionsMenuController {
 	
-	public static boolean hasInitialized = false;
-
 	// titleInput.fxml
 	@FXML
 	private TextField titleInput;
@@ -82,7 +80,7 @@ public class UserInputController extends OptionsMenuController {
      * 
      * This method removes all the text boxes and labels that are not in use, given the number of choices.
      * 
-     * @param url
+     * @param url the URL of the fxml file
      * @param rb
      * 
      */
